@@ -17,7 +17,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/standard_margin"
             android:background="@color/colored"
-            android:paddingBottom="@dimen/smallest_margin"
+            android:paddingTop="@dimen/small_margin"
+            android:paddingBottom="@dimen/small_margin"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
@@ -61,7 +62,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!--Item programs-->
+        <!--Item programs   -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/home_rv_programs"
             android:layout_width="match_parent"
