@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">UnikomRadio</string>
+    <string name="text_close">Close</string>
+
+    <string name="titleapp">Smart Hits Radio</string>
+
+    <string name="home_streaming_play_title">Live Streaming</string>
+    <string name="programs_live_title">Programs On Air</string>
+    <string name="topcharts_title">Top Chart</string>
+
+    <string name="see_all">See All</string>
+</resources>

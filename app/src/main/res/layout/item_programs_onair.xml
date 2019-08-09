@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/program_item_onair_width"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/small_margin"
+    android:layout_marginEnd="@dimen/small_margin"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/item_program_onair_thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/program_item_onair_height"
+        android:src="@drawable/image_placeholder" />
+
+    <TextView
+        android:id="@+id/item_program_onair_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hits Request Night"
+        android:textSize="@dimen/font_size_standard"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/item_program_onair_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Monday - Friday"
+        />
+</LinearLayout>
