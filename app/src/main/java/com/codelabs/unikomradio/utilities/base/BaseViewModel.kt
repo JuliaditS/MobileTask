@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.codelabs.unikomradio.utilities.helper.Event
 
-open class BaseViewModel(): ViewModel(){
+open class BaseViewModel : ViewModel() {
 
     val isRequesting = MutableLiveData<Event<Boolean>>()
     val showMessage = MutableLiveData<Event<String>>()

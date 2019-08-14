@@ -3,12 +3,15 @@ package com.codelabs.unikomradio.data.source.remote
 import com.codelabs.unikomradio.BuildConfig
 import com.codelabs.unikomradio.MyApplication
 import com.codelabs.unikomradio.data.source.remote.plants.PlantsApiService
+import com.codelabs.unikomradio.data.source.remote.plants.ProgramsApiService
+import com.codelabs.unikomradio.data.source.remote.plants.TopchartsApiService
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import java.util.concurrent.TimeUnit
 
 interface ApiService {
@@ -22,13 +25,6 @@ interface ApiService {
             val mClient = if (BuildConfig.DEBUG){
                 OkHttpClient.Builder()
                     .cache(appCache)
-                    .addInterceptor {chain ->
-                        val request = chain.request().apply {
-                            newBuilder().header("Cache-Control",
-                                "public, max-age="+5).build()
-                        }
-                        chain.proceed(request)
-                    }
                     .addInterceptor(mLoggingInterceptor)
                     .readTimeout(60,TimeUnit.SECONDS)
                     .connectTimeout(60, TimeUnit.SECONDS)
@@ -36,13 +32,6 @@ interface ApiService {
             } else {
                 OkHttpClient.Builder()
                     .cache(appCache)
-                    .addInterceptor { chain ->
-                        val request = chain.request().apply {
-                            newBuilder().header("Cache-Control",
-                                "public, max-age=" + 5).build()
-                        }
-                        chain.proceed(request)
-                    }
                     .readTimeout(60, TimeUnit.SECONDS)
                     .connectTimeout(60, TimeUnit.SECONDS)
                     .build()
@@ -57,5 +46,7 @@ interface ApiService {
         }
 
         val plantApiService : PlantsApiService = getApiService.create(PlantsApiService::class.java)
+        val programApiService : ProgramsApiService = getApiService.create(ProgramsApiService::class.java)
+        val topchartApiService: TopchartsApiService = getApiService.create(TopchartsApiService::class.java)
     }
 }

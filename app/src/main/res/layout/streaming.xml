@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <FrameLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:keepScreenOn="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/streaming_song_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_margin="50dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/image_placeholder"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/streaming_program"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hits Request Night"
+                android:textSize="@dimen/font_size_title"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/streaming_song_thumbnail" />
+
+            <TextView
+                android:id="@+id/streaming_label_program"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hits Request Night"
+                android:textSize="@dimen/font_size_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/streaming_program" />
+
+
+            <ProgressBar
+                android:id="@+id/streaming_proggressbar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginTop="@dimen/extra_large_margin"
+                android:layout_marginEnd="@dimen/standard_margin"
+                android:max="100"
+                android:progress="50"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/streaming_label_program" />
+
+            <ImageView
+                android:id="@+id/streaming_playlist_icon"
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_height"
+                android:layout_marginStart="@dimen/large_margin"
+                android:layout_marginTop="@dimen/massive_large_margin"
+                android:src="@drawable/playlist"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/streaming_proggressbar" />
+
+            <ImageView
+                android:layout_width="77dp"
+                android:layout_height="77dp"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:src="@drawable/playbutton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/streaming_proggressbar" />
+
+            <ImageView
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_height"
+                android:src="@drawable/speaker"
+                android:layout_marginEnd="@dimen/large_margin"
+                android:layout_marginTop="@dimen/massive_large_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/streaming_proggressbar" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+</layout>
