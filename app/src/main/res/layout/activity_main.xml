@@ -4,10 +4,16 @@
         xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".mvvm.main.MainActivity">
+        tools:context=".mvvm.main.MainActivity"
+        android:background="@color/colorPrimary"
+>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:theme="@style/BottomNavigationView"
+            android:background="@color/colorSecondary"
+            android:backgroundTint="@color/colorSecondary"
+            app:itemIconTint="@android:color/white"
             android:id="@+id/main_bottomnavigationview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -18,6 +24,6 @@
             android:id="@+id/main_viewpager"
             app:layout_constraintBottom_toTopOf="@id/main_bottomnavigationview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="0dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

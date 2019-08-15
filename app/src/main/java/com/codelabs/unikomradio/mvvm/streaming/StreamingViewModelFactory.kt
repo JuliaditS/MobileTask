@@ -1,8 +1,11 @@
 package com.codelabs.unikomradio.mvvm.streaming
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.codelabs.unikomradio.data.source.ProgramsRepository
 
-class StreamingViewModelFactory(
-        private val programsRepository: ProgramsRepository
-) : ViewModelProvider.NewInstanceFactory()
+class StreamingViewModelFactory : ViewModelProvider.NewInstanceFactory() {
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return StreamingViewModel() as T
+    }
+}

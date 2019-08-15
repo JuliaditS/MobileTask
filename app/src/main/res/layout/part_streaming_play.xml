@@ -45,7 +45,7 @@
             android:layout_width="41dp"
             android:layout_height="41dp"
             android:layout_marginEnd="@dimen/standard_margin"
-            android:src="@drawable/playbutton"
+            android:src="@mipmap/playbutton"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>

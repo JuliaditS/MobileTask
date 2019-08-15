@@ -19,17 +19,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        supportActionBar?.title = "Discover Music"
-//
-//        home_streaming_play_button.setOnClickListener {
-//            val url = "http://hits.unikom.ac.id:9996/;listen.pls?sid=1" // your URL here
-//            val mediaPlayer: MediaPlayer? = MediaPlayer().apply {
-//                setAudioStreamType(AudioManager.STREAM_MUSIC)
-//                setDataSource(url)
-//                prepare() // might take long! (for buffering, etc)
-//                start()
-//            }
-//        }
 
         var prevMenuItem: MenuItem? = null
 
