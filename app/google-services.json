@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "17883412285",
+    "firebase_url": "https://unikomradioapp.firebaseio.com",
+    "project_id": "unikomradioapp",
+    "storage_bucket": "unikomradioapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:17883412285:android:7c416192407a6945",
+        "android_client_info": {
+          "package_name": "com.codelabs.unikomradio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "17883412285-1mavb706pcu1hu2ij02risug6h77rk01.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codelabs.unikomradio",
+            "certificate_hash": "a26d3d3919ce17884527cbd28c843bbf78dd10d7"
+          }
+        },
+        {
+          "client_id": "17883412285-mbqpbo82i7f3ji6f38cc4mn70fp8ipua.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAH0IAjTU1Oj8Zy4x-X3ek40OME7DQTlxs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "17883412285-mbqpbo82i7f3ji6f38cc4mn70fp8ipua.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

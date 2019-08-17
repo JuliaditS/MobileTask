@@ -10,7 +10,7 @@
         android:id="@+id/item_program_onair_thumbnail"
         android:layout_width="match_parent"
         android:layout_height="@dimen/program_item_onair_height"
-        android:src="@drawable/image_placeholder" />
+        android:src="@drawable/ic_launcher_background" />
 
     <TextView
         android:id="@+id/item_program_onair_title"

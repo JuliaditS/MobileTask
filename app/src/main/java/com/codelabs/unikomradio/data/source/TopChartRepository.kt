@@ -1,11 +1,11 @@
 package com.codelabs.unikomradio.data.source
 
-import android.util.Log
-import com.codelabs.unikomradio.data.model.Program
 import com.codelabs.unikomradio.data.model.TopChart
-import com.codelabs.unikomradio.data.source.local.ProgramDao
 import com.codelabs.unikomradio.data.source.local.TopchartDao
 import com.codelabs.unikomradio.data.source.remote.ApiService
+import com.codelabs.unikomradio.utilities.TOPCHARTS
+import com.google.firebase.firestore.FirebaseFirestore
+import timber.log.Timber
 
 class TopChartRepository private constructor(private val topchartDao: TopchartDao) {
 
@@ -18,20 +18,22 @@ class TopChartRepository private constructor(private val topchartDao: TopchartDa
                 topchartDao.insertAll(response)
             }
         } catch (e: Throwable) {
-            Log.e(TAG, e.toString())
+            Timber.d(e.localizedMessage.toString())
         }
         return response
     }
 
-    fun getTopChart(topchartId:String) = topchartDao.getTopchart(topchartId)
+
+    fun getTopChart(topchartId: String) = topchartDao.getTopchart(topchartId)
 
     companion object {
 
-        @Volatile private var instance: TopChartRepository? = null
+        @Volatile
+        private var instance: TopChartRepository? = null
 
         fun getInstance(topchartDao: TopchartDao) =
-                instance ?: synchronized(this){
-                    instance ?: TopChartRepository(topchartDao).also { instance = it }
-                }
+            instance ?: synchronized(this) {
+                instance ?: TopChartRepository(topchartDao).also { instance = it }
+            }
     }
 }

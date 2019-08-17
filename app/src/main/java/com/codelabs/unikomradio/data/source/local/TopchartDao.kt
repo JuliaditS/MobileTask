@@ -12,7 +12,7 @@ interface TopchartDao {
     @Query("SELECT * FROM topcharts")
     fun getTopcharts(): LiveData<List<TopChart>>
 
-    @Query("SELECT * FROM plants WHERE id = :topchartId")
+    @Query("SELECT * FROM topcharts WHERE id = :topchartId")
     fun getTopchart(topchartId: String): LiveData<TopChart>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

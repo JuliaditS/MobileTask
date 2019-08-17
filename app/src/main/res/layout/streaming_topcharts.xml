@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+                name="mViewModel"
+                type="com.codelabs.unikomradio.mvvm.streaming.streaming_topcharts.StreamingTopchartsViewModel"/>
+        <variable
+                name="mListener"
+                type="com.codelabs.unikomradio.mvvm.streaming.streaming_topcharts.StreamingTopchartsUserActionListener"/>
+    </data>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+    >
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/streaming_bottomsheet_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:context=".mvvm.main.MainActivity"
+                tools:listitem="@layout/item_topcharts"
+        />
+
+    </LinearLayout>
+</layout>

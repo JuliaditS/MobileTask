@@ -12,7 +12,7 @@ class PlantRepository private constructor(private val plantDao: PlantDao) {
     suspend fun getPlants(): List<Plant>{
         val response = ApiService.plantApiService.getPlants().await()
         try {
-            if (response.size > 0){
+            if (response.isNotEmpty()){
                 plantDao.insertAll(response)
             }
         } catch (e : Throwable){

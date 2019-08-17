@@ -12,95 +12,95 @@
                 type="com.codelabs.unikomradio.mvvm.streaming.StreamingUserActionListener"/>
     </data>
 
-    <FrameLayout
-            android:id="@+id/root"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="50dp"
-            android:keepScreenOn="true">
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+    >
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ImageView
+                android:layout_marginTop="@dimen/standard_margin"
+                android:id="@+id/streaming_song_thumbnail"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="290dp"
+                android:layout_margin="50dp"
+                android:scaleType="centerCrop"
+                android:elevation="3dp"
+                app:layout_constraintTop_toTopOf="parent"
+        />
 
-            <ImageView
-                    android:id="@+id/streaming_song_thumbnail"
-                    android:layout_width="match_parent"
-                    android:layout_height="250dp"
-                    android:layout_margin="50dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/thumbnailradio"
-                    app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+                android:id="@+id/streaming_program"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:text="Hits Request Night"
+                android:textSize="@dimen/font_size_title"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/streaming_song_thumbnail"/>
 
-            <TextView
-                    android:id="@+id/streaming_program"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hits Request Night"
-                    android:textSize="@dimen/font_size_title"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/streaming_song_thumbnail"/>
-
-            <TextView
-                    android:id="@+id/streaming_label_program"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hits Request Night"
-                    android:textSize="@dimen/font_size_small"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/streaming_program"/>
+        <TextView
+                android:id="@+id/streaming_label_program"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hits Request Night"
+                android:textSize="@dimen/font_size_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/streaming_program"/>
 
 
-            <ProgressBar
-                    android:id="@+id/streaming_proggressbar"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/standard_margin"
-                    android:layout_marginTop="@dimen/extra_large_margin"
-                    android:layout_marginEnd="@dimen/standard_margin"
-                    android:max="100"
-                    android:progress="50"
-                    android:progressTint="@android:color/white"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/streaming_label_program"/>
+        <ProgressBar
+                android:layout_marginTop="@dimen/standard_margin"
+                android:id="@+id/streaming_proggressbar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginEnd="@dimen/standard_margin"
+                android:max="100"
+                android:progress="99"
+                android:progressTint="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/streaming_label_program"
+                app:layout_constraintHorizontal_bias="0.0"/>
 
-            <ImageView
-                    android:id="@+id/streaming_playlist_icon"
-                    android:layout_width="@dimen/icon_width"
-                    android:layout_height="@dimen/icon_height"
-                    android:layout_marginStart="@dimen/large_margin"
-                    android:layout_marginTop="@dimen/massive_large_margin"
-                    android:src="@mipmap/musiclib"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/streaming_proggressbar"/>
+        <ImageView
+                android:onClick="@{()->mListener.onTopChartClick()}"
+                android:id="@+id/streaming_playlist_icon"
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_height"
+                android:layout_marginStart="@dimen/large_margin"
+                android:src="@mipmap/musiclib"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/streaming_proggressbar" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
-            <ImageView
-                    android:id="@+id/streaming_play_streaming"
-                    android:onClick="@{()->mListener.onPlayMusicClick()}"
-                    android:layout_width="77dp"
-                    android:layout_height="77dp"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:src="@mipmap/playbutton"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/streaming_proggressbar"/>
+        <ImageView
+                android:id="@+id/streaming_play_streaming"
+                android:onClick="@{()->mListener.onPlayMusicClick()}"
+                android:layout_width="77dp"
+                android:layout_height="77dp"
+                android:src="@mipmap/playbutton"
+                android:layout_marginTop="@dimen/standard_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/streaming_proggressbar" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
-            <ImageView
-                    android:onClick="@{()->mListener.onMuteClick()}"
-                    android:id="@+id/streaming_sound_active"
-                    android:layout_width="@dimen/icon_width"
-                    android:layout_height="@dimen/icon_height"
-                    android:src="@mipmap/volume"
-                    android:layout_marginEnd="@dimen/large_margin"
-                    android:layout_marginTop="@dimen/massive_large_margin"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/streaming_proggressbar"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </FrameLayout>
+        <ImageView
+                android:onClick="@{()->mListener.onMuteClick()}"
+                android:id="@+id/streaming_sound_active"
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_height"
+                android:src="@mipmap/volume"
+                android:layout_marginEnd="@dimen/large_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/streaming_proggressbar" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

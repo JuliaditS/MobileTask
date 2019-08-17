@@ -7,14 +7,16 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.codelabs.unikomradio.data.model.GardenPlanting
 import com.codelabs.unikomradio.data.model.Plant
+import com.codelabs.unikomradio.data.model.TopChart
 import com.codelabs.unikomradio.data.utils.Converters
 import com.codelabs.unikomradio.utilities.DATABASE_NAME
 
-@Database(entities = [GardenPlanting::class, Plant::class], version = 1, exportSchema = false)
+@Database(entities = [GardenPlanting::class, Plant::class, TopChart::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase(){
     abstract fun gardenPlantingDao(): GardenPlantingDao
     abstract fun plantDao(): PlantDao
+    abstract fun topchartDao(): TopchartDao
 
     companion object {
 

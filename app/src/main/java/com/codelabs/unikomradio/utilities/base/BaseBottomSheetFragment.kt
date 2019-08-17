@@ -9,8 +9,9 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.codelabs.unikomradio.utilities.extensions.*
 import com.codelabs.unikomradio.utilities.helper.EventObserver
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-abstract class BaseFragment<T : BaseViewModel, B : ViewDataBinding>(val layoutId: Int) : Fragment() {
+abstract class BaseBottomSheetFragment<T : BaseViewModel, B : ViewDataBinding>(val layoutId: Int) : BottomSheetDialogFragment() {
 
     lateinit var mParentVM: T
     lateinit var mBinding: B
@@ -26,7 +27,7 @@ abstract class BaseFragment<T : BaseViewModel, B : ViewDataBinding>(val layoutId
     override fun onViewCreated(paramView: View, savedInstanceState: Bundle?) {
         super.onViewCreated(paramView, savedInstanceState)
         mParentVM.apply {
-            showMessage.observe(this@BaseFragment, EventObserver {
+            showMessage.observe(this@BaseBottomSheetFragment, EventObserver {
                 if (it.isNotEmpty()) {
                     when (mMessageType) {
                         MESSAGE_TYPE_SNACK_CUSTOM -> {
@@ -42,7 +43,7 @@ abstract class BaseFragment<T : BaseViewModel, B : ViewDataBinding>(val layoutId
                 }
             })
 
-            showMessageRes.observe(this@BaseFragment, EventObserver {
+            showMessageRes.observe(this@BaseBottomSheetFragment, EventObserver {
                 if (it != 0) {
                     when (mMessageType) {
                         MESSAGE_TYPE_SNACK_CUSTOM -> {
@@ -78,5 +79,4 @@ abstract class BaseFragment<T : BaseViewModel, B : ViewDataBinding>(val layoutId
         const val MESSAGE_TYPE_SNACK = "SNACK_TYPE"
         const val MESSAGE_TYPE_SNACK_CUSTOM = "SNACK_CUSTOM_TYPE"
     }
-
 }

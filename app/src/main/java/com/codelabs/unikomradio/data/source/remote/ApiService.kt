@@ -16,7 +16,8 @@ import java.util.concurrent.TimeUnit
 
 interface ApiService {
     companion object Factory {
-        val getApiService : Retrofit by lazy {
+        private val getApiService : Retrofit by lazy {
+
             val mLoggingInterceptor = HttpLoggingInterceptor()
             mLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
@@ -36,6 +37,7 @@ interface ApiService {
                     .connectTimeout(60, TimeUnit.SECONDS)
                     .build()
             }
+
 
             return@lazy Retrofit.Builder()
                 .baseUrl(BuildConfig.BASE_URL)

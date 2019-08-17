@@ -3,14 +3,7 @@
     <item
             android:id="@+id/main_home_item"
             android:icon="@drawable/icon_home"
-            android:title="home"
-            app:showAsAction="ifRoom"
-    />
-
-    <item
-            android:id="@+id/main_streaming_play_item"
-            android:title="streaming"
-            android:icon="@drawable/icon_streaming"
+            android:title="Home"
             app:showAsAction="ifRoom"
     />
 
@@ -18,13 +11,28 @@
             android:id="@+id/main_programs_item"
             android:title="programs"
             app:showAsAction="ifRoom"
-            android:icon="@drawable/icon_music"
+            android:icon="@drawable/icon_programs"
     />
 
     <item
-            android:id="@+id/main_crew_item"
-            android:title="crew"
+            android:id="@+id/main_streaming_play_item"
+            android:title="Radio"
+            android:icon="@drawable/icon_radio"
             app:showAsAction="ifRoom"
-            android:icon="@drawable/icon_user"
+    />
+
+
+    <item
+            android:id="@+id/main_crew_item"
+            android:title="Crew"
+            app:showAsAction="ifRoom"
+            android:icon="@drawable/icon_crew"
+    />
+
+    <item
+            android:id="@+id/main_news_item"
+            android:title="News"
+            app:showAsAction="ifRoom"
+            android:icon="@drawable/icon_news"
     />
 </menu>

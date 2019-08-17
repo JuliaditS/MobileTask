@@ -20,8 +20,8 @@
     <dimen name="massive_large_margin">48dp</dimen>
 
 
-    <dimen name="icon_width">24dp</dimen>
-    <dimen name="icon_height">24dp</dimen>
+    <dimen name="icon_width">26dp</dimen>
+    <dimen name="icon_height">26dp</dimen>
 
     <dimen name="font_size_title">20sp</dimen>
     <dimen name="font_size_standard">16sp</dimen>
