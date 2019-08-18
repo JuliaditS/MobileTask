@@ -6,6 +6,7 @@ import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.PowerManager
 import android.widget.Toast
+import com.facebook.drawee.backends.pipeline.Fresco
 import java.io.IOException
 import timber.log.Timber
 
@@ -25,6 +26,7 @@ class MyApplication : Application(){
             Timber.plant(Timber.DebugTree())
         }
 
+        Fresco.initialize(this)
         try {
             initMediaPlayer()
         } catch (e: IOException){

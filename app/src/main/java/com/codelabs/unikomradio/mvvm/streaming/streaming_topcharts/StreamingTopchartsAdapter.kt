@@ -13,8 +13,6 @@ import timber.log.Timber
 
 class StreamingTopchartsAdapter : ListAdapter<TopChart, StreamingTopchartsAdapter.ViewHolder>(StreamingDiffCallback()) {
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             ItemTopchartsBinding.inflate(

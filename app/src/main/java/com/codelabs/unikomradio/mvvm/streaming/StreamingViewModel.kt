@@ -16,9 +16,6 @@ import kotlinx.coroutines.cancel
 
 class StreamingViewModel : BaseViewModel() {
 
-    val url = "http://hits.unikom.ac.id:9996/;listen.pls?sid=1"
-    var mediaPlayer: MediaPlayer? = null
-
     private val _isPlaying = MutableLiveData<Boolean>()
     val isPlaying: LiveData<Boolean>
         get() = _isPlaying
@@ -38,7 +35,6 @@ class StreamingViewModel : BaseViewModel() {
     }
 
     init {
-        _isPlaying.value = false
         _isMute.value = false
     }
 
@@ -49,10 +45,13 @@ class StreamingViewModel : BaseViewModel() {
 
     fun stopStreaming() {
         _isPlaying.value = false
-//        context?.stopService(intent)
     }
 
     fun muteStreaming() {
       _isMute.value = _isMute.value != true
+    }
+
+    fun stateStreaming(state:Boolean){
+        _isPlaying.value = state
     }
 }

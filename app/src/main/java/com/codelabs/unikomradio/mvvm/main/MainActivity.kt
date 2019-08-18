@@ -16,7 +16,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -25,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         //init tampilan awal
         loadFragment(HomeFragment())
+        supportActionBar?.title = "Discover Music"
 
         main_bottomnavigationview.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
@@ -34,22 +34,27 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.main_home_item -> {
                 fragment = HomeFragment()
+                supportActionBar?.title = "Discover Music"
             }
 
             R.id.main_programs_item -> {
                 fragment = ProgramFragment()
+                supportActionBar?.title = "Programs Music"
 
             }
 
             R.id.main_streaming_play_item -> {
                 fragment = StreamingFragment()
+                supportActionBar?.title = "Live Streaming Radio"
             }
 
             R.id.main_crew_item -> {
                 fragment = CrewFragment()
+                supportActionBar?.title = "On Air Tropps"
             }
 
             R.id.main_news_item -> {
+                supportActionBar?.title = "News"
                 fragment = NewsFragment()
             }
         }

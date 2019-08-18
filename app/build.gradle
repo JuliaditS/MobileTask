@@ -94,8 +94,10 @@ dependencies {
     implementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
 
     //Firebase
-    implementation "com.google.firebase:firebase-firestore:21.0.0"
+    implementation "com.google.firebase:firebase-firestore:$rootProject.firebaseFirestoreVersion"
     implementation "com.google.firebase:firebase-analytics:$rootProject.firebaseVersion"
+
+    implementation "com.facebook.fresco:fresco:$rootProject.frescoVersion"
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -1,14 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".mvvm.crew.CrewFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+        <variable
+            name="mListener"
+            type="com.codelabs.unikomradio.mvvm.crew.CrewUserActionListener" />
+        <variable
+            name="mViewModel"
+            type="com.codelabs.unikomradio.mvvm.crew.CrewViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/crew_recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment"/>
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginEnd="@dimen/standard_margin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/crew_playradio_layout"
+            tools:context=".mvvm.main.MainActivity"
+            tools:listitem="@layout/item_crew" />
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:fresco="http://schemas.android.com/tools"
+            android:id="@+id/crew_playradio_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:background="@color/colorSecondary"
+            android:paddingTop="@dimen/small_margin"
+            android:paddingBottom="@dimen/small_margin"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/crew_playradio_play_image_thumbnail"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="@dimen/standard_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:placeholderImage="@drawable/icon_radiohits"
+                fresco:roundWithOverlayColor="@color/colorPrimary"
+                fresco:roundedCornerRadius="5dp" />
+
+            <TextView
+                android:id="@+id/crew_playradio_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginEnd="8dp"
+                android:text="@string/home_streaming_play_title"
+                android:textSize="@dimen/font_size_title"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/crew_playradio_play_button"
+                app:layout_constraintStart_toEndOf="@id/crew_playradio_play_image_thumbnail"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/crew_playradio_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginEnd="8dp"
+                android:drawableStart="@drawable/icon_livestreaming"
+                android:drawablePadding="5dp"
+                android:text="@string/live_streaming"
+                android:textColor="@color/colorAccent"
+                app:layout_constraintEnd_toStartOf="@+id/crew_playradio_play_button"
+                app:layout_constraintStart_toEndOf="@id/crew_playradio_play_image_thumbnail"
+                app:layout_constraintTop_toBottomOf="@id/crew_playradio_title" />
+
+            <ImageView
+                android:onClick="@{()->mListener.onPlayRadio()}"
+                android:id="@+id/crew_playradio_play_button"
+                android:layout_width="41dp"
+                android:layout_height="39dp"
+                android:layout_marginEnd="@dimen/standard_margin"
+                android:src="@mipmap/playbutton"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

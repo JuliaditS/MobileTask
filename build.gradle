@@ -42,6 +42,9 @@ buildscript {
         glideVersion = "4.9.0"
         timberVersion = "4.7.1"
         firebaseVersion = "17.1.0"
+        firebaseFirestoreVersion = "21.0.0"
+        frescoVersion = "2.0.0"
+
     }
 
     repositories {

@@ -13,7 +13,14 @@
     <string name="my_garden_title">See All</string>
     <string name="plant_list_title">See All</string>
 
+    <string name="title_home">Discover Music</string>
+    <string name="title_program">Programs Music</string>
+    <string name="title_radio">Live Streaming Radio</string>
+    <string name="title_crew">On Air Tropps</string>
+    <string name="title_new">News</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="live_streaming">Live Streaming</string>
 
 </resources>

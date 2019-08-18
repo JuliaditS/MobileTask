@@ -35,7 +35,9 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
     }
 
     override fun setContentData() {
-        activity?.actionBar?.title = "Live Streaming Audio"
+        if (mediaPlayer?.isPlaying != null){
+            viewModel.stateStreaming(mediaPlayer!!.isPlaying)
+        }
     }
 
     override fun setMessageType(): String {
@@ -47,7 +49,9 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
         mBinding.mListener = this
         mBinding.mViewModel = viewModel
         mediaPlayer = (requireActivity().application as MyApplication).mMediaPlayer
-        mBinding.streamingSongThumbnail.setImageResource(R.drawable.thumbnailradio_rounder_corners)
+        mBinding.streamingSongThumbnail.setImageDrawable(
+            resources.getDrawable(R.drawable.thumbnailradio_rounder_corners)
+        )
     }
 
     override fun onPlayMusicClick() {
