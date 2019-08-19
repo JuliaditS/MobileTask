@@ -34,20 +34,21 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginStart="@dimen/small_margin"
-                    android:textSize="@dimen/font_size_title"
+                    android:layout_marginStart="0dp"
+                    android:textSize="@dimen/font_size_standard"
                     android:text="@{Integer.toString(topchart.currentRank)}"
-                    android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"/>
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
                     android:id="@+id/item_topchart_song_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/standard_margin"
+                    android:layout_marginStart="@dimen/small_margin"
                     android:layout_marginTop="@dimen/smallest_margin"
                     android:text="@{topchart.song}"
                     android:textStyle="bold"
-                    android:textSize="@dimen/font_size_title"
+                    android:textSize="@dimen/font_size_standard"
                     app:layout_constraintStart_toEndOf="@id/item_topchart_thumbnail"
                     app:layout_constraintTop_toTopOf="parent"/>
 
@@ -55,8 +56,9 @@
                     android:id="@+id/item_topchart_song_singer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/standard_margin"
+                    android:layout_marginStart="@dimen/small_margin"
                     android:text="@{topchart.singer}"
+                    android:textColor="#BABEC7"
                     android:textSize="@dimen/font_size_standard"
                     app:layout_constraintStart_toEndOf="@+id/item_topchart_thumbnail"
                     app:layout_constraintTop_toBottomOf="@+id/item_topchart_song_title"/>
