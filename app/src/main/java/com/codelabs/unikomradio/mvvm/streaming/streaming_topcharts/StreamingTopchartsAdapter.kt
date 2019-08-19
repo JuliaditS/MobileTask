@@ -62,6 +62,7 @@ class StreamingTopchartsAdapter : ListAdapter<TopChart, StreamingTopchartsAdapte
             when (state){
                 DOWN_STATE -> image.setImageResource(R.drawable.icon_down_white)
                 UP_STATE -> image.setImageResource(R.drawable.icon_up_white)
+                else -> image.setImageResource(R.drawable.icon_middle)
             }
         }
 

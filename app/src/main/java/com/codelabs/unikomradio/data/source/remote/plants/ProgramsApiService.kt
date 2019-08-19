@@ -5,6 +5,6 @@ import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 
 interface ProgramsApiService {
-    @GET("programs")
+    @GET("program")
     fun getPrograms(): Deferred<List<Program>>
 }

@@ -27,8 +27,13 @@
     <dimen name="font_size_standard">16sp</dimen>
     <dimen name="font_size_small">14sp</dimen>
 
-    <dimen name="image_crew_width_thumbnail">174dp</dimen>
-    <dimen name="image_crew_height_thumbnail">141dp</dimen>
+    <dimen name="image_crew_width_thumbnail">148dp</dimen>
+    <dimen name="image_crew_height_thumbnail">140dp</dimen>
+    <dimen name="image_programs_width_thumbnail">148dp</dimen>
+    <dimen name="image_programs_height_thumbnail">140dp</dimen>
+
+    <dimen name="image_playradio_width_thumbnail">40dp</dimen>
+    <dimen name="image_playradio_height_thumbnail">40dp</dimen>
 
 
 </resources>

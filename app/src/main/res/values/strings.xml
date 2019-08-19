@@ -22,5 +22,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="live_streaming">Live Streaming</string>
+    <string name="broadcast_today">Broadcast Today</string>
+
+    <string name="dummy_text">Orang Bandung pasti suka sama tim sepakbola kebanggaannya, Persib. Di sini tempatnya bobotoh buat kenal sama Persib lebih dekat. Karena di PERSIBDAY, bakal ada info-info tentang PERSIB BANDUNG, mulai dari Jadwal dan ulasan Pertandingan, Profile Pemain, Sejarah PERSIB, dan isu terhangat seputar Persib yang dikemas secara santai dan interaktif sama Sobat Hits.Di PERSIBDAY Ale Aulia nggak cuma siaran sendiri, tapi bakal ditemenin sama artis-artis atau perwakilan dari kelompok bobotoh, seperti Viking atau Bomber. Di persibday Sobat Hits juga bisa request lagu-lagu Hits pilihan, termasuk lagu-lagu bertemakan Persib Bandung.</string>
 
 </resources>

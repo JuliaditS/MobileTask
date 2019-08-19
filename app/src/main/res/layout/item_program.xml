@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:fresco="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.Html"/>
+
+        <import type="android.os.Build"/>
+
+        <import type="android.view.View"/>
+
+        <variable
+                name="mListener"
+                type="com.codelabs.unikomradio.mvvm.programs.ProgramUserActionListener"/>
+
+        <variable
+                name="program"
+                type="com.codelabs.unikomradio.data.model.Program"/>
+    </data>
+
+    <LinearLayout
+            android:id="@+id/program_item_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/smallest_margin"
+            android:paddingEnd="@dimen/smallest_margin">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/program_item_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/image_programs_height_thumbnail"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:placeholderImage="@drawable/thumbnailradio"
+                fresco:roundWithOverlayColor="@color/colorPrimary"
+                fresco:roundedCornerRadius="5dp"/>
+
+        <TextView
+                android:id="@+id/program_item_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{program.title}"
+                android:textSize="@dimen/font_size_small"
+                android:textStyle="bold"/>
+
+        <TextView
+                android:id="@+id/program_item_day"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{program.heldDay}"
+                android:textColor="@color/textColorStandard"/>
+
+
+    </LinearLayout>
+</layout>

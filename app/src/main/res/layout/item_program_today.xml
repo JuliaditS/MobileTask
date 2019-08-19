@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:fresco="http://schemas.android.com/tools">
+    <data>
+        <import type="android.text.Html"/>
+
+        <import type="android.os.Build"/>
+
+        <variable
+                name="mListener"
+                type="com.codelabs.unikomradio.mvvm.programs.ProgramUserActionListener"/>
+        <variable
+                name="program"
+                type="com.codelabs.unikomradio.data.model.Program"/>
+    </data>
+    <LinearLayout
+            android:id="@+id/item_program_today_layout"
+            android:layout_width="@dimen/image_programs_width_thumbnail"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:layout_marginEnd="@dimen/smallest_margin"
+    >
+
+        <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/program_item_thumbnail"
+                app:placeholderImage="@drawable/thumbnailradio"
+                android:layout_width="@dimen/image_programs_width_thumbnail"
+                android:layout_height="@dimen/image_programs_height_thumbnail"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                fresco:roundedCornerRadius="5dp"
+                fresco:roundWithOverlayColor="@color/colorPrimary"
+        />
+
+        <TextView
+                android:id="@+id/program_item_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_size_small"
+                android:text="@{program.title}"
+                android:gravity="center"
+                android:textStyle="bold"
+        />
+
+        <TextView
+                android:id="@+id/program_item_day"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{program.startAt + ` - ` + program.endAt}"
+                android:textColor="@color/textColorStandard"
+                android:gravity="center"
+        />
+
+    </LinearLayout>
+</layout>

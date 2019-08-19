@@ -17,7 +17,7 @@
                 android:id="@+id/home_streaming_play_layout"
                 layout="@layout/part_streaming_play"/>
 
-        <!--Item programs-->
+        <!--Item program-->
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/home_rv_programs"
@@ -65,7 +65,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/home_programs_proggressbar"/>
 
-        <!--Item programs-->
+        <!--Item program-->
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/home_rv_programs_onair"
                 android:layout_width="match_parent"

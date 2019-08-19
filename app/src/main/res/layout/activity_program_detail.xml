@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:fresco="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+                name="program"
+                type="com.codelabs.unikomradio.data.model.Program"/>
+    </data>
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            tools:context=".mvvm.programs.programdetail.ProgramDetailActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginEnd="@dimen/standard_margin">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/program_detail_thumbnail"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:layout_marginTop="@dimen/standard_margin"
+                    fresco:layout_constraintEnd_toEndOf="parent"
+                    fresco:layout_constraintStart_toStartOf="parent"
+                    fresco:layout_constraintTop_toTopOf="parent"
+                    fresco:actualImageResource="@drawable/thumnailradiox"
+                    fresco:roundWithOverlayColor="@color/colorPrimary"
+                    fresco:actualImageScaleType="fitXY"
+                    android:scaleType="fitXY"
+                    fresco:roundedCornerRadius="5dp"/>
+
+            <TextView
+                    android:id="@+id/program_detail_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/smallest_margin"
+                    android:text="@{program.title}"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/font_size_title"
+                    android:textStyle="bold"
+                    fresco:layout_constraintStart_toStartOf="parent"
+                    fresco:layout_constraintTop_toBottomOf="@id/program_detail_thumbnail"/>
+
+            <TextView
+                    android:id="@+id/program_detail_held"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/icon_date"
+                    android:drawablePadding="5dp"
+                    android:text="@{program.heldDay}"
+                    android:textColor="@android:color/white"
+                    fresco:layout_constraintStart_toStartOf="parent"
+                    fresco:layout_constraintTop_toBottomOf="@id/program_detail_title"/>
+
+            <TextView
+                    android:id="@+id/program_detail_at"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/icon_time"
+                    android:drawablePadding="5dp"
+                    android:text="@{program.startAt+ ` - `+program.endAt}"
+                    android:textColor="@android:color/white"
+                    fresco:layout_constraintEnd_toEndOf="parent"
+                    fresco:layout_constraintTop_toBottomOf="@id/program_detail_title"/>
+
+            <TextView
+                    android:id="@+id/program_detail_description"
+                    fresco:layout_constraintTop_toBottomOf="@id/program_detail_held"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/textColorStandard"
+                    android:text="@{program.description}"
+                    android:layout_marginTop="@dimen/standard_margin"/>
+
+            <TextView
+                    android:id="@+id/program_detail_label_announcer"
+                    android:text="Announcer"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/font_size_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/standard_margin"
+                    fresco:layout_constraintTop_toBottomOf="@id/program_detail_description"/>
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/program_detail_announcer_recyclerview"
+                    fresco:layout_constraintTop_toBottomOf="@id/program_detail_label_announcer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/smallest_margin"
+                    android:paddingBottom="@dimen/standard_margin">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+</layout>

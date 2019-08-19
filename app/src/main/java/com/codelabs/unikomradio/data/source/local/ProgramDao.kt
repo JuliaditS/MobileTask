@@ -9,10 +9,10 @@ import com.codelabs.unikomradio.data.model.Program
 
 @Dao
 interface ProgramDao {
-    @Query("SELECT * FROM programs")
+    @Query("SELECT * FROM program")
     fun getPrograms(): LiveData<List<Program>>
 
-    @Query("SELECT * FROM programs WHERE id = :programId")
+    @Query("SELECT * FROM program WHERE id = :programId")
     fun getProgram(programId: String): LiveData<Program>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

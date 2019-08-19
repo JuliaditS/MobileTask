@@ -5,22 +5,14 @@ import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
-import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.codelabs.unikomradio.MyApplication
 
 import com.codelabs.unikomradio.R
-import com.codelabs.unikomradio.databinding.FragmentCrewBinding
-import com.codelabs.unikomradio.mvvm.streaming.StreamingViewModel
-import com.codelabs.unikomradio.mvvm.streaming.StreamingViewModelFactory
-import com.codelabs.unikomradio.mvvm.streaming.streaming_topcharts.StreamingTopchartsAdapter
+import com.codelabs.unikomradio.databinding.CrewBinding
 import com.codelabs.unikomradio.utilities.base.BaseFragment
 import com.codelabs.unikomradio.utilities.helper.Event
 import com.codelabs.unikomradio.utilities.services.MediaPlayerServices
@@ -34,7 +26,7 @@ private const val ARG_PARAM2 = "param2"
  * A simple [Fragment] subclass.
  *
  */
-class CrewFragment : BaseFragment<CrewViewModel,FragmentCrewBinding>(R.layout.fragment_crew),CrewUserActionListener {
+class CrewFragment : BaseFragment<CrewViewModel,CrewBinding>(R.layout.crew),CrewUserActionListener {
 
     private lateinit var adapter: CrewAdapter
     private var mediaPlayer: MediaPlayer? = null

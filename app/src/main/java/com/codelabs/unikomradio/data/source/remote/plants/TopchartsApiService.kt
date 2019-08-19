@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 
 interface TopchartsApiService {
-    @GET("programs")
+    @GET("program")
     fun getTopcharts(): Deferred<List<TopChart>>
 }

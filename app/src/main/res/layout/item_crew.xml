@@ -16,17 +16,20 @@
 
     <LinearLayout
             android:orientation="vertical"
-            android:layout_width="@dimen/image_crew_width_thumbnail"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            android:layout_marginTop="@dimen/standard_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:paddingStart="@dimen/smallest_margin"
+            android:paddingEnd="@dimen/smallest_margin"
+
     >
 
         <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/crew_item_thumbnail"
                 android:src="@drawable/crew_placeholder"
                 app:placeholderImage="@drawable/crew_placeholder"
-                android:layout_width="@dimen/image_crew_width_thumbnail"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/image_crew_height_thumbnail"
                 fresco:roundedCornerRadius="5dp"
                 fresco:roundWithOverlayColor="@color/colorPrimary"
