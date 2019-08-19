@@ -25,7 +25,6 @@ class MediaPlayerServices : Service(), MediaPlayer.OnPreparedListener, MediaPlay
 
         mediaPlayer = (application as MyApplication).mMediaPlayer
         mediaPlayer?.apply {
-            reset()
             val audioAttributes = AudioAttributes.Builder()
                 .setLegacyStreamType(AudioManager.STREAM_MUSIC)
                 .build()
