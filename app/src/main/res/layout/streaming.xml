@@ -20,7 +20,6 @@
     >
 
         <ImageView
-                android:layout_marginTop="@dimen/standard_margin"
                 android:id="@+id/streaming_song_thumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
