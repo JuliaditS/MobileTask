@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="mListener"
+            type="com.codelabs.unikomradio.mvvm.news.NewsUserActionListener"/>
+        <variable
+            name="mViewModel"
+            type="com.codelabs.unikomradio.mvvm.news.NewsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        tools:context=".mvvm.news.NewsFragment">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/news_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            xmlns:fresco="http://schemas.android.com/tools"
+            android:id="@+id/news_playradio_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:background="@color/colorSecondary"
+            android:paddingTop="@dimen/small_margin"
+            android:paddingBottom="@dimen/small_margin"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/news_playradio_play_image_thumbnail"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="@dimen/standard_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:placeholderImage="@drawable/icon_radiohits"
+                fresco:roundWithOverlayColor="@color/colorPrimary"
+                fresco:roundedCornerRadius="5dp"/>
+
+            <TextView
+                android:id="@+id/news_playradio_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginEnd="8dp"
+                android:text="@string/home_streaming_play_title"
+                android:textSize="@dimen/font_size_title"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/news_playradio_play_button"
+                app:layout_constraintStart_toEndOf="@id/news_playradio_play_image_thumbnail"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/news_playradio_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginEnd="8dp"
+                android:drawableStart="@drawable/icon_livestreaming"
+                android:drawablePadding="5dp"
+                android:text="@string/live_streaming"
+                android:textColor="@color/colorAccent"
+                app:layout_constraintEnd_toStartOf="@+id/news_playradio_play_button"
+                app:layout_constraintStart_toEndOf="@id/news_playradio_play_image_thumbnail"
+                app:layout_constraintTop_toBottomOf="@id/news_playradio_title"/>
+
+            <ImageView
+                android:onClick="@{()->mListener.onPlayRadio()}"
+                android:id="@+id/news_playradio_play_button"
+                android:layout_width="@dimen/image_playradio_width_thumbnail"
+                android:layout_height="@dimen/image_playradio_height_thumbnail"
+                android:layout_marginEnd="@dimen/standard_margin"
+                android:src="@mipmap/playbutton"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

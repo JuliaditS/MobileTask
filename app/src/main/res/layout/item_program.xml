@@ -37,6 +37,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:placeholderImage="@drawable/thumbnailradio"
+                app:actualImageResource="@drawable/thumbnailradio"
+                android:scaleType="centerCrop"
+
                 fresco:roundWithOverlayColor="@color/colorPrimary"
                 fresco:roundedCornerRadius="5dp"/>
 
