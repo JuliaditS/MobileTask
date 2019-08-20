@@ -38,6 +38,7 @@ class NewsFragment : BaseFragment<NewsViewModel, NewsBinding>(R.layout.news), Ne
 
     override fun setContentData() {
         adapter = NewsAdapter()
+        mBinding.mListener = this
         mBinding.newsRecyclerview.layoutManager =
                 LinearLayoutManager(requireContext(),RecyclerView.VERTICAL,false)
         mBinding.newsRecyclerview.adapter = adapter

@@ -14,7 +14,8 @@ data class News (
         @field:SerializedName("title") val title: String,
         @field:SerializedName("date") val date: String,
         @field:SerializedName("description") val description: String,
-        @field:SerializedName("source") val source: String
+        @field:SerializedName("source") val source: String,
+        @field:SerializedName("imageUrl") val imageUrl: String
 ) : Parcelable {
-    constructor() : this(0, "", "", "", "")
+    constructor() : this(0, "", "", "", "","")
 }

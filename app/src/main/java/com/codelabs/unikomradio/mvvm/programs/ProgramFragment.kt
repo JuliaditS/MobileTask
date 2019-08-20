@@ -48,9 +48,14 @@ class ProgramFragment : BaseFragment<ProgramViewModel, ProgramBinding>(R.layout.
         mBinding.programBroadcastTodayRecyclerview.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
         mBinding.programBroadcastTodayRecyclerview.adapter = bottomAdapter
 
-        if (mediaPlayer?.isPlaying != null) {
-            viewModel.stateStreaming(mediaPlayer!!.isPlaying)
+        try {
+            if (mediaPlayer?.isPlaying != null) {
+                viewModel.stateStreaming(mediaPlayer!!.isPlaying)
+            }
+        } catch (e : IllegalStateException){
+            e.printStackTrace()
         }
+
     }
 
     override fun onCreateObserver(viewModel: ProgramViewModel) {

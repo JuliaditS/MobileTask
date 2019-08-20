@@ -31,8 +31,9 @@
                 app:placeholderImage="@drawable/crew_placeholder"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/image_crew_height_thumbnail"
-                fresco:roundedCornerRadius="5dp"
-                fresco:roundWithOverlayColor="@color/colorPrimary"
+                app:actualImageScaleType="fitXY"
+                app:roundWithOverlayColor="@color/colorPrimary"
+                app:roundedCornerRadius="12dp"
 
         />
         <TextView

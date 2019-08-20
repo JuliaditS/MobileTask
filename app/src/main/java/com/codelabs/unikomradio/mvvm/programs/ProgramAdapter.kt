@@ -48,6 +48,7 @@ class ProgramAdapter : ListAdapter<Program, ProgramAdapter.ViewHolder>(ProgramDi
                     intent.putExtra(INTENT_PARCELABLE, program)
                     context.startActivity(intent)
                 }
+                programItemThumbnail.setImageURI(item.imageUrl)
             }
 
         }

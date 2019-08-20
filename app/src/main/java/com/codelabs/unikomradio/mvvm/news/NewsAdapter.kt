@@ -48,6 +48,7 @@ class NewsAdapter : ListAdapter<News, NewsAdapter.ViewHolder>(NewsDiffCallback()
                     intent.putExtra(INTENT_PARCELABLE, news)
                     context.startActivity(intent)
                 }
+                binding.newsItemThumbnail.setImageURI(item.imageUrl)
             }
 
         }

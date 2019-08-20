@@ -34,6 +34,7 @@ class NewsDetailActivity :
         mParentVM = viewModel
         val newsData: News = intent.getParcelableExtra(INTENT_PARCELABLE)
         mBinding.news = newsData
+        mBinding.newsDetailThumbnail.setImageURI(newsData.imageUrl)
         adapter = ProgramDetailAdapter()
     }
 

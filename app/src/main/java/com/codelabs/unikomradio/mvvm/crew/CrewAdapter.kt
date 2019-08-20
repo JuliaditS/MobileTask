@@ -41,9 +41,8 @@ class CrewAdapter : ListAdapter<Crew, CrewAdapter.ViewHolder>(CrewDiffCallback()
             binding.apply {
                 crew = item
                 executePendingBindings()
-                Timber.d("Ada datanya padahal: ${crew!!.name}")
+                crewItemThumbnail.setImageURI(item.userPhoto)
             }
-            binding.crewItemThumbnail.setImageURI(item.userPhoto)
         }
     }
 }
