@@ -3,13 +3,13 @@ package com.codelabs.unikomradio.mvvm.home
 import android.media.MediaPlayer
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.codelabs.unikomradio.MyApplication
 import com.codelabs.unikomradio.R
 import com.codelabs.unikomradio.databinding.HomeBinding
-import com.codelabs.unikomradio.mvvm.crew.CrewAdapter
+import com.codelabs.unikomradio.mvvm.news.NewsAdapter
 import com.codelabs.unikomradio.mvvm.programs.ProgramTodayAdapter
 import com.codelabs.unikomradio.mvvm.streaming.streaming_topcharts.StreamingTopchartsAdapter
 import com.codelabs.unikomradio.utilities.base.BaseFragment
@@ -23,7 +23,8 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
     private lateinit var bannerAdapter: BannerAdapter
     private lateinit var programAdapter: ProgramTodayAdapter
     private lateinit var topChartAdapter: StreamingTopchartsAdapter
-    private lateinit var crewAdapter: CrewAdapter
+    private lateinit var crewAdapter: CrewHomeAdapter
+    private lateinit var newsAdapter: NewsAdapter
 
     private var mediaPlayer: MediaPlayer? = null
 
@@ -57,12 +58,15 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
                 LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         mBinding.homeTopchartRecyclerview.adapter = topChartAdapter
 
-        crewAdapter = CrewAdapter()
+        crewAdapter = CrewHomeAdapter()
         mBinding.homeOnairtroopsRecyclerview.layoutManager =
-                StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.HORIZONTAL )
+                LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
         mBinding.homeOnairtroopsRecyclerview.adapter = crewAdapter
 
-
+        newsAdapter = NewsAdapter()
+        mBinding.homeNewsRecyclerview.layoutManager =
+                LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+        mBinding.homeNewsRecyclerview.adapter = newsAdapter
 
         if (mediaPlayer?.isPlaying != null) {
             viewModel.stateStreaming(mediaPlayer!!.isPlaying)
@@ -96,7 +100,6 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
         viewModel.apply {
             topcharts.observe(this@HomeFragment, Observer {
                 if (it.isNotEmpty()) {
-                    Timber.i(it.toString())
                     topChartAdapter.submitList(it)
                 } else {
                     viewModel.showMessage.value = Event("program not found")
@@ -106,10 +109,21 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
 
         viewModel.apply {
             crews.observe(this@HomeFragment, Observer {
-                if (it.isNotEmpty()){
+                if (it.isNotEmpty()) {
                     crewAdapter.submitList(it)
                 } else {
                     viewModel.showMessage.value = Event("crew not found")
+                }
+            })
+        }
+
+        viewModel.apply {
+            news.observe(this@HomeFragment, Observer {
+                if (it.isNotEmpty()) {
+                    Timber.i("ada datanya goblok "+it.toString())
+                    newsAdapter.submitList(it)
+                } else {
+                    viewModel.showMessage.value = Event("news not found")
                 }
             })
         }

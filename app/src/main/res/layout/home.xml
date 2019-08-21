@@ -125,11 +125,42 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/home_onairtroops_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/standard_margin"
                 android:layout_marginTop="@dimen/standard_margin"
-                app:layout_constraintTop_toBottomOf="@id/home_onairtroops_label"
+                app:layout_constraintTop_toBottomOf="@id/home_onairtroops_label" />
+
+            <TextView
+                android:id="@+id/home_news_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:text="@string/title_new"
+                android:textSize="@dimen/font_size_title"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_onairtroops_recyclerview" />
+
+            <TextView
+                android:id="@+id/home_news_see_all"
+                style="@style/ButtonSeeAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:layout_marginEnd="@dimen/standard_margin"
+                android:text="@string/see_all"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_onairtroops_recyclerview" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/home_news_recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginTop="@dimen/standard_margin"
+                app:layout_constraintTop_toBottomOf="@id/home_news_label" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
