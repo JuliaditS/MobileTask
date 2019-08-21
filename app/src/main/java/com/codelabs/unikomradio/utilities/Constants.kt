@@ -6,5 +6,6 @@ const val TOPCHARTS = "topcharts"
 const val CREW = "crews"
 const val PROGRAM = "programs"
 const val NEWS = "news"
+const val BANNER = "banner"
 
 const val INTENT_PARCELABLE = "intent_parcelable"

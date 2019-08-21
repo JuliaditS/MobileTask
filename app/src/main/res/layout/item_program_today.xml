@@ -28,10 +28,10 @@
                 app:placeholderImage="@drawable/thumbnailradio"
                 android:layout_width="@dimen/image_programs_width_thumbnail"
                 android:layout_height="@dimen/image_programs_height_thumbnail"
+                android:src="@drawable/thumbnailradio"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:actualImageScaleType="fitXY"
                 app:roundWithOverlayColor="@color/colorPrimary"
                 app:roundedCornerRadius="12dp"
         />

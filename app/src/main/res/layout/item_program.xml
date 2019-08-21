@@ -34,12 +34,12 @@
                 android:id="@+id/program_item_thumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/image_programs_height_thumbnail"
+                android:src="@drawable/thumbnailradio"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:placeholderImage="@drawable/thumbnailradio"
                 app:actualImageResource="@drawable/thumbnailradio"
-                app:actualImageScaleType="fitXY"
                 app:roundWithOverlayColor="@color/colorPrimary"
                 app:roundedCornerRadius="12dp"/>
 

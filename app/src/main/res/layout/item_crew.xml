@@ -27,11 +27,10 @@
 
         <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/crew_item_thumbnail"
-                android:src="@drawable/crew_placeholder"
-                app:placeholderImage="@drawable/crew_placeholder"
+                android:src="@mipmap/crew_placeholder"
+                app:placeholderImage="@mipmap/crew_placeholder"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/image_crew_height_thumbnail"
-                app:actualImageScaleType="fitXY"
                 app:roundWithOverlayColor="@color/colorPrimary"
                 app:roundedCornerRadius="12dp"
 

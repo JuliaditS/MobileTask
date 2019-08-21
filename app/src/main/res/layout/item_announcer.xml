@@ -20,7 +20,7 @@
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/announcer_item_thumbnail"
-            app:placeholderImage="@drawable/crew_placeholder"
+            app:placeholderImage="@mipmap/crew_placeholder"
             android:padding="10dp"
             android:layout_width="180dp"
             android:layout_height="150dp"
