@@ -12,6 +12,7 @@
             name="mViewModel"
             type="com.codelabs.unikomradio.mvvm.home.HomeViewModel" />
     </data>
+    
 
     <ScrollView
         android:layout_width="match_parent"
