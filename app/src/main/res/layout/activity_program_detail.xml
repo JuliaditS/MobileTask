@@ -33,7 +33,7 @@
                     fresco:roundWithOverlayColor="@color/colorPrimary"
                     fresco:actualImageScaleType="fitXY"
                     android:scaleType="fitXY"
-                    fresco:roundedCornerRadius="5dp"/>
+                    fresco:roundedCornerRadius="20dp"/>
 
             <TextView
                     android:id="@+id/program_detail_title"
