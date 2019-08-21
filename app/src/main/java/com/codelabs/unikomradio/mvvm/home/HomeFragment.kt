@@ -65,7 +65,7 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
 
         newsAdapter = NewsAdapter()
         mBinding.homeNewsRecyclerview.layoutManager =
-                LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+                GridLayoutManager(requireContext(), 2, GridLayoutManager.HORIZONTAL, false)
         mBinding.homeNewsRecyclerview.adapter = newsAdapter
 
         if (mediaPlayer?.isPlaying != null) {
@@ -120,7 +120,7 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
         viewModel.apply {
             news.observe(this@HomeFragment, Observer {
                 if (it.isNotEmpty()) {
-                    Timber.i("ada datanya goblok "+it.toString())
+                    Timber.i("ada datanya goblok " + it.toString())
                     newsAdapter.submitList(it)
                 } else {
                     viewModel.showMessage.value = Event("news not found")

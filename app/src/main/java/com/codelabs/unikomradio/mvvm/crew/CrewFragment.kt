@@ -47,6 +47,7 @@ class CrewFragment : BaseFragment<CrewViewModel,CrewBinding>(R.layout.crew),Crew
         adapter = CrewAdapter()
         mBinding.crewRecyclerview.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
         mBinding.crewRecyclerview.adapter = adapter
+
         if (mediaPlayer?.isPlaying != null){
             viewModel.stateStreaming(mediaPlayer!!.isPlaying)
         }
