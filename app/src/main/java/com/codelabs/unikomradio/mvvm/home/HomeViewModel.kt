@@ -2,14 +2,8 @@ package com.codelabs.unikomradio.mvvm.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.codelabs.unikomradio.data.model.Banner
-import com.codelabs.unikomradio.data.model.Crew
-import com.codelabs.unikomradio.data.model.Program
-import com.codelabs.unikomradio.data.model.TopChart
-import com.codelabs.unikomradio.utilities.BANNER
-import com.codelabs.unikomradio.utilities.CREW
-import com.codelabs.unikomradio.utilities.PROGRAM
-import com.codelabs.unikomradio.utilities.TOPCHARTS
+import com.codelabs.unikomradio.data.model.*
+import com.codelabs.unikomradio.utilities.*
 import com.codelabs.unikomradio.utilities.base.BaseViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import timber.log.Timber
@@ -20,6 +14,7 @@ class HomeViewModel internal constructor() : BaseViewModel() {
     val docBanner = db.collection(BANNER)
     val docTopcharts = db.collection(TOPCHARTS)
     val docCrew = db.collection(CREW)
+    val docNews = db.collection(NEWS)
 
     private val _programs = MutableLiveData<List<Program>>()
     val programs: LiveData<List<Program>>
@@ -37,6 +32,10 @@ class HomeViewModel internal constructor() : BaseViewModel() {
     val crews: LiveData<List<Crew>>
         get() = _crews
 
+    private val _news = MutableLiveData<List<News>>()
+    val news: LiveData<List<News>>
+        get() = _news
+
 
     private val _isPlaying = MutableLiveData<Boolean>()
     val isPlaying: LiveData<Boolean>
@@ -47,6 +46,7 @@ class HomeViewModel internal constructor() : BaseViewModel() {
         initBanner()
         initTopCharts()
         initCrews()
+        initNews()
     }
 
     private fun initBanner() {
@@ -150,6 +150,31 @@ class HomeViewModel internal constructor() : BaseViewModel() {
                 }
                 _crews.value = mutableList
                 Timber.i("${crews.value}")
+
+            } else {
+                Timber.w("Current data null")
+            }
+        }
+    }
+
+    private fun initNews(){
+        docNews.addSnapshotListener { snapshot, exception ->
+            if (exception != null) {
+                Timber.w("Listen failed.")
+                exception.printStackTrace()
+                return@addSnapshotListener
+            }
+
+            if (snapshot != null) {
+                Timber.w("Current news data: ${snapshot.documents}")
+                val mutableList = mutableListOf<News>()
+
+                for (document in snapshot.documents) {
+                    document.toObject(News::class.java)?.let { mutableList.add(it) }
+
+                }
+                _news.value = mutableList
+                Timber.i("news programs ${news.value}")
 
             } else {
                 Timber.w("Current data null")

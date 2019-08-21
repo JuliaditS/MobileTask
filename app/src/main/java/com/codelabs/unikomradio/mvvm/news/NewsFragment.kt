@@ -42,6 +42,7 @@ class NewsFragment : BaseFragment<NewsViewModel, NewsBinding>(R.layout.news), Ne
         mBinding.newsRecyclerview.layoutManager =
                 LinearLayoutManager(requireContext(),RecyclerView.VERTICAL,false)
         mBinding.newsRecyclerview.adapter = adapter
+        mBinding.newsRecyclerview.isNestedScrollingEnabled = false
 
         if (mediaPlayer?.isPlaying != null) {
             viewModel.stateStreaming(mediaPlayer!!.isPlaying)
