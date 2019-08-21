@@ -1,6 +1,5 @@
 package com.codelabs.unikomradio.mvvm.programs
 
-import android.media.MediaPlayer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.codelabs.unikomradio.data.model.Crew
@@ -46,10 +45,10 @@ class ProgramViewModel internal constructor() : BaseViewModel() {
                     document.toObject(Program::class.java)?.let { mutableList.add(it) }
                     val crewMap: HashMap<String, Any?>? = document["crew"] as HashMap<String, Any?>?
                     val crew = Crew(
-                        -1,
-                        crewMap?.get("userPhoto") as String? ?: "",
-                        crewMap?.get("name") as String? ?: "",
-                        crewMap?.get("role") as String? ?: ""
+                            -1,
+                            crewMap?.get("userPhoto") as String? ?: "",
+                            crewMap?.get("name") as String? ?: "",
+                            crewMap?.get("role") as String? ?: ""
                     )
                     mutableList[i].announcer.add(crew)
                     i++

@@ -12,7 +12,7 @@
             name="mViewModel"
             type="com.codelabs.unikomradio.mvvm.home.HomeViewModel" />
     </data>
-    
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -30,28 +30,106 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/home_banner_recyclerview"
-                android:layout_marginStart="@dimen/smallest_margin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"/>
+                android:layout_marginStart="@dimen/standard_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:layout_marginTop="@dimen/standard_margin"
-                app:layout_constraintStart_toStartOf="parent"
                 android:id="@+id/home_broadcast_today"
-                android:textSize="@dimen/font_size_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/broadcast_today"
-                app:layout_constraintTop_toBottomOf="@id/home_banner_recyclerview"
                 android:layout_marginStart="@dimen/standard_margin"
-                />
+                android:layout_marginTop="@dimen/standard_margin"
+                android:text="@string/broadcast_today"
+                android:textSize="@dimen/font_size_title"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_banner_recyclerview" />
 
             <TextView
-                android:text="@string/see_all"
+                android:id="@+id/home_programs_see_all"
+                style="@style/ButtonSeeAll"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:layout_marginEnd="@dimen/standard_margin"
+                android:text="@string/see_all"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/home_banner_recyclerview" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/home_broadcast_today_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginTop="@dimen/standard_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_broadcast_today" />
+
+            <TextView
+                android:id="@+id/home_topchart_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:text="@string/topcharts_title"
+                android:textSize="@dimen/font_size_title"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_broadcast_today_recyclerview" />
+
+            <TextView
+                android:id="@+id/home_topchart_see_all"
+                style="@style/ButtonSeeAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:layout_marginEnd="@dimen/standard_margin"
+                android:text="@string/see_all"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/home_broadcast_today_recyclerview" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/home_topchart_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginTop="@dimen/standard_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_topchart_label" />
+
+            <TextView
+                android:id="@+id/home_onairtroops_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:text="@string/title_crew"
+                android:textSize="@dimen/font_size_title"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_topchart_recyclerview" />
+
+            <TextView
+                android:id="@+id/home_onairtroops_see_all"
+                style="@style/ButtonSeeAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:layout_marginEnd="@dimen/standard_margin"
+                android:text="@string/see_all"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_topchart_recyclerview" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/home_onairtroops_recyclerview"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginTop="@dimen/standard_margin"
+                app:layout_constraintTop_toBottomOf="@id/home_onairtroops_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

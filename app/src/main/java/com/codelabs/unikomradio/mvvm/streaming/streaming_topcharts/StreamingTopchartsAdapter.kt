@@ -22,7 +22,7 @@ class StreamingTopchartsAdapter : ListAdapter<TopChart, StreamingTopchartsAdapte
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
+        Timber.i("Lukman bacot yang ke-%d", position)
         val topChart = getItem(position)
         holder.apply {
             bind(createOnClickListener(), topChart)

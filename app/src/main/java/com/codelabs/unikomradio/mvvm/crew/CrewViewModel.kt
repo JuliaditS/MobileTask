@@ -12,7 +12,6 @@ import timber.log.Timber
 class CrewViewModel internal constructor() : BaseViewModel() {
     val db = FirebaseFirestore.getInstance()
     val docRef = db.collection(CREW)
-    var mediaPlayer: MediaPlayer? = null
 
 
     private val _crews = MutableLiveData<List<Crew>>()
@@ -58,7 +57,7 @@ class CrewViewModel internal constructor() : BaseViewModel() {
         _isPlaying.value = false
     }
 
-    fun stateStreaming(state:Boolean){
+    fun stateStreaming(state: Boolean) {
         _isPlaying.value = state
     }
 
