@@ -34,6 +34,7 @@ class HomeViewModel internal constructor() : BaseViewModel() {
 
     init {
         initProgram()
+        initBanner()
     }
 
     private fun initBanner(){
@@ -45,7 +46,7 @@ class HomeViewModel internal constructor() : BaseViewModel() {
             }
 
             if (snapshot != null) {
-                Timber.w("Current news data: ${snapshot.documents}")
+                Timber.w("Current home banner data: ${snapshot.documents}")
                 val mutableList = mutableListOf<Banner>()
 
                 for (document in snapshot.documents) {
@@ -53,7 +54,7 @@ class HomeViewModel internal constructor() : BaseViewModel() {
 
                 }
                 _banner.value = mutableList
-                Timber.i("news programs ${banner.value}")
+                Timber.i("bannerdata ${banner.value}")
 
             } else {
                 Timber.w("Current data null")

@@ -1,135 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
-                name="mListener"
-                type="com.codelabs.unikomradio.mvvm.home.HomeUserActionListener"/>
+            name="mListener"
+            type="com.codelabs.unikomradio.mvvm.home.HomeUserActionListener" />
+
         <variable
-                name="mViewModel"
-                type="com.codelabs.unikomradio.mvvm.home.HomeViewModel"/>
+            name="mViewModel"
+            type="com.codelabs.unikomradio.mvvm.home.HomeViewModel" />
     </data>
+
     <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
 
-    >
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/small_margin"
-                android:paddingBottom="@dimen/small_margin"
-                android:background="@color/colorPrimary"
         >
 
-            <include
-                    android:id="@+id/home_streaming_play_layout"
-                    layout="@layout/part_streaming_play"/>
-
-            <!--Item program-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:paddingTop="@dimen/small_margin"
+            android:paddingBottom="@dimen/small_margin">
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/home_rv_programs"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/standard_margin"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:layout_marginEnd="@dimen/standard_margin"
-                    app:layout_constraintTop_toBottomOf="@id/home_streaming_play_layout"/>
+                android:id="@+id/program_banner_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"/>
 
-            <ProgressBar
-                    android:id="@+id/home_programs_proggressbar"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/standard_margin"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:layout_marginEnd="@dimen/standard_margin"
-                    android:max="100"
-                    android:progress="50"
-                    android:progressBackgroundTint="@color/colored"
-                    app:layout_constraintTop_toBottomOf="@id/home_rv_programs"/>
-
-            <TextView
-                    android:id="@+id/home_programs_on_air_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/standard_margin"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:text="@string/programs_live_title"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/font_size_title"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/home_programs_proggressbar"/>
-
-            <TextView
-                    android:id="@+id/home_programs_see_all"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/extra_large_margin"
-                    android:layout_marginEnd="@dimen/standard_margin"
-                    android:text="@string/see_all"
-                    android:textSize="@dimen/font_size_standard"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/home_programs_proggressbar"/>
-
-            <!--Item program-->
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/home_rv_programs_onair"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/standard_margin"
-                    android:layout_marginTop="@dimen/font_size_standard"
-                    android:layout_marginEnd="@dimen/standard_margin"
-                    app:layout_constraintTop_toBottomOf="@id/home_programs_see_all"/>
-
-            <TextView
-                    android:id="@+id/home_topcharts_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/standard_margin"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:text="@string/topcharts_title"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/font_size_title"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/home_rv_programs_onair"/>
-
-            <TextView
-                    android:id="@+id/home_topcharts_see_all"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/extra_large_margin"
-                    android:layout_marginEnd="@dimen/standard_margin"
-                    android:text="@string/see_all"
-                    android:textSize="@dimen/font_size_standard"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/home_rv_programs_onair"/>
-
-            <!--Item topcharts-->
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/home_topcharts_recyclerview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/standard_margin"
-                    android:layout_marginEnd="@dimen/standard_margin"
-                    app:layout_constraintTop_toBottomOf="@id/home_topcharts_title"/>
-
-            <TextView
-                    android:id="@+id/home_hitscrew_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/standard_margin"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:text="@string/crew_title"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/font_size_title"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/home_topcharts_recyclerview"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
