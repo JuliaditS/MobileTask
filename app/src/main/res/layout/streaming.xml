@@ -25,9 +25,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:layout_margin="50dp"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 android:elevation="3dp"
                 app:layout_constraintTop_toTopOf="parent"
+                app:roundedCornerRadius="12dp"
         />
 
         <TextView
@@ -52,9 +53,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/streaming_program"/>
 
-
         <ProgressBar
-                android:layout_marginTop="@dimen/standard_margin"
+                android:layout_marginTop="@dimen/massive_large_margin"
                 android:id="@+id/streaming_proggressbar"
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="match_parent"

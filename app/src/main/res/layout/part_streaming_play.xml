@@ -7,14 +7,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/standard_margin"
         android:background="@color/colorSecondary"
-        android:paddingTop="@dimen/small_margin"
-        android:paddingBottom="@dimen/small_margin"
+        android:paddingTop="@dimen/smallest_margin"
+        android:paddingBottom="@dimen/smallest_margin"
         android:layout_gravity="bottom">
 
     <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/home_streaming_play_image_thumbnail"
-            android:layout_width="46dp"
-            android:layout_height="46dp"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
             android:layout_marginStart="@dimen/standard_margin"
             app:placeholderImage="@drawable/icon_radiohits"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -28,12 +28,12 @@
             android:id="@+id/home_streaming_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/standard_margin"
             android:text="@string/home_streaming_play_title"
             android:textSize="@dimen/font_size_title"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/home_streaming_play_image_thumbnail"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toStartOf="@+id/home_streaming_play_button"/>
 
     <TextView
@@ -42,12 +42,12 @@
             android:id="@+id/home_streaming_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/standard_margin"
             android:text="@string/live_streaming"
             android:textColor="@color/colorAccent"
             app:layout_constraintStart_toEndOf="@id/home_streaming_play_image_thumbnail"
             app:layout_constraintTop_toBottomOf="@id/home_streaming_title"
-            app:layout_constraintEnd_toStartOf="@+id/home_streaming_play_button" android:layout_marginEnd="8dp"/>
+            app:layout_constraintEnd_toStartOf="@+id/home_streaming_play_button"
+            android:layout_marginEnd="8dp"/>
 
     <ImageView
             android:id="@+id/home_streaming_play_button"

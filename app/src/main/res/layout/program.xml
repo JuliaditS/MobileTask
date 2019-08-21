@@ -45,17 +45,19 @@
 
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/program_broadcast_today_recyclerview"
-                    android:layout_marginStart="@dimen/standard_margin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/small_margin"
-                    app:layout_constraintTop_toBottomOf="@+id/program_label_broadcast"/>
+                    android:layout_marginTop="@dimen/standard_margin"
+                    android:layout_marginStart="@dimen/standard_margin"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/program_label_broadcast" />
 
             <TextView
                     android:id="@+id/program_label_radio_program"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/smallest_margin"
+                    android:layout_marginTop="@dimen/massive_large_margin"
                     android:textStyle="bold"
                     android:layout_marginStart="@dimen/standard_margin"
                     android:textSize="@dimen/font_size_title"
@@ -65,14 +67,14 @@
             />
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:layout_marginTop="@dimen/smallest_margin"
                     android:id="@+id/program_programs_recyclerview"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="@dimen/standard_margin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/standard_margin"
                     android:layout_marginEnd="@dimen/standard_margin"
-                    app:layout_constraintTop_toBottomOf="@id/program_label_radio_program"
-            />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/program_broadcast_today_recyclerview"
+                    app:layout_constraintTop_toBottomOf="@id/program_label_radio_program" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
@@ -84,14 +86,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/standard_margin"
                 android:background="@color/colorSecondary"
-                android:paddingTop="@dimen/small_margin"
-                android:paddingBottom="@dimen/small_margin"
+                android:paddingTop="@dimen/smallest_margin"
+                android:paddingBottom="@dimen/smallest_margin"
                 app:layout_constraintBottom_toBottomOf="parent">
 
             <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/program_playradio_play_image_thumbnail"
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
+                    android:layout_width="41dp"
+                    android:layout_height="41dp"
                     android:layout_marginStart="@dimen/standard_margin"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -104,7 +106,6 @@
                     android:id="@+id/program_playradio_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/standard_margin"
                     android:layout_marginEnd="8dp"
                     android:text="@string/home_streaming_play_title"
                     android:textSize="@dimen/font_size_title"
@@ -117,7 +118,6 @@
                     android:id="@+id/program_playradio_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/standard_margin"
                     android:layout_marginEnd="8dp"
                     android:drawableStart="@drawable/icon_livestreaming"
                     android:drawablePadding="5dp"

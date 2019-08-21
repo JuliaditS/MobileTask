@@ -26,7 +26,7 @@
                     android:id="@+id/news_detail_thumbnail"
                     android:layout_width="match_parent"
                     android:layout_height="220dp"
-                    android:layout_marginTop="@dimen/standard_margin"
+                    android:layout_marginTop="@dimen/very_small_margin"
                     fresco:layout_constraintEnd_toEndOf="parent"
                     fresco:layout_constraintStart_toStartOf="parent"
                     fresco:layout_constraintTop_toTopOf="parent"
@@ -34,13 +34,13 @@
                     fresco:roundWithOverlayColor="@color/colorPrimary"
                     fresco:actualImageScaleType="fitXY"
                     android:scaleType="fitXY"
-                    fresco:roundedCornerRadius="5dp"/>
+                    fresco:roundedCornerRadius="12dp"/>
 
             <TextView
                     android:id="@+id/news_detail_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/smallest_margin"
+                    android:layout_marginTop="@dimen/standard_margin"
                     android:text="@{news.title}"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/font_size_title"
@@ -53,6 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/icon_date"
+                    android:layout_marginTop="@dimen/very_small_margin"
                     android:drawablePadding="5dp"
                     android:text="@{news.date}"
                     android:textColor="@color/textColorStandard"
@@ -65,7 +66,10 @@
                     fresco:layout_constraintTop_toBottomOf="@id/news_detail_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/textColorStandard"
+                    android:textColor="@color/colored"
+                    android:textSize="@dimen/font_size_small"
+                    android:lineSpacingMultiplier="1"
+                    android:lineSpacingExtra="6dp"
                     android:text="@{news.description}"
                     android:layout_marginTop="@dimen/standard_margin"/>
 

@@ -31,6 +31,7 @@
                 app:placeholderImage="@mipmap/crew_placeholder"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/image_crew_height_thumbnail"
+                android:layout_marginTop="@dimen/standard_margin"
                 app:roundWithOverlayColor="@color/colorPrimary"
                 app:roundedCornerRadius="12dp"
 
@@ -38,7 +39,7 @@
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/smallest_margin"
+                android:layout_marginTop="@dimen/very_small_margin"
                 android:text="@{crew.name}"
                 android:gravity="center"
                 android:textStyle="bold"

@@ -3,10 +3,13 @@ package com.codelabs.unikomradio.mvvm.programs
 import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
+import android.graphics.Rect
 import android.media.MediaPlayer
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.codelabs.unikomradio.MyApplication
 import com.codelabs.unikomradio.R
@@ -35,6 +38,24 @@ class ProgramFragment : BaseFragment<ProgramViewModel, ProgramBinding>(R.layout.
         mBinding.mViewModel = viewModel
         mBinding.mListener = this
         mediaPlayer = (requireActivity().application as MyApplication).mMediaPlayer
+
+        mBinding.programProgramsRecyclerview.addItemDecoration(object : RecyclerView.ItemDecoration() {
+            override fun getItemOffsets(
+                outRect: Rect,
+                view: View,
+                parent: RecyclerView,
+                state: RecyclerView.State
+            ) {
+                val spacing = 8
+                outRect.bottom = spacing
+                if (parent.getChildLayoutPosition(view) % 2 == 0) {
+                    outRect.left = spacing
+                    outRect.right = spacing
+                } else {
+                    outRect.right = spacing
+                }
+            }
+        })
     }
 
     override fun setContentData() {

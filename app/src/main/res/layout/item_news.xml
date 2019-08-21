@@ -14,15 +14,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/standard_margin">
+        android:orientation="vertical">
 
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/newsItem_thumbnail"
             android:layout_width="0dp"
             android:layout_height="80dp"
-            android:layout_margin="@dimen/standard_margin"
+                android:layout_margin="@dimen/standard_margin"
             app:actualImageResource="@drawable/news_placeholder"
             app:layout_constraintEnd_toEndOf="@id/guideline"
             app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +51,7 @@
             android:id="@+id/news_item_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/smallest_margin"
+            android:layout_marginTop="@dimen/super_smallest_margin"
             android:layout_marginEnd="@dimen/standard_margin"
             android:ellipsize="end"
             android:maxLines="3"

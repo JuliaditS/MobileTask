@@ -26,9 +26,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:layout_marginBottom="@dimen/small_margin"
-            android:orientation="vertical"
-            android:paddingStart="@dimen/smallest_margin"
-            android:paddingEnd="@dimen/smallest_margin">
+            android:orientation="vertical">
 
         <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/program_item_thumbnail"
