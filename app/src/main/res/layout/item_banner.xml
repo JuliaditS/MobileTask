@@ -10,29 +10,22 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
+        android:layout_marginStart="@dimen/smallest_margin"
+        android:layout_marginEnd="@dimen/smallest_margin"
         android:orientation="vertical">
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/program_banner_thumbnail"
             android:layout_width="match_parent"
             android:layout_height="140dp"
-            android:layout_margin="@dimen/standard_margin"
             app:actualImageResource="@drawable/placeholder_banner"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/guideline2"
             app:layout_constraintTop_toTopOf="parent"
             app:roundWithOverlayColor="@color/colorPrimary"
             app:roundedCornerRadius="12dp" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.84" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

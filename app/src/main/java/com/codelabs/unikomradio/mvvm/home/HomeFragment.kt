@@ -31,9 +31,9 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
     override fun setContentData() {
         bannerAdapter = BannerAdapter()
         mBinding.mListener = this
-        mBinding.programBannerRecyclerview.layoutManager =
+        mBinding.homeBannerRecyclerview.layoutManager =
                 LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-        mBinding.programBannerRecyclerview.adapter = bannerAdapter
+        mBinding.homeBannerRecyclerview.adapter = bannerAdapter
 
         if (mediaPlayer?.isPlaying != null) {
             viewModel.stateStreaming(mediaPlayer!!.isPlaying)

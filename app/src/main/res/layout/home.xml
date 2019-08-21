@@ -28,10 +28,28 @@
             android:paddingBottom="@dimen/small_margin">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/program_banner_recyclerview"
+                android:id="@+id/home_banner_recyclerview"
+                android:layout_marginStart="@dimen/smallest_margin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:layout_marginTop="@dimen/standard_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/home_broadcast_today"
+                android:textSize="@dimen/font_size_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/broadcast_today"
+                app:layout_constraintTop_toBottomOf="@id/home_banner_recyclerview"
+                android:layout_marginStart="@dimen/standard_margin"
+                />
+
+            <TextView
+                android:text="@string/see_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
