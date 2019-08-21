@@ -18,65 +18,64 @@
             tools:context=".mvvm.programs.ProgramFragment">
         <ScrollView
                 android:id="@+id/program_scrollview"
-                app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toTopOf="@id/program_playradio_layout"
-        >
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/program_top_layout"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
         >
 
-            <TextView
-                    android:id="@+id/program_label_broadcast"
-                    android:textStyle="bold"
-                    android:layout_marginStart="@dimen/standard_margin"
-                    android:layout_marginEnd="@dimen/standard_margin"
-                    android:textSize="@dimen/font_size_title"
-                    android:text="@string/broadcast_today"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/program_top_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/smallest_margin"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent"
+            >
 
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/program_broadcast_today_recyclerview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:layout_marginStart="@dimen/standard_margin"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/program_label_broadcast" />
+                <TextView
+                        android:id="@+id/program_label_broadcast"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/very_small_margin"
+                        android:layout_marginTop="@dimen/smallest_margin"
+                        android:layout_marginEnd="@dimen/standard_margin"
+                        android:text="@string/broadcast_today"
+                        android:textSize="@dimen/font_size_title"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toTopOf="parent"/>
 
-            <TextView
-                    android:id="@+id/program_label_radio_program"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/massive_large_margin"
-                    android:textStyle="bold"
-                    android:layout_marginStart="@dimen/standard_margin"
-                    android:textSize="@dimen/font_size_title"
-                    android:layout_marginEnd="@dimen/standard_margin"
-                    android:text="Radio Program"
-                    app:layout_constraintTop_toBottomOf="@id/program_broadcast_today_recyclerview"
-            />
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/program_broadcast_today_recyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/program_label_broadcast"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/program_programs_recyclerview"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:layout_marginEnd="@dimen/standard_margin"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/program_broadcast_today_recyclerview"
-                    app:layout_constraintTop_toBottomOf="@id/program_label_radio_program" />
+                <TextView
+                        android:id="@+id/program_label_radio_program"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/very_small_margin"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:layout_marginEnd="@dimen/very_small_margin"
+                        android:text="Radio Program"
+                        android:textSize="@dimen/font_size_title"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toBottomOf="@id/program_broadcast_today_recyclerview"
+                />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/program_programs_recyclerview"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:clipToPadding="false"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/program_broadcast_today_recyclerview"
+                        app:layout_constraintTop_toBottomOf="@id/program_label_radio_program"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -128,11 +127,11 @@
                     app:layout_constraintTop_toBottomOf="@id/program_playradio_title"/>
 
             <ImageView
-                    android:onClick="@{()->mListener.onPlayRadio()}"
                     android:id="@+id/program_playradio_play_button"
                     android:layout_width="@dimen/image_playradio_width_thumbnail"
                     android:layout_height="@dimen/image_playradio_height_thumbnail"
                     android:layout_marginEnd="@dimen/standard_margin"
+                    android:onClick="@{()->mListener.onPlayRadio()}"
                     android:src="@mipmap/playbutton"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

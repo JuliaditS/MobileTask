@@ -122,8 +122,14 @@ class HomeViewModel internal constructor() : BaseViewModel() {
             if (snapshot != null) {
                 Timber.w("Current data: ${snapshot.documents}")
                 val mutableList = mutableListOf<TopChart>()
+
+                var i=0
                 for (document in snapshot.documents) {
+                    if (i>3){
+                        break
+                    }
                     document.toObject(TopChart::class.java)?.let { mutableList.add(it) }
+                    i++
                 }
                 _topcharts.value = mutableList
                 Timber.i("${topcharts.value}")
@@ -171,7 +177,6 @@ class HomeViewModel internal constructor() : BaseViewModel() {
 
                 for (document in snapshot.documents) {
                     document.toObject(News::class.java)?.let { mutableList.add(it) }
-
                 }
                 _news.value = mutableList
                 Timber.i("news programs ${news.value}")

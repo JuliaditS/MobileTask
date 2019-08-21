@@ -1,7 +1,6 @@
 package com.codelabs.unikomradio.mvvm.main
 
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.codelabs.unikomradio.R

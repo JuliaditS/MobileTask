@@ -20,8 +20,8 @@ class MediaPlayerServices : Service(), MediaPlayer.OnPreparedListener, MediaPlay
     private var mediaPlayer: MediaPlayer? = null
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
-//        val wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
-//        wifiLock = wifiManager.createWifiLock(WifiManager.WIFI_MODE_FULL, "mylock")
+        val wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        wifiLock = wifiManager.createWifiLock(WifiManager.WIFI_MODE_FULL, "mylock")
 
         mediaPlayer = (application as MyApplication).mMediaPlayer
         mediaPlayer?.apply {
@@ -32,7 +32,7 @@ class MediaPlayerServices : Service(), MediaPlayer.OnPreparedListener, MediaPlay
             setOnPreparedListener(this@MediaPlayerServices)
             setDataSource(url)
             prepareAsync()
-//            setWakeMode(applicationContext, PowerManager.PARTIAL_WAKE_LOCK)
+            setWakeMode(applicationContext, PowerManager.PARTIAL_WAKE_LOCK)
         }
 
         wifiLock?.acquire()
@@ -42,7 +42,6 @@ class MediaPlayerServices : Service(), MediaPlayer.OnPreparedListener, MediaPlay
 
     /** Called when MediaPlayer is ready */
     override fun onPrepared(mediaPlayer: MediaPlayer) {
-        Log.i("Bacot", "Starting")
         mediaPlayer.start()
     }
 
@@ -59,7 +58,7 @@ class MediaPlayerServices : Service(), MediaPlayer.OnPreparedListener, MediaPlay
     override fun onDestroy() {
         super.onDestroy()
         mediaPlayer?.release()
-//        wifiLock?.release()
+        wifiLock?.release()
     }
 
     companion object {

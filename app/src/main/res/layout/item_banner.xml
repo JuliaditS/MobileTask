@@ -13,8 +13,6 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:layout_marginStart="@dimen/smallest_margin"
-        android:layout_marginEnd="@dimen/smallest_margin"
         android:orientation="vertical">
 
         <com.facebook.drawee.view.SimpleDraweeView

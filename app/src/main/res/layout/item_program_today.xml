@@ -25,10 +25,9 @@
         <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/program_item_thumbnail"
                 app:placeholderImage="@drawable/thumbnailradio"
-                android:layout_width="@dimen/image_programs_width_thumbnail"
-                android:layout_height="@dimen/image_programs_height_thumbnail"
+                android:layout_width="@dimen/image_width_thumbnail"
+                android:layout_height="@dimen/image_height_thumbnail"
                 android:src="@drawable/thumbnailradio"
-                android:layout_marginEnd="12dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

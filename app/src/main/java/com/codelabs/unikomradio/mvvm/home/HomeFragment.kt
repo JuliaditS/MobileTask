@@ -14,7 +14,8 @@ import com.codelabs.unikomradio.mvvm.programs.ProgramTodayAdapter
 import com.codelabs.unikomradio.mvvm.streaming.streaming_topcharts.StreamingTopchartsAdapter
 import com.codelabs.unikomradio.utilities.base.BaseFragment
 import com.codelabs.unikomradio.utilities.helper.Event
-import timber.log.Timber
+import com.codelabs.unikomradio.utilities.helper.RecyclerviewItemDecoration
+import com.codelabs.unikomradio.utilities.helper.RecyclerviewItemGridTwoHorizontalDecoration
 
 
 class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), HomeUserActionListener {
@@ -27,7 +28,6 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
     private lateinit var newsAdapter: NewsAdapter
 
     private var mediaPlayer: MediaPlayer? = null
-
 
     private val viewModel: HomeViewModel by viewModels {
         HomeViewModelFactory()
@@ -43,30 +43,7 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
         bannerAdapter = BannerAdapter()
         mBinding.mListener = this
 
-        mBinding.homeBannerRecyclerview.layoutManager =
-                LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-        mBinding.homeBannerRecyclerview.adapter = bannerAdapter
-
-
-        programAdapter = ProgramTodayAdapter()
-        mBinding.homeBroadcastTodayRecyclerview.layoutManager =
-                LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-        mBinding.homeBroadcastTodayRecyclerview.adapter = programAdapter
-
-        topChartAdapter = StreamingTopchartsAdapter()
-        mBinding.homeTopchartRecyclerview.layoutManager =
-                LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-        mBinding.homeTopchartRecyclerview.adapter = topChartAdapter
-
-        crewAdapter = CrewHomeAdapter()
-        mBinding.homeOnairtroopsRecyclerview.layoutManager =
-                LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-        mBinding.homeOnairtroopsRecyclerview.adapter = crewAdapter
-
-        newsAdapter = NewsAdapter()
-        mBinding.homeNewsRecyclerview.layoutManager =
-                GridLayoutManager(requireContext(), 2, GridLayoutManager.HORIZONTAL, false)
-        mBinding.homeNewsRecyclerview.adapter = newsAdapter
+        initAllRecylerView()
 
         if (mediaPlayer?.isPlaying != null) {
             viewModel.stateStreaming(mediaPlayer!!.isPlaying)
@@ -76,13 +53,62 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
     override fun onPlayRadio() {
     }
 
+    private fun initAllRecylerView() {
+        val itemDecoration = RecyclerviewItemDecoration(requireContext(), 16f)
+        val itemDecorationGrid = RecyclerviewItemGridTwoHorizontalDecoration(requireContext(),16f)
+        setBannerView(itemDecoration)
+        setProgramsView(itemDecoration)
+        setTopchartsView(itemDecoration)
+        setCrewsView(itemDecoration)
+        setNewsView(itemDecorationGrid)
+    }
+
+    private fun setBannerView(itemDecoration: RecyclerviewItemDecoration) {
+        mBinding.homeBannerRecyclerview.layoutManager =
+            LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+        mBinding.homeBannerRecyclerview.adapter = bannerAdapter
+        mBinding.homeBannerRecyclerview.addItemDecoration(itemDecoration)
+    }
+
+    private fun setProgramsView(itemDecoration: RecyclerviewItemDecoration) {
+        programAdapter = ProgramTodayAdapter()
+        mBinding.homeBroadcastTodayRecyclerview.layoutManager =
+            LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+        mBinding.homeBroadcastTodayRecyclerview.adapter = programAdapter
+        mBinding.homeBroadcastTodayRecyclerview.addItemDecoration(itemDecoration)
+    }
+
+    private fun setTopchartsView(itemDecoration: RecyclerviewItemDecoration) {
+        topChartAdapter = StreamingTopchartsAdapter()
+        mBinding.homeTopchartRecyclerview.layoutManager =
+            LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+        mBinding.homeTopchartRecyclerview.adapter = topChartAdapter
+    }
+
+    private fun setCrewsView(itemDecoration: RecyclerviewItemDecoration) {
+        crewAdapter = CrewHomeAdapter()
+        mBinding.homeOnairtroopsRecyclerview.layoutManager =
+            LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+        mBinding.homeOnairtroopsRecyclerview.adapter = crewAdapter
+        mBinding.homeOnairtroopsRecyclerview.addItemDecoration(itemDecoration)
+    }
+
+    private fun setNewsView(itemDecoration: RecyclerviewItemGridTwoHorizontalDecoration) {
+        newsAdapter = NewsAdapter()
+        mBinding.homeNewsRecyclerview.layoutManager =
+            GridLayoutManager(requireContext(), 2, GridLayoutManager.HORIZONTAL, false)
+        mBinding.homeNewsRecyclerview.adapter = newsAdapter
+
+    }
+
+
     override fun onCreateObserver(viewModel: HomeViewModel) {
         viewModel.apply {
             banner.observe(this@HomeFragment, Observer {
                 if (it.isNotEmpty()) {
                     bannerAdapter.submitList(it)
                 } else {
-                    viewModel.showMessage.value = Event("program not found")
+                    viewModel.showMessage.value = Event("banner not found")
                 }
             })
         }
@@ -102,7 +128,7 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
                 if (it.isNotEmpty()) {
                     topChartAdapter.submitList(it)
                 } else {
-                    viewModel.showMessage.value = Event("program not found")
+                    viewModel.showMessage.value = Event("topcharts not found")
                 }
             })
         }
@@ -120,7 +146,6 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
         viewModel.apply {
             news.observe(this@HomeFragment, Observer {
                 if (it.isNotEmpty()) {
-                    Timber.i("ada datanya goblok " + it.toString())
                     newsAdapter.submitList(it)
                 } else {
                     viewModel.showMessage.value = Event("news not found")
@@ -132,6 +157,5 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
     override fun setMessageType(): String {
         return MESSAGE_TYPE_TOAST
     }
-
 
 }

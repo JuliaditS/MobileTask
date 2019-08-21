@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
-            name="news"
-            type="com.codelabs.unikomradio.data.model.News" />
+                name="news"
+                type="com.codelabs.unikomradio.data.model.News"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/news_item_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:orientation="vertical">
+            android:id="@+id/news_item_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/small_margin"
+            android:background="@color/colorPrimary"
+            android:paddingStart="@dimen/very_small_margin"
+            android:paddingEnd="@dimen/very_small_margin"
+            android:orientation="vertical">
 
 
         <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/newsItem_thumbnail"
-            android:layout_width="0dp"
-            android:layout_height="80dp"
-                android:layout_margin="@dimen/standard_margin"
-            app:actualImageResource="@drawable/news_placeholder"
-            app:layout_constraintEnd_toEndOf="@id/guideline"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:roundWithOverlayColor="@color/colorPrimary"
-            app:roundedCornerRadius="12dp" />
+                android:id="@+id/newsItem_thumbnail"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/image_news_height_thumbnail"
+                android:layout_marginEnd="@dimen/very_small_margin"
+                app:actualImageResource="@drawable/news_placeholder"
+                app:layout_constraintEnd_toEndOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:roundWithOverlayColor="@color/colorPrimary"
+                app:roundedCornerRadius="12dp"/>
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.4"
-            app:layout_constraintHorizontal_bias="0.4" />
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.4"
+                app:layout_constraintHorizontal_bias="0.4"/>
 
         <TextView
-            android:id="@+id/news_item_date"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/standard_margin"
-            android:text="@{news.date}"
-            android:textColor="@color/textColorStandard"
-            app:layout_constraintStart_toStartOf="@id/guideline"
-            app:layout_constraintTop_toTopOf="parent" />
+                android:id="@+id/news_item_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{news.date}"
+                android:textColor="@color/textColorStandard"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
-            android:id="@+id/news_item_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/super_smallest_margin"
-            android:layout_marginEnd="@dimen/standard_margin"
-            android:ellipsize="end"
-            android:maxLines="3"
-            android:text="@{news.title}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guideline"
-            app:layout_constraintTop_toBottomOf="@id/news_item_date" />
+                android:id="@+id/news_item_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:text="@{news.title}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/news_item_date"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

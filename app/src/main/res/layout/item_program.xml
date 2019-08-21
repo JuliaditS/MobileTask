@@ -22,22 +22,23 @@
 
     <LinearLayout
             android:id="@+id/program_item_layout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
             android:layout_marginBottom="@dimen/small_margin"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
             android:orientation="vertical">
 
         <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/program_item_thumbnail"
-                android:layout_width="@dimen/image_programs_width_thumbnail"
-                android:layout_height="@dimen/image_programs_height_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/image_height_thumbnail"
                 android:src="@drawable/thumbnailradio"
+                app:actualImageResource="@drawable/thumbnailradio"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:placeholderImage="@drawable/thumbnailradio"
-                app:actualImageResource="@drawable/thumbnailradio"
                 app:roundWithOverlayColor="@color/colorPrimary"
                 app:roundedCornerRadius="12dp"/>
 
@@ -46,11 +47,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/very_small_margin"
+                android:ellipsize="end"
                 android:gravity="center"
+                android:maxLines="1"
                 android:text="@{program.title}"
                 android:textSize="@dimen/font_size_small"
-                android:ellipsize="end"
-                android:maxLines="1"
                 android:textStyle="bold"/>
 
         <TextView

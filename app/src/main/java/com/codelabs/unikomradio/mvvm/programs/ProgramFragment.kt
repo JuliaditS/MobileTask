@@ -3,29 +3,28 @@ package com.codelabs.unikomradio.mvvm.programs
 import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
-import android.graphics.Rect
 import android.media.MediaPlayer
-import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.codelabs.unikomradio.MyApplication
 import com.codelabs.unikomradio.R
 import com.codelabs.unikomradio.data.model.Program
 import com.codelabs.unikomradio.databinding.ProgramBinding
 import com.codelabs.unikomradio.utilities.base.BaseFragment
 import com.codelabs.unikomradio.utilities.helper.Event
+import com.codelabs.unikomradio.utilities.helper.RecyclerviewItemDecoration
+import com.codelabs.unikomradio.utilities.helper.RecyclerviewItemGridTwoHorizontalDecoration
 import com.codelabs.unikomradio.utilities.services.MediaPlayerServices
-import timber.log.Timber
 
 class ProgramFragment : BaseFragment<ProgramViewModel, ProgramBinding>(R.layout.program), ProgramUserActionListener {
     override fun onClickItem(program: Program) {
     }
 
     private lateinit var topAdapter: ProgramAdapter
-    private lateinit var bottomAdapter: ProgramTodayAdapter
+    private lateinit var programTodayAdapter: ProgramTodayAdapter
 
     private var mediaPlayer: MediaPlayer? = null
 
@@ -38,46 +37,42 @@ class ProgramFragment : BaseFragment<ProgramViewModel, ProgramBinding>(R.layout.
         mBinding.mViewModel = viewModel
         mBinding.mListener = this
         mediaPlayer = (requireActivity().application as MyApplication).mMediaPlayer
-
-        mBinding.programProgramsRecyclerview.addItemDecoration(object : RecyclerView.ItemDecoration() {
-            override fun getItemOffsets(
-                outRect: Rect,
-                view: View,
-                parent: RecyclerView,
-                state: RecyclerView.State
-            ) {
-                val spacing = 8
-                outRect.bottom = spacing
-                if (parent.getChildLayoutPosition(view) % 2 == 0) {
-                    outRect.left = spacing
-                    outRect.right = spacing
-                } else {
-                    outRect.right = spacing
-                }
-            }
-        })
     }
 
     override fun setContentData() {
+
+        val itemDecoration = RecyclerviewItemDecoration(requireContext(), 16f)
+
+        programTodayAdapter = ProgramTodayAdapter()
+        mBinding.programBroadcastTodayRecyclerview.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        mBinding.programBroadcastTodayRecyclerview.adapter = programTodayAdapter
+        mBinding.programBroadcastTodayRecyclerview.addItemDecoration(itemDecoration)
         topAdapter = ProgramAdapter()
+
         mBinding.programProgramsRecyclerview.layoutManager =
-            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
         mBinding.programProgramsRecyclerview.adapter = topAdapter
+        mBinding.programProgramsRecyclerview.addItemDecoration(
+            RecyclerviewItemGridTwoHorizontalDecoration(
+                requireContext(),
+                16f
+            )
+        )
 
 
-        bottomAdapter = ProgramTodayAdapter()
-        mBinding.programBroadcastTodayRecyclerview.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
-        mBinding.programBroadcastTodayRecyclerview.adapter = bottomAdapter
+
+
 
         try {
             if (mediaPlayer?.isPlaying != null) {
                 viewModel.stateStreaming(mediaPlayer!!.isPlaying)
             }
-        } catch (e : IllegalStateException){
+        } catch (e: IllegalStateException) {
             e.printStackTrace()
         }
-
     }
+
 
     override fun onCreateObserver(viewModel: ProgramViewModel) {
         viewModel.apply {
@@ -93,7 +88,7 @@ class ProgramFragment : BaseFragment<ProgramViewModel, ProgramBinding>(R.layout.
         viewModel.apply {
             programs.observe(this@ProgramFragment, Observer {
                 if (it.isNotEmpty()) {
-                    bottomAdapter.submitList(it)
+                    programTodayAdapter.submitList(it)
                 } else {
                     viewModel.showMessage.value = Event("program not found")
                 }

@@ -23,9 +23,7 @@
                 android:id="@+id/news_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:paddingBottom="@dimen/standard_margin"
                 app:layout_constraintBottom_toTopOf="@id/news_playradio_layout"
-
                 app:layout_constraintTop_toTopOf="parent"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
