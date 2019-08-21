@@ -22,7 +22,7 @@
 
     <LinearLayout
             android:id="@+id/program_item_layout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:layout_marginBottom="@dimen/small_margin"
@@ -30,7 +30,7 @@
 
         <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/program_item_thumbnail"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/image_programs_width_thumbnail"
                 android:layout_height="@dimen/image_programs_height_thumbnail"
                 android:src="@drawable/thumbnailradio"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -45,6 +45,7 @@
                 android:id="@+id/program_item_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/very_small_margin"
                 android:gravity="center"
                 android:text="@{program.title}"
                 android:textSize="@dimen/font_size_small"

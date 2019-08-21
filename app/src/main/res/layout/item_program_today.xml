@@ -16,11 +16,10 @@
     </data>
     <LinearLayout
             android:id="@+id/item_program_today_layout"
-            android:layout_width="@dimen/image_programs_width_thumbnail"
+            android:layout_width="wrap_content"
             android:orientation="vertical"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            android:layout_marginEnd="@dimen/smallest_margin"
     >
 
         <com.facebook.drawee.view.SimpleDraweeView
@@ -29,6 +28,7 @@
                 android:layout_width="@dimen/image_programs_width_thumbnail"
                 android:layout_height="@dimen/image_programs_height_thumbnail"
                 android:src="@drawable/thumbnailradio"
+                android:layout_marginEnd="12dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -40,6 +40,7 @@
                 android:id="@+id/program_item_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/very_small_margin"
                 android:textSize="@dimen/font_size_small"
                 android:text="@{program.title}"
                 android:gravity="center"
