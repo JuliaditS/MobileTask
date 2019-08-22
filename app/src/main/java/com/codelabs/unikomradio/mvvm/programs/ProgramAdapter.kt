@@ -16,6 +16,7 @@ import timber.log.Timber
 class ProgramAdapter : ListAdapter<Program, ProgramAdapter.ViewHolder>(ProgramDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
         return ViewHolder(
             ItemProgramBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false

@@ -17,18 +17,41 @@ import com.codelabs.unikomradio.mvvm.home.HomeFragment
 import com.codelabs.unikomradio.mvvm.news.NewsFragment
 import com.codelabs.unikomradio.mvvm.programs.ProgramFragment
 import com.codelabs.unikomradio.mvvm.streaming.StreamingFragment
+import com.codelabs.unikomradio.mvvm.streaming.streaming_topcharts.StreamingTopchartsActivity
 import com.codelabs.unikomradio.utilities.base.BaseActivity
+import com.codelabs.unikomradio.utilities.helper.OnSeeAllClickedListener
 import com.codelabs.unikomradio.utilities.services.MediaPlayerServices
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import timber.log.Timber
 
 
-class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main), MainUserActionListener {
+class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main), MainUserActionListener,
+   OnSeeAllClickedListener {
+    override fun onPlayRadioLayoutClick() {
+        mBinding.mainBottomnavigationview.selectedItemId = R.id.main_streaming_play_item
+    }
+
     private var mediaPlayer: MediaPlayer? = null
 
 
     private val viewModel: MainViewModel by viewModels {
         MainViewModelFactory()
+    }
+
+    override fun onBroadcastSeeAllClicked() {
+        mBinding.mainBottomnavigationview.selectedItemId = R.id.main_programs_item
+    }
+
+    override fun onTopchartSeeAllClicked() {
+        startActivity(Intent(this,StreamingTopchartsActivity::class.java))
+    }
+
+    override fun onAirtroppsSeeAllClicked() {
+        mBinding.mainBottomnavigationview.selectedItemId = R.id.main_crew_item
+    }
+
+    override fun onNewsSeeAllClicked() {
+        mBinding.mainBottomnavigationview.selectedItemId = R.id.main_news_item
     }
 
     override fun setMessageType(): String {
@@ -82,6 +105,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
                 mBinding.mainPlayradioLayout.visibility = View.VISIBLE
             }
         }
+
         return@OnNavigationItemSelectedListener loadFragment(fragment)
     }
 
@@ -124,19 +148,16 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
             intent.action = MediaPlayerServices.ACTION_PLAY
             this.startService(intent)
             viewModel.playStreaming()
-            Timber.i("DIKLIK DI MAIN dongo")
 
         } else {
-            Timber.i("ternyata "+mediaPlayer?.isPlaying.toString())
+            Timber.i("ternyata " + mediaPlayer?.isPlaying.toString())
             if (mediaPlayer?.isPlaying == true) {
                 mediaPlayer?.pause()
                 viewModel.stopStreaming()
-                Timber.i("DIKLIK DI babi")
 
             } else {
                 mediaPlayer?.start()
                 viewModel.playStreaming()
-                Timber.i("DIKLIK DI bangsat")
             }
         }
     }

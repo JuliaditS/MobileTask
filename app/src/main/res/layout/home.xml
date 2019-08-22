@@ -52,6 +52,7 @@
                     style="@style/ButtonSeeAll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="@{()-> mListener.onClickBroadcastSeeAll()}"
                     android:layout_marginTop="@dimen/standard_margin"
                     android:layout_marginEnd="@dimen/very_small_margin"
                     android:text="@string/see_all"
@@ -86,6 +87,7 @@
                     android:layout_marginTop="@dimen/standard_margin"
                     android:layout_marginEnd="@dimen/very_small_margin"
                     android:text="@string/see_all"
+                    android:onClick="@{()-> mListener.onClickTopchartSeeAll()}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/home_broadcast_today_recyclerview"/>
 
@@ -116,6 +118,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/standard_margin"
                     android:layout_marginEnd="@dimen/very_small_margin"
+                    android:onClick="@{()-> mListener.onAirTroopsSeeAll()}"
                     android:text="@string/see_all"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/home_topchart_recyclerview"/>
@@ -147,6 +150,7 @@
                     android:layout_marginTop="@dimen/standard_margin"
                     android:layout_marginEnd="@dimen/very_small_margin"
                     android:text="@string/see_all"
+                    android:onClick="@{()-> mListener.onNewsSeeAll()}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/home_onairtroops_recyclerview"/>
 

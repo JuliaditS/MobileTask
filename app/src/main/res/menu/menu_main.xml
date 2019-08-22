@@ -9,7 +9,7 @@
 
     <item
             android:id="@+id/main_programs_item"
-            android:title="programs"
+            android:title="Programs"
             app:showAsAction="ifRoom"
             android:icon="@drawable/icon_programs"
     />

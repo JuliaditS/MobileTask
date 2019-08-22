@@ -152,15 +152,20 @@ class CirclePagerIndicatorDecoration(private val context: Context, private val s
         super.getItemOffsets(outRect, view, parent, state)
         val lastPosition = state.itemCount - 1
 
-        outRect.bottom = spacingInDp(20f)
-        if (parent.getChildLayoutPosition(view) == 0) {
-            outRect.left = spacingInDp(firstSpacing)
-            outRect.right = spacingInDp(itemSpacing)
-        } else if (parent.getChildLayoutPosition(view) == lastPosition) {
-            outRect.right = spacingInDp(endSpacing)
-        } else {
-            outRect.right = spacingInDp(itemSpacing)
-            outRect.left = spacingInDp(itemSpacing)
+        outRect.bottom = spacingInDp(30f)
+        when {
+            parent.getChildLayoutPosition(view) == 0 -> {
+                outRect.left = spacingInDp(firstSpacing)
+                outRect.right = spacingInDp(itemSpacing / 2)
+            }
+            parent.getChildLayoutPosition(view) == lastPosition -> {
+                outRect.right = spacingInDp(endSpacing)
+                outRect.left = spacingInDp(itemSpacing / 2)
+            }
+            else -> {
+                outRect.right = spacingInDp(itemSpacing / 2)
+                outRect.left = spacingInDp(itemSpacing / 2)
+            }
         }
     }
 

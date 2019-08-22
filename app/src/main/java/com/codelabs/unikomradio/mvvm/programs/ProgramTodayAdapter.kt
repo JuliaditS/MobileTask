@@ -13,10 +13,15 @@ import com.codelabs.unikomradio.databinding.ItemProgramTodayBinding
 import com.codelabs.unikomradio.mvvm.programs.programdetail.ProgramDetailActivity
 import com.codelabs.unikomradio.utilities.INTENT_PARCELABLE
 import timber.log.Timber
+import android.app.Activity
+import android.util.DisplayMetrics
+
+
 
 class ProgramTodayAdapter : ListAdapter<Program, ProgramTodayAdapter.ViewHolder>(ProgramTodayAdapterDiffCallback()) {
-
+    private lateinit var context: Context
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        context = parent.context
         return ViewHolder(
             ItemProgramTodayBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
@@ -26,10 +31,18 @@ class ProgramTodayAdapter : ListAdapter<Program, ProgramTodayAdapter.ViewHolder>
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+        val displaymetrics = DisplayMetrics()
+        (context as Activity).windowManager.defaultDisplay.getMetrics(displaymetrics)
+
+        val devicewidth = (displaymetrics.widthPixels * 0.42).toInt()
+
         val topChart = getItem(position)
+
         holder.apply {
             bind(createOnClickListener(), topChart)
             itemView.tag = topChart
+            itemView.layoutParams.width = devicewidth
+
         }
     }
 

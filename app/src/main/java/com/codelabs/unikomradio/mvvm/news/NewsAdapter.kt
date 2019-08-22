@@ -1,7 +1,9 @@
 package com.codelabs.unikomradio.mvvm.news
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -14,8 +16,9 @@ import com.codelabs.unikomradio.utilities.INTENT_PARCELABLE
 import timber.log.Timber
 
 class NewsAdapter : ListAdapter<News, NewsAdapter.ViewHolder>(NewsDiffCallback()) {
-
+    private lateinit var context: Context
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        context = parent.context
         return ViewHolder(
             ItemNewsBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
@@ -24,11 +27,15 @@ class NewsAdapter : ListAdapter<News, NewsAdapter.ViewHolder>(NewsDiffCallback()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val displaymetrics = DisplayMetrics()
+        (context as Activity).windowManager.defaultDisplay.getMetrics(displaymetrics)
 
+        val devicewidth = (displaymetrics.widthPixels * 0.90).toInt()
         val news = getItem(position)
         holder.apply {
             bind(news)
             itemView.tag = news
+            itemView.layoutParams.width = devicewidth
         }
     }
 

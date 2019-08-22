@@ -1,34 +1,36 @@
 package com.codelabs.unikomradio.mvvm.home
 
+import android.graphics.Point
 import android.media.MediaPlayer
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.*
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.codelabs.unikomradio.MyApplication
+import com.codelabs.unikomradio.R
 import com.codelabs.unikomradio.databinding.HomeBinding
 import com.codelabs.unikomradio.mvvm.news.NewsAdapter
 import com.codelabs.unikomradio.mvvm.programs.ProgramTodayAdapter
 import com.codelabs.unikomradio.mvvm.streaming.streaming_topcharts.StreamingTopchartsAdapter
 import com.codelabs.unikomradio.utilities.base.BaseFragment
-import com.codelabs.unikomradio.utilities.helper.*
+import com.codelabs.unikomradio.utilities.helper.Event
+import com.codelabs.unikomradio.utilities.helper.OnSeeAllClickedListener
 import com.codelabs.unikomradio.utilities.helper.recyclerviewhelper.itemdecoration.CirclePagerIndicatorDecoration
 import com.codelabs.unikomradio.utilities.helper.recyclerviewhelper.itemdecoration.RecyclerviewItemDecoration
 import com.codelabs.unikomradio.utilities.helper.recyclerviewhelper.itemdecoration.RecyclerviewItemGridTwoHorizontalDecoration
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.LinearSnapHelper
-import com.codelabs.unikomradio.R
 import com.codelabs.unikomradio.utilities.helper.recyclerviewhelper.snaphelper.SnapHelper
-import kotlin.math.min
+import timber.log.Timber
 
 
 class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), HomeUserActionListener {
-
-
     private lateinit var bannerAdapter: BannerAdapter
     private lateinit var programAdapter: ProgramTodayAdapter
     private lateinit var topChartAdapter: StreamingTopchartsAdapter
     private lateinit var crewAdapter: CrewHomeAdapter
     private lateinit var newsAdapter: NewsAdapter
+
+    private lateinit var onSeeAllClickedListener: OnSeeAllClickedListener
 
     private var mediaPlayer: MediaPlayer? = null
 
@@ -47,6 +49,12 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
         mBinding.mListener = this
 
         initAllRecylerView()
+
+        activity?.let {
+            if (it !is OnSeeAllClickedListener) throw IllegalArgumentException("Activity should implement OnSeeAllClickListener")
+
+            onSeeAllClickedListener = activity as OnSeeAllClickedListener
+        }
 
         if (mediaPlayer?.isPlaying != null) {
             viewModel.stateStreaming(mediaPlayer!!.isPlaying)
@@ -80,10 +88,10 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
         mBinding.homeBannerRecyclerview.adapter = bannerAdapter
         SnapHelper().attachToRecyclerView(mBinding.homeBannerRecyclerview)
 
-        val itemDecoration2=
+        val itemDecoration2 =
             CirclePagerIndicatorDecoration(
                 requireContext(),
-                8f
+                12f
             )
         itemDecoration2.firstItemSpacing(16f)
         mBinding.homeBannerRecyclerview.addItemDecoration(itemDecoration2)
@@ -95,6 +103,7 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
             LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
         mBinding.homeBroadcastTodayRecyclerview.adapter = programAdapter
         mBinding.homeBroadcastTodayRecyclerview.addItemDecoration(itemDecoration)
+
     }
 
     private fun setTopchartsView(itemDecoration: RecyclerviewItemDecoration) {
@@ -171,6 +180,22 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
                 }
             })
         }
+    }
+
+    override fun onClickBroadcastSeeAll() {
+        onSeeAllClickedListener.onBroadcastSeeAllClicked()
+    }
+
+    override fun onClickTopchartSeeAll() {
+        onSeeAllClickedListener.onTopchartSeeAllClicked()
+    }
+
+    override fun onAirTroopsSeeAll() {
+        onSeeAllClickedListener.onAirtroppsSeeAllClicked()
+    }
+
+    override fun onNewsSeeAll() {
+        onSeeAllClickedListener.onNewsSeeAllClicked()
     }
 
     override fun setMessageType(): String {

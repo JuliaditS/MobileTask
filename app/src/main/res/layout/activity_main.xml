@@ -22,6 +22,7 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+                android:onClick="@{()->mListener.onPlayRadioLayoutClick()}"
                 xmlns:fresco="http://schemas.android.com/tools"
                 android:id="@+id/main_playradio_layout"
                 android:layout_width="match_parent"
