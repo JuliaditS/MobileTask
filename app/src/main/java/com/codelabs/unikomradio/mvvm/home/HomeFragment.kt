@@ -3,19 +3,22 @@ package com.codelabs.unikomradio.mvvm.home
 import android.media.MediaPlayer
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.*
 import com.codelabs.unikomradio.MyApplication
-import com.codelabs.unikomradio.R
 import com.codelabs.unikomradio.databinding.HomeBinding
 import com.codelabs.unikomradio.mvvm.news.NewsAdapter
 import com.codelabs.unikomradio.mvvm.programs.ProgramTodayAdapter
 import com.codelabs.unikomradio.mvvm.streaming.streaming_topcharts.StreamingTopchartsAdapter
 import com.codelabs.unikomradio.utilities.base.BaseFragment
-import com.codelabs.unikomradio.utilities.helper.Event
-import com.codelabs.unikomradio.utilities.helper.RecyclerviewItemDecoration
-import com.codelabs.unikomradio.utilities.helper.RecyclerviewItemGridTwoHorizontalDecoration
+import com.codelabs.unikomradio.utilities.helper.*
+import com.codelabs.unikomradio.utilities.helper.recyclerviewhelper.itemdecoration.CirclePagerIndicatorDecoration
+import com.codelabs.unikomradio.utilities.helper.recyclerviewhelper.itemdecoration.RecyclerviewItemDecoration
+import com.codelabs.unikomradio.utilities.helper.recyclerviewhelper.itemdecoration.RecyclerviewItemGridTwoHorizontalDecoration
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.LinearSnapHelper
+import com.codelabs.unikomradio.R
+import com.codelabs.unikomradio.utilities.helper.recyclerviewhelper.snaphelper.SnapHelper
+import kotlin.math.min
 
 
 class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), HomeUserActionListener {
@@ -54,8 +57,16 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
     }
 
     private fun initAllRecylerView() {
-        val itemDecoration = RecyclerviewItemDecoration(requireContext(), 16f)
-        val itemDecorationGrid = RecyclerviewItemGridTwoHorizontalDecoration(requireContext(),16f)
+        val itemDecoration =
+            RecyclerviewItemDecoration(
+                requireContext(),
+                16f
+            )
+        val itemDecorationGrid =
+            RecyclerviewItemGridTwoHorizontalDecoration(
+                requireContext(),
+                16f
+            )
         setBannerView(itemDecoration)
         setProgramsView(itemDecoration)
         setTopchartsView(itemDecoration)
@@ -67,7 +78,15 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
         mBinding.homeBannerRecyclerview.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
         mBinding.homeBannerRecyclerview.adapter = bannerAdapter
-        mBinding.homeBannerRecyclerview.addItemDecoration(itemDecoration)
+        SnapHelper().attachToRecyclerView(mBinding.homeBannerRecyclerview)
+
+        val itemDecoration2=
+            CirclePagerIndicatorDecoration(
+                requireContext(),
+                8f
+            )
+        itemDecoration2.firstItemSpacing(16f)
+        mBinding.homeBannerRecyclerview.addItemDecoration(itemDecoration2)
     }
 
     private fun setProgramsView(itemDecoration: RecyclerviewItemDecoration) {

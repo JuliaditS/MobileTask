@@ -49,9 +49,7 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
         mBinding.mListener = this
         mBinding.mViewModel = viewModel
         mediaPlayer = (requireActivity().application as MyApplication).mMediaPlayer
-        mBinding.streamingSongThumbnail.setImageDrawable(
-            resources.getDrawable(R.drawable.thumbnailradio_rounder_corners)
-        )
+
     }
 
     override fun onPlayMusicClick() {

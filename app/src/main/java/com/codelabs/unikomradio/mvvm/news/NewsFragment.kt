@@ -60,15 +60,15 @@ class NewsFragment : BaseFragment<NewsViewModel, NewsBinding>(R.layout.news), Ne
             })
         }
 
-        viewModel.apply {
-            isPlaying.observe(viewLifecycleOwner, Observer<Boolean> {
-                if (it) {
-                    mBinding.newsPlayradioPlayButton.setImageResource(R.mipmap.pause)
-                } else {
-                    mBinding.newsPlayradioPlayButton.setImageResource(R.mipmap.playbutton)
-                }
-            })
-        }
+//        viewModel.apply {
+//            isPlaying.observe(viewLifecycleOwner, Observer<Boolean> {
+//                if (it) {
+//                    mBinding.newsPlayradioPlayButton.setImageResource(R.mipmap.pause)
+//                } else {
+//                    mBinding.newsPlayradioPlayButton.setImageResource(R.mipmap.playbutton)
+//                }
+//            })
+//        }
     }
 
     override fun onPlayRadio() {

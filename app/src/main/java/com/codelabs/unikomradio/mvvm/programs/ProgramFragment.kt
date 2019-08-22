@@ -15,8 +15,8 @@ import com.codelabs.unikomradio.data.model.Program
 import com.codelabs.unikomradio.databinding.ProgramBinding
 import com.codelabs.unikomradio.utilities.base.BaseFragment
 import com.codelabs.unikomradio.utilities.helper.Event
-import com.codelabs.unikomradio.utilities.helper.RecyclerviewItemDecoration
-import com.codelabs.unikomradio.utilities.helper.RecyclerviewItemGridTwoHorizontalDecoration
+import com.codelabs.unikomradio.utilities.helper.recyclerviewhelper.itemdecoration.RecyclerviewItemDecoration
+import com.codelabs.unikomradio.utilities.helper.recyclerviewhelper.itemdecoration.RecyclerviewItemGridTwoHorizontalDecoration
 import com.codelabs.unikomradio.utilities.services.MediaPlayerServices
 
 class ProgramFragment : BaseFragment<ProgramViewModel, ProgramBinding>(R.layout.program), ProgramUserActionListener {
@@ -41,7 +41,11 @@ class ProgramFragment : BaseFragment<ProgramViewModel, ProgramBinding>(R.layout.
 
     override fun setContentData() {
 
-        val itemDecoration = RecyclerviewItemDecoration(requireContext(), 16f)
+        val itemDecoration =
+            RecyclerviewItemDecoration(
+                requireContext(),
+                16f
+            )
 
         programTodayAdapter = ProgramTodayAdapter()
         mBinding.programBroadcastTodayRecyclerview.layoutManager =
@@ -59,9 +63,6 @@ class ProgramFragment : BaseFragment<ProgramViewModel, ProgramBinding>(R.layout.
                 16f
             )
         )
-
-
-
 
 
         try {
@@ -95,15 +96,15 @@ class ProgramFragment : BaseFragment<ProgramViewModel, ProgramBinding>(R.layout.
             })
         }
 
-        viewModel.apply {
-            isPlaying.observe(viewLifecycleOwner, Observer<Boolean> {
-                if (it) {
-                    mBinding.programPlayradioPlayButton.setImageResource(R.mipmap.pause)
-                } else {
-                    mBinding.programPlayradioPlayButton.setImageResource(R.mipmap.playbutton)
-                }
-            })
-        }
+//        viewModel.apply {
+//            isPlaying.observe(viewLifecycleOwner, Observer<Boolean> {
+//                if (it) {
+//                    mBinding.programPlayradioPlayButton.setImageResource(R.mipmap.pause)
+//                } else {
+//                    mBinding.programPlayradioPlayButton.setImageResource(R.mipmap.playbutton)
+//                }
+//            })
+//        }
     }
 
 

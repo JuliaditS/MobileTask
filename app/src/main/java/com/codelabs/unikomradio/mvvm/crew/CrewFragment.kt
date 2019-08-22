@@ -17,15 +17,6 @@ import com.codelabs.unikomradio.utilities.base.BaseFragment
 import com.codelabs.unikomradio.utilities.helper.Event
 import com.codelabs.unikomradio.utilities.services.MediaPlayerServices
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- *
- */
 class CrewFragment : BaseFragment<CrewViewModel,CrewBinding>(R.layout.crew),CrewUserActionListener {
 
     private lateinit var adapter: CrewAdapter
@@ -68,15 +59,15 @@ class CrewFragment : BaseFragment<CrewViewModel,CrewBinding>(R.layout.crew),Crew
             })
         }
 
-        viewModel.apply {
-            isPlaying.observe(viewLifecycleOwner, Observer<Boolean> {
-                if (it) {
-                    mBinding.crewPlayradioPlayButton.setImageResource(R.mipmap.pause)
-                } else {
-                    mBinding.crewPlayradioPlayButton.setImageResource(R.mipmap.playbutton)
-                }
-            })
-        }
+//        viewModel.apply {
+//            isPlaying.observe(viewLifecycleOwner, Observer<Boolean> {
+//                if (it) {
+//                    mBinding.crewPlayradioPlayButton.setImageResource(R.mipmap.pause)
+//                } else {
+//                    mBinding.crewPlayradioPlayButton.setImageResource(R.mipmap.playbutton)
+//                }
+//            })
+//        }
     }
 
     override fun onPlayRadio() {

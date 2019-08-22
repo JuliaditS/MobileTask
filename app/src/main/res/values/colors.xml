@@ -6,4 +6,5 @@
 
     <color name="colored">#F5F5F5</color>
     <color name="textColorStandard">#798399</color>
+    <color name="colorIndicatorSlider">#BABEC7</color>
 </resources>

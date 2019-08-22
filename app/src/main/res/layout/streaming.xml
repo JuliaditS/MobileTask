@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+>
 
     <data>
         <variable
@@ -15,19 +15,24 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@color/colorPrimary"
 
     >
-
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/streaming_song_thumbnail"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_margin="50dp"
-                android:scaleType="fitXY"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/very_small_margin"
+                android:layout_marginEnd="@dimen/very_small_margin"
+                android:layout_marginTop="@dimen/very_small_margin"
                 android:elevation="3dp"
+                android:scaleType="fitXY"
+                app:actualImageResource="@drawable/thumbnailradio"
+                app:actualImageScaleType="fitXY"
+                app:layout_constraintBottom_toTopOf="@id/streaming_guideline"
                 app:layout_constraintTop_toTopOf="parent"
+                app:roundWithOverlayColor="@color/colorPrimary"
                 app:roundedCornerRadius="12dp"
         />
 
@@ -35,13 +40,12 @@
                 android:id="@+id/streaming_program"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small_margin"
                 android:text="Hits Request Night"
                 android:textSize="@dimen/font_size_title"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/streaming_song_thumbnail"/>
+                app:layout_constraintTop_toBottomOf="@id/streaming_guideline"/>
 
         <TextView
                 android:id="@+id/streaming_label_program"
@@ -54,53 +58,71 @@
                 app:layout_constraintTop_toBottomOf="@id/streaming_program"/>
 
         <ProgressBar
-                android:layout_marginTop="@dimen/massive_large_margin"
                 android:id="@+id/streaming_proggressbar"
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/standard_margin"
-                android:layout_marginEnd="@dimen/standard_margin"
+                android:layout_marginStart="@dimen/very_small_margin"
+                android:layout_marginEnd="@dimen/very_small_margin"
                 android:max="100"
                 android:progress="99"
                 android:progressTint="@android:color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/streaming_label_program"
-                app:layout_constraintHorizontal_bias="0.0"/>
+                app:layout_constraintTop_toBottomOf="@id/streaming_spectrum"/>
 
         <ImageView
-                android:onClick="@{()->mListener.onTopChartClick()}"
+                android:id="@+id/streaming_spectrum"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="@dimen/very_small_margin"
+                android:layout_marginTop="@dimen/very_small_margin"
+                android:layout_marginEnd="@dimen/very_small_margin"
+                android:src="@drawable/spectrum"
+                android:scaleType="fitXY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/streaming_label_program"/>
+
+        <ImageView
                 android:id="@+id/streaming_playlist_icon"
                 android:layout_width="@dimen/icon_width"
                 android:layout_height="@dimen/icon_height"
                 android:layout_marginStart="@dimen/large_margin"
+                android:onClick="@{()->mListener.onTopChartClick()}"
                 android:src="@drawable/icon_topchart"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/streaming_proggressbar" android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@id/streaming_proggressbar"/>
 
         <ImageView
                 android:id="@+id/streaming_play_streaming"
-                android:onClick="@{()->mListener.onPlayMusicClick()}"
                 android:layout_width="77dp"
                 android:layout_height="77dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:onClick="@{()->mListener.onPlayMusicClick()}"
                 android:src="@mipmap/playbutton"
-                android:layout_marginTop="@dimen/small_margin"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/streaming_proggressbar" android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@+id/streaming_proggressbar"/>
 
         <ImageView
-                android:onClick="@{()->mListener.onMuteClick()}"
                 android:id="@+id/streaming_sound_active"
                 android:layout_width="@dimen/icon_width"
                 android:layout_height="@dimen/icon_height"
-                android:src="@mipmap/volume"
                 android:layout_marginEnd="@dimen/large_margin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/streaming_proggressbar" android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                android:layout_marginBottom="8dp"
+                android:onClick="@{()->mListener.onMuteClick()}"
+                android:src="@mipmap/volume"
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/streaming_proggressbar"/>
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/streaming_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.6"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

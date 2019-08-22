@@ -12,6 +12,9 @@ import android.os.PowerManager
 import android.util.Log
 import android.widget.Toast
 import com.codelabs.unikomradio.MyApplication
+import java.io.IOException
+import java.lang.IllegalArgumentException
+import java.lang.IllegalStateException
 
 class MediaPlayerServices : Service(), MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener {
     private val url = "http://hits.unikom.ac.id:9996/;listen.pls?sid=1"
@@ -24,20 +27,30 @@ class MediaPlayerServices : Service(), MediaPlayer.OnPreparedListener, MediaPlay
         wifiLock = wifiManager.createWifiLock(WifiManager.WIFI_MODE_FULL, "mylock")
 
         mediaPlayer = (application as MyApplication).mMediaPlayer
-        mediaPlayer?.apply {
-            val audioAttributes = AudioAttributes.Builder()
-                .setLegacyStreamType(AudioManager.STREAM_MUSIC)
-                .build()
-            setAudioAttributes(audioAttributes)
-            setOnPreparedListener(this@MediaPlayerServices)
-            setDataSource(url)
-            prepareAsync()
-            setWakeMode(applicationContext, PowerManager.PARTIAL_WAKE_LOCK)
+        val audioAttributes = AudioAttributes.Builder()
+            .setLegacyStreamType(AudioManager.STREAM_MUSIC)
+            .build()
+
+        try {
+            mediaPlayer?.apply {
+                isLooping = true
+                setAudioAttributes(audioAttributes)
+                setOnPreparedListener(this@MediaPlayerServices)
+                setDataSource(url)
+                prepareAsync()
+                setWakeMode(applicationContext, PowerManager.PARTIAL_WAKE_LOCK)
+                wifiLock?.acquire()
+            }
+        } catch (e: IllegalArgumentException){
+            e.printStackTrace()
+        } catch (e: IllegalStateException){
+            e.printStackTrace()
+        } catch (e: IOException){
+            e.printStackTrace()
         }
 
-        wifiLock?.acquire()
 
-        return START_STICKY_COMPATIBILITY
+        return START_NOT_STICKY
     }
 
     /** Called when MediaPlayer is ready */

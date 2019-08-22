@@ -10,7 +10,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="370dp"
+        android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:orientation="vertical">

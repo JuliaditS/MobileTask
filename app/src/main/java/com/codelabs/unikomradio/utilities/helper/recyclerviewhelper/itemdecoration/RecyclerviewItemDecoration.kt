@@ -1,4 +1,4 @@
-package com.codelabs.unikomradio.utilities.helper
+package com.codelabs.unikomradio.utilities.helper.recyclerviewhelper.itemdecoration
 
 import android.content.Context
 import android.graphics.Rect
@@ -24,4 +24,6 @@ class RecyclerviewItemDecoration(private val context: Context, private val spaci
             outRect.right = mPadding
         }
     }
+
 }
+

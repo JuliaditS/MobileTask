@@ -1,11 +1,10 @@
-package com.codelabs.unikomradio.utilities.helper
+package com.codelabs.unikomradio.utilities.helper.recyclerviewhelper.itemdecoration
 
 import android.content.Context
 import android.graphics.Rect
 import android.util.TypedValue
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import timber.log.Timber
 
 class RecyclerviewItemGridTwoHorizontalDecoration(private val context: Context, private val spacing: Float) :
     RecyclerView.ItemDecoration() {
