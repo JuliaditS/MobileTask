@@ -34,12 +34,12 @@
     </style>
 
     <style name="ButtonSeeAll" parent="Theme.AppCompat.Light">
-        <item name="android:paddingStart">15dp</item>
-        <item name="android:paddingEnd">15dp</item>
-        <item name="android:paddingTop">5dp</item>
-        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:background">@drawable/background_radius_white</item>
-        <item name="android:textSize">@dimen/font_size_standard</item>
+        <item name="android:textSize">@dimen/font_size_small</item>
     </style>
 </resources>

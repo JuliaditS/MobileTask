@@ -25,7 +25,7 @@
                     android:id="@+id/program_detail_thumbnail"
                     android:layout_width="match_parent"
                     android:layout_height="220dp"
-                    android:layout_marginTop="@dimen/standard_margin"
+                    android:layout_marginTop="@dimen/very_small_margin"
                     fresco:layout_constraintEnd_toEndOf="parent"
                     fresco:layout_constraintStart_toStartOf="parent"
                     fresco:layout_constraintTop_toTopOf="parent"
@@ -39,7 +39,7 @@
                     android:id="@+id/program_detail_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/smallest_margin"
+                    android:layout_marginTop="@dimen/standard_margin"
                     android:text="@{program.title}"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/font_size_title"
@@ -52,6 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/icon_date"
+                    android:layout_marginTop="@dimen/very_small_margin"
                     android:drawablePadding="5dp"
                     android:text="@{program.heldDay}"
                     android:textColor="@android:color/white"
@@ -61,6 +62,7 @@
             <TextView
                     android:id="@+id/program_detail_at"
                     android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/very_small_margin"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/icon_time"
                     android:drawablePadding="5dp"
@@ -75,6 +77,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/textColorStandard"
+                    android:lineSpacingMultiplier="1"
+                    android:lineSpacingExtra="6dp"
                     android:text="@{program.description}"
                     android:layout_marginTop="@dimen/standard_margin"/>
 
@@ -88,12 +92,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/standard_margin"
                     fresco:layout_constraintTop_toBottomOf="@id/program_detail_description"/>
+
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/program_detail_announcer_recyclerview"
                     fresco:layout_constraintTop_toBottomOf="@id/program_detail_label_announcer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/smallest_margin"
+                    android:layout_marginTop="@dimen/very_small_margin"
                     android:paddingBottom="@dimen/standard_margin">
 
             </androidx.recyclerview.widget.RecyclerView>

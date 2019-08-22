@@ -38,7 +38,7 @@
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/smallest_margin"
+                android:layout_marginTop="@dimen/very_small_margin"
                 android:text="@{crew.name}"
                 android:gravity="center"
                 android:textStyle="bold"
