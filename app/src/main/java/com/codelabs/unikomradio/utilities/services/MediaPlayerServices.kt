@@ -50,7 +50,7 @@ class MediaPlayerServices : Service(), MediaPlayer.OnPreparedListener, MediaPlay
         }
 
 
-        return START_NOT_STICKY
+        return START_STICKY
     }
 
     /** Called when MediaPlayer is ready */
@@ -72,6 +72,7 @@ class MediaPlayerServices : Service(), MediaPlayer.OnPreparedListener, MediaPlay
         super.onDestroy()
         mediaPlayer?.release()
         wifiLock?.release()
+        mediaPlayer = null
     }
 
     companion object {

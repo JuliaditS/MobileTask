@@ -22,7 +22,6 @@ class StreamingTopchartsAdapter : ListAdapter<TopChart, StreamingTopchartsAdapte
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Timber.i("Lukman bacot yang ke-%d", position)
         val topChart = getItem(position)
         holder.apply {
             bind(createOnClickListener(), topChart)
@@ -53,7 +52,6 @@ class StreamingTopchartsAdapter : ListAdapter<TopChart, StreamingTopchartsAdapte
             binding.apply {
                 topchart = item
                 executePendingBindings()
-                Timber.d("Ada datanya padahal: ${topchart!!.song}")
             }
         }
 
@@ -69,9 +67,9 @@ class StreamingTopchartsAdapter : ListAdapter<TopChart, StreamingTopchartsAdapte
     }
 
     companion object {
-        val DOWN_STATE = 0
-        val UP_STATE = 1
-        val IDLE_STATE = 2
+        const val DOWN_STATE = 0
+        const val UP_STATE = 1
+        const val IDLE_STATE = 2
     }
 }
 

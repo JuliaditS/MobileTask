@@ -64,7 +64,6 @@ class ProgramTodayAdapter : ListAdapter<Program, ProgramTodayAdapter.ViewHolder>
                     context.startActivity(intent)
                 }
                 executePendingBindings()
-                Timber.d("Ada datanya padahal: ${program!!.title}")
             }
             binding.programItemThumbnail.setImageURI(item.imageUrl)
         }

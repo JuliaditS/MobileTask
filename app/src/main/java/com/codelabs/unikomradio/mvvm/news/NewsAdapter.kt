@@ -49,7 +49,6 @@ class NewsAdapter : ListAdapter<News, NewsAdapter.ViewHolder>(NewsDiffCallback()
             binding.apply {
                 news = item
                 executePendingBindings()
-                Timber.i("data: $news")
                 newsItemLayout.setOnClickListener {
                     val intent = Intent(context, NewsDetailActivity::class.java)
                     intent.putExtra(INTENT_PARCELABLE, news)

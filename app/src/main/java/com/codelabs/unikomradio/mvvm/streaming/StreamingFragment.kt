@@ -11,13 +11,16 @@ import com.codelabs.unikomradio.R
 import com.codelabs.unikomradio.databinding.StreamingBinding
 import com.codelabs.unikomradio.mvvm.streaming.streaming_topcharts.StreamingTopchartsActivity
 import com.codelabs.unikomradio.utilities.base.BaseFragment
-import com.codelabs.unikomradio.utilities.services.MediaPlayerServices
+import com.google.android.exoplayer2.SimpleExoPlayer
 
 
 class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.layout.streaming),
     StreamingUserActionListener {
 
     private var mediaPlayer: MediaPlayer? = null
+    private lateinit var exoPlayer: SimpleExoPlayer
+
+
     private val viewModel: StreamingViewModel by viewModels {
         StreamingViewModelFactory()
     }
@@ -35,9 +38,11 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
     }
 
     override fun setContentData() {
-        if (mediaPlayer?.isPlaying != null){
-            viewModel.stateStreaming(mediaPlayer!!.isPlaying)
-        }
+//        if (mediaPlayer?.isPlaying != null){
+//            viewModel.stateStreaming(mediaPlayer!!.isPlaying)
+//        }
+
+        viewModel.stateStreaming(exoPlayer.playWhenReady)
     }
 
     override fun setMessageType(): String {
@@ -48,29 +53,43 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
         mParentVM = viewModel
         mBinding.mListener = this
         mBinding.mViewModel = viewModel
-        mediaPlayer = (requireActivity().application as MyApplication).mMediaPlayer
-
+//        mediaPlayer = (requireActivity().application as MyApplication).mMediaPlayer
+        exoPlayer = (requireActivity().application as MyApplication).exoPlayer
     }
 
+//    override fun onPlayMusicClick() {
+//        val intent = Intent(activity, MediaPlayerServices::class.java)
+//        if (!isMyServiceRunning(MediaPlayerServices::class.java)) {
+//            intent.action = MediaPlayerServices.ACTION_PLAY
+//            activity?.startService(intent)
+//            viewModel.playStreaming()
+//        } else {
+//            if (mediaPlayer?.isPlaying == true) {
+//                mediaPlayer?.pause()
+//                viewModel.stopStreaming()
+//            } else {
+//                mediaPlayer?.start()
+//                viewModel.playStreaming()
+//            }
+//        }
+//    }
+
     override fun onPlayMusicClick() {
-        val intent = Intent(activity, MediaPlayerServices::class.java)
-        if (!isMyServiceRunning(MediaPlayerServices::class.java)) {
-            intent.action = MediaPlayerServices.ACTION_PLAY
-            activity?.startService(intent)
-            viewModel.playStreaming()
-        } else {
-            if (mediaPlayer?.isPlaying == true) {
-                mediaPlayer?.pause()
+        try {
+            if (exoPlayer.playWhenReady) {
                 viewModel.stopStreaming()
+                exoPlayer.playWhenReady = false
             } else {
-                mediaPlayer?.start()
                 viewModel.playStreaming()
+                exoPlayer.playWhenReady = true
             }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
     override fun onTopChartClick() {
-        startActivity(Intent(requireContext(),StreamingTopchartsActivity::class.java))
+        startActivity(Intent(requireContext(), StreamingTopchartsActivity::class.java))
     }
 
     private fun isMyServiceRunning(serviceClass: Class<*>): Boolean {
@@ -88,9 +107,11 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
         viewModel.muteStreaming()
         if (viewModel.isMute.value == true) {
             mediaPlayer?.setVolume(0f, 0f)
+            exoPlayer.volume = 0f
             mBinding.streamingSoundActive.setImageResource(R.mipmap.volumemute)
         } else {
-            mediaPlayer?.setVolume(1f, 1f)
+//            mediaPlayer?.setVolume(1f, 1f)
+            exoPlayer.volume = 1f
             mBinding.streamingSoundActive.setImageResource(R.mipmap.volume)
         }
     }

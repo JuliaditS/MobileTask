@@ -49,7 +49,6 @@ class BannerAdapter : ListAdapter<Banner, BannerAdapter.ViewHolder>(BannerDiffCa
             binding.apply {
                 banner = item
                 executePendingBindings()
-                Timber.i("data: $banner")
                 binding.programBannerThumbnail.setImageURI(item.imageUrl)
             }
 

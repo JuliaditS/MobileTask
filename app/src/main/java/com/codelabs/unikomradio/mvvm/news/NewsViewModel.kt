@@ -27,13 +27,11 @@ class NewsViewModel : BaseViewModel() {
     private fun start() {
         docRef.addSnapshotListener { snapshot, exception ->
             if (exception != null) {
-                Timber.w("Listen failed.")
                 exception.printStackTrace()
                 return@addSnapshotListener
             }
 
             if (snapshot != null) {
-                Timber.w("Current news data: ${snapshot.documents}")
                 val mutableList = mutableListOf<News>()
 
                 for (document in snapshot.documents) {
@@ -41,9 +39,9 @@ class NewsViewModel : BaseViewModel() {
 
                 }
                 _news.value = mutableList
-                Timber.i("news programs ${news.value}")
 
             } else {
+                exception?.printStackTrace()
                 Timber.w("Current data null")
             }
         }

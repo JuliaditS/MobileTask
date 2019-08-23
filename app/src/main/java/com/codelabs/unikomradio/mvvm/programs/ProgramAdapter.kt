@@ -43,7 +43,6 @@ class ProgramAdapter : ListAdapter<Program, ProgramAdapter.ViewHolder>(ProgramDi
             binding.apply {
                 program = item
                 executePendingBindings()
-                Timber.i("data: $program")
                 programItemLayout.setOnClickListener {
                     val intent = Intent(context,ProgramDetailActivity::class.java)
                     intent.putExtra(INTENT_PARCELABLE, program)

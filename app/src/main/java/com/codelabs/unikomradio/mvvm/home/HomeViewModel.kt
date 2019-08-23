@@ -10,11 +10,11 @@ import timber.log.Timber
 
 class HomeViewModel internal constructor() : BaseViewModel() {
     val db = FirebaseFirestore.getInstance()
-    val docProgram = db.collection(PROGRAM)
-    val docBanner = db.collection(BANNER)
-    val docTopcharts = db.collection(TOPCHARTS)
-    val docCrew = db.collection(CREW)
-    val docNews = db.collection(NEWS)
+    private val docProgram = db.collection(PROGRAM)
+    private val docBanner = db.collection(BANNER)
+    private val docTopcharts = db.collection(TOPCHARTS)
+    private val docCrew = db.collection(CREW)
+    private val docNews = db.collection(NEWS)
 
     private val _programs = MutableLiveData<List<Program>>()
     val programs: LiveData<List<Program>>
@@ -58,7 +58,6 @@ class HomeViewModel internal constructor() : BaseViewModel() {
             }
 
             if (snapshot != null) {
-                Timber.w("Current home banner data: ${snapshot.documents}")
                 val mutableList = mutableListOf<Banner>()
 
                 for (document in snapshot.documents) {
@@ -66,7 +65,6 @@ class HomeViewModel internal constructor() : BaseViewModel() {
 
                 }
                 _banner.value = mutableList
-                Timber.i("bannerdata ${banner.value}")
 
             } else {
                 Timber.w("Current data null")
@@ -89,8 +87,7 @@ class HomeViewModel internal constructor() : BaseViewModel() {
 
                 val announcer: HashMap<String, String> = HashMap<String, String>()
 
-                var i = 0
-                for (document in snapshot.documents) {
+                for ((i, document) in snapshot.documents.withIndex()) {
                     document.toObject(Program::class.java)?.let { mutableList.add(it) }
                     val crewMap: HashMap<String, Any?>? = document["crew"] as HashMap<String, Any?>?
                     val crew = Crew(
@@ -100,10 +97,8 @@ class HomeViewModel internal constructor() : BaseViewModel() {
                             crewMap?.get("role") as String? ?: ""
                     )
                     mutableList[i].announcer.add(crew)
-                    i++
                 }
                 _programs.value = mutableList
-                Timber.i("data programs ${programs.value}")
 
             } else {
                 Timber.w("Current data null")
@@ -120,7 +115,6 @@ class HomeViewModel internal constructor() : BaseViewModel() {
             }
 
             if (snapshot != null) {
-                Timber.w("Current data: ${snapshot.documents}")
                 val mutableList = mutableListOf<TopChart>()
 
                 var i=0
@@ -132,8 +126,6 @@ class HomeViewModel internal constructor() : BaseViewModel() {
                     i++
                 }
                 _topcharts.value = mutableList
-                Timber.i("${topcharts.value}")
-
             } else {
                 Timber.w("Current data null")
             }
@@ -149,14 +141,11 @@ class HomeViewModel internal constructor() : BaseViewModel() {
             }
 
             if (snapshot != null) {
-                Timber.w("Current data: ${snapshot.documents}")
                 val mutableList = mutableListOf<Crew>()
                 for (document in snapshot.documents) {
                     document.toObject(Crew::class.java)?.let { mutableList.add(it) }
                 }
                 _crews.value = mutableList
-                Timber.i("${crews.value}")
-
             } else {
                 Timber.w("Current data null")
             }
@@ -172,15 +161,12 @@ class HomeViewModel internal constructor() : BaseViewModel() {
             }
 
             if (snapshot != null) {
-                Timber.w("Current news data: ${snapshot.documents}")
                 val mutableList = mutableListOf<News>()
 
                 for (document in snapshot.documents) {
                     document.toObject(News::class.java)?.let { mutableList.add(it) }
                 }
                 _news.value = mutableList
-                Timber.i("news programs ${news.value}")
-
             } else {
                 Timber.w("Current data null")
             }
