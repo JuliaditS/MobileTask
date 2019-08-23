@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codelabs.unikomradio.MyApplication
 import com.codelabs.unikomradio.R
+import com.codelabs.unikomradio.data.model.Program
 import com.codelabs.unikomradio.databinding.HomeBinding
 import com.codelabs.unikomradio.mvvm.news.NewsAdapter
 import com.codelabs.unikomradio.mvvm.programs.ProgramTodayAdapter
+import com.codelabs.unikomradio.mvvm.programs.specifyToday
 import com.codelabs.unikomradio.mvvm.streaming.streaming_topcharts.StreamingTopchartsAdapter
 import com.codelabs.unikomradio.utilities.base.BaseFragment
 import com.codelabs.unikomradio.utilities.helper.Event
@@ -143,8 +145,29 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
 
         viewModel.apply {
             programs.observe(this@HomeFragment, Observer {
+                val programTodayList = ArrayList<Program>()
+                for (d in it) {
+                    if (d.heldDay.contains('-')) {
+                        val dummyDay: String = d.heldDay.replace(" ", "")
+                        val dummyDayString = dummyDay.split("-")
+                        if (specifyToday.isToday(dummyDayString[0], dummyDayString[1])) {
+                            programTodayList.add(d)
+                        }
+                    } else if (d.heldDay.contains(',')) {
+                        val dumm = d.heldDay.split(',')
+                        for ((i, _) in dumm.withIndex()) {
+                            if (specifyToday.isToday(dumm[i])) {
+                                programTodayList.add(d)
+                            }
+                        }
+                    } else {
+                        if (specifyToday.isToday(d.heldDay)) {
+                            programTodayList.add(d)
+                        }
+                    }
+                }
                 if (it.isNotEmpty()) {
-                    programAdapter.submitList(it)
+                    programAdapter.submitList(programTodayList)
                 } else {
                     viewModel.showMessage.value = Event("program not found")
                 }

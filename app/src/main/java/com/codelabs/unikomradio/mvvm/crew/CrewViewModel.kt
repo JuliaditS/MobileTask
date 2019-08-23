@@ -35,14 +35,11 @@ class CrewViewModel internal constructor() : BaseViewModel() {
             }
 
             if (snapshot != null) {
-                Timber.w("Current data: ${snapshot.documents}")
                 val mutableList = mutableListOf<Crew>()
                 for (document in snapshot.documents) {
                     document.toObject(Crew::class.java)?.let { mutableList.add(it) }
                 }
                 _crews.value = mutableList
-                Timber.i("${crews.value}")
-
             } else {
                 Timber.w("Current data null")
             }

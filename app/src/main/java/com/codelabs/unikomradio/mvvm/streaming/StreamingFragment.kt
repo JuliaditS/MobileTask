@@ -8,10 +8,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.codelabs.unikomradio.MyApplication
 import com.codelabs.unikomradio.R
+import com.codelabs.unikomradio.data.model.Program
 import com.codelabs.unikomradio.databinding.StreamingBinding
+import com.codelabs.unikomradio.mvvm.programs.specifyToday
 import com.codelabs.unikomradio.mvvm.streaming.streaming_topcharts.StreamingTopchartsActivity
 import com.codelabs.unikomradio.utilities.base.BaseFragment
+import com.codelabs.unikomradio.utilities.helper.Event
 import com.google.android.exoplayer2.SimpleExoPlayer
+import timber.log.Timber
 
 
 class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.layout.streaming),
@@ -34,7 +38,39 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
                     mBinding.streamingPlayStreaming.setImageResource(R.mipmap.playbutton)
                 }
             })
+
+            programs.observe(this@StreamingFragment, Observer {
+
+                val programTodayList = ArrayList<Program>()
+                for ((i, d) in it.withIndex()) {
+                    if (d.heldDay.contains('-')) {
+                        val dummyDay: String = d.heldDay.replace(" ", "")
+                        val dummyDayString = dummyDay.split("-")
+                        if (specifyToday.isToday(dummyDayString[0], dummyDayString[1])) {
+                            programTodayList.add(d)
+                        }
+                    } else {
+                        if (specifyToday.isToday(d.heldDay)) {
+                            programTodayList.add(d)
+                        }
+                    }
+                }
+                if (it.isNotEmpty()) {
+                    for (p in programTodayList) {
+                        if ( (p.startAt.toDouble() <= specifyToday.getHourSpecify()) && (p.endAt.toDouble() >= specifyToday.getHourSpecify())){
+                            mBinding.streamingSongThumbnail.setImageURI(p.imageUrl)
+                            mBinding.streamingProgram.text = p.title
+                            mBinding.streamingLabelProgram.text = "radio hits unikom"
+                        }
+                    }
+                } else {
+                    viewModel.showMessage.value = Event("program not found")
+                }
+            })
+
         }
+
+
     }
 
     override fun setContentData() {

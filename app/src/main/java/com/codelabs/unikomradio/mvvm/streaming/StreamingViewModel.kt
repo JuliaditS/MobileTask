@@ -1,20 +1,21 @@
 package com.codelabs.unikomradio.mvvm.streaming
 
-import android.content.Context
-import android.content.Context.AUDIO_SERVICE
-import android.content.Intent
-import android.media.AudioManager
-import android.media.MediaPlayer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.codelabs.unikomradio.data.model.Crew
+import com.codelabs.unikomradio.data.model.Program
+import com.codelabs.unikomradio.utilities.PROGRAM
 import com.codelabs.unikomradio.utilities.base.BaseViewModel
-import com.codelabs.unikomradio.utilities.services.MediaPlayerServices
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
+import timber.log.Timber
 
 
 class StreamingViewModel : BaseViewModel() {
+    val db = FirebaseFirestore.getInstance()
+    val docRef = db.collection(PROGRAM)
 
     private val _isPlaying = MutableLiveData<Boolean>()
     val isPlaying: LiveData<Boolean>
@@ -23,6 +24,10 @@ class StreamingViewModel : BaseViewModel() {
     private val _isMute = MutableLiveData<Boolean>()
     val isMute: LiveData<Boolean>
         get() = _isMute
+
+    private val _programs = MutableLiveData<List<Program>>()
+    val programs: LiveData<List<Program>>
+        get() = _programs
 
 
     /**
@@ -36,6 +41,35 @@ class StreamingViewModel : BaseViewModel() {
 
     init {
         _isMute.value = false
+
+        docRef.addSnapshotListener { snapshot, exception ->
+            if (exception != null) {
+                Timber.w("Listen failed.")
+                exception.printStackTrace()
+                return@addSnapshotListener
+            }
+
+            if (snapshot != null) {
+                Timber.w("Current data: ${snapshot.documents}")
+                val mutableList = mutableListOf<Program>()
+                var i = 0
+                for (document in snapshot.documents) {
+                    document.toObject(Program::class.java)?.let { mutableList.add(it) }
+                    val crewMap: HashMap<String, Any?>? = document["crew"] as HashMap<String, Any?>?
+                    val crew = Crew(
+                        -1,
+                        crewMap?.get("userPhoto") as String? ?: "",
+                        crewMap?.get("name") as String? ?: "",
+                        crewMap?.get("role") as String? ?: ""
+                    )
+                    mutableList[i].announcer.add(crew)
+                    i++
+                }
+                _programs.value = mutableList
+            } else {
+                Timber.w("Current data null")
+            }
+        }
     }
 
 
@@ -48,10 +82,10 @@ class StreamingViewModel : BaseViewModel() {
     }
 
     fun muteStreaming() {
-      _isMute.value = _isMute.value != true
+        _isMute.value = _isMute.value != true
     }
 
-    fun stateStreaming(state:Boolean){
+    fun stateStreaming(state: Boolean) {
         _isPlaying.value = state
     }
 }

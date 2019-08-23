@@ -36,10 +36,6 @@ class ProgramViewModel internal constructor() : BaseViewModel() {
             if (snapshot != null) {
                 Timber.w("Current data: ${snapshot.documents}")
                 val mutableList = mutableListOf<Program>()
-                val announcerList = mutableListOf<Crew>()
-
-                val announcer: HashMap<String, String> = HashMap<String, String>()
-
                 var i = 0
                 for (document in snapshot.documents) {
                     document.toObject(Program::class.java)?.let { mutableList.add(it) }
@@ -54,7 +50,6 @@ class ProgramViewModel internal constructor() : BaseViewModel() {
                     i++
                 }
                 _programs.value = mutableList
-                Timber.i("data programs ${programs.value}")
 
             } else {
                 Timber.w("Current data null")
