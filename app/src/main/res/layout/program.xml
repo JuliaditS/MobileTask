@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
                 name="mListener"
-                type="com.codelabs.unikomradio.mvvm.programs.ProgramUserActionListener"/>
+                type="com.codelabs.unikomradio.mvvm.programs.ProgramUserActionListener" />
+
         <variable
                 name="mViewModel"
-                type="com.codelabs.unikomradio.mvvm.programs.ProgramViewModel"/>
+                type="com.codelabs.unikomradio.mvvm.programs.ProgramViewModel" />
     </data>
 
 
@@ -16,19 +20,18 @@
             android:layout_height="match_parent"
             android:background="@color/colorPrimary"
             tools:context=".mvvm.programs.ProgramFragment">
+
         <ScrollView
                 android:id="@+id/program_scrollview"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_constraintTop_toTopOf="parent"
-        >
+                app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/program_top_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-            >
+                    app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                         android:id="@+id/program_label_broadcast"
@@ -40,7 +43,8 @@
                         android:text="@string/broadcast_today"
                         android:textSize="@dimen/font_size_title"
                         android:textStyle="bold"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/program_broadcast_today_recyclerview"
@@ -49,7 +53,7 @@
                         android:layout_marginTop="@dimen/standard_margin"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/program_label_broadcast"/>
+                        app:layout_constraintTop_toBottomOf="@+id/program_label_broadcast" />
 
                 <TextView
                         android:id="@+id/program_label_radio_program"
@@ -61,8 +65,7 @@
                         android:text="Radio Program"
                         android:textSize="@dimen/font_size_title"
                         android:textStyle="bold"
-                        app:layout_constraintTop_toBottomOf="@id/program_broadcast_today_recyclerview"
-                />
+                        app:layout_constraintTop_toBottomOf="@id/program_broadcast_today_recyclerview" />
 
                 <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/program_programs_recyclerview"
@@ -72,70 +75,26 @@
                         android:clipToPadding="false"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/program_broadcast_today_recyclerview"
-                        app:layout_constraintTop_toBottomOf="@id/program_label_radio_program"/>
+                        app:layout_constraintTop_toBottomOf="@id/program_label_radio_program" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/program_result_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/program_label_broadcast"
+                        app:layout_constraintTop_toBottomOf="@id/program_label_broadcast" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
-        <!--<androidx.constraintlayout.widget.ConstraintLayout-->
-                <!--xmlns:fresco="http://schemas.android.com/tools"-->
-                <!--android:id="@+id/program_playradio_layout"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="@dimen/standard_margin"-->
-                <!--android:background="@color/colorSecondary"-->
-                <!--android:paddingTop="@dimen/smallest_margin"-->
-                <!--android:paddingBottom="@dimen/smallest_margin"-->
-                <!--app:layout_constraintBottom_toBottomOf="parent">-->
-
-            <!--<com.facebook.drawee.view.SimpleDraweeView-->
-                    <!--android:id="@+id/program_playradio_play_image_thumbnail"-->
-                    <!--android:layout_width="41dp"-->
-                    <!--android:layout_height="41dp"-->
-                    <!--android:layout_marginStart="@dimen/standard_margin"-->
-                    <!--app:layout_constraintBottom_toBottomOf="parent"-->
-                    <!--app:layout_constraintStart_toStartOf="parent"-->
-                    <!--app:layout_constraintTop_toTopOf="parent"-->
-                    <!--app:placeholderImage="@drawable/icon_radiohits"-->
-                    <!--fresco:roundWithOverlayColor="@color/colorPrimary"-->
-                    <!--fresco:roundedCornerRadius="5dp"/>-->
-
-            <!--<TextView-->
-                    <!--android:id="@+id/program_playradio_title"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginEnd="8dp"-->
-                    <!--android:text="@string/home_streaming_play_title"-->
-                    <!--android:textSize="@dimen/font_size_title"-->
-                    <!--android:textStyle="bold"-->
-                    <!--app:layout_constraintEnd_toStartOf="@+id/program_playradio_play_button"-->
-                    <!--app:layout_constraintStart_toEndOf="@id/program_playradio_play_image_thumbnail"-->
-                    <!--app:layout_constraintTop_toTopOf="parent"/>-->
-
-            <!--<TextView-->
-                    <!--android:id="@+id/program_playradio_description"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginEnd="8dp"-->
-                    <!--android:drawableStart="@drawable/icon_livestreaming"-->
-                    <!--android:drawablePadding="5dp"-->
-                    <!--android:text="@string/live_streaming"-->
-                    <!--android:textColor="@color/colorAccent"-->
-                    <!--app:layout_constraintEnd_toStartOf="@+id/program_playradio_play_button"-->
-                    <!--app:layout_constraintStart_toEndOf="@id/program_playradio_play_image_thumbnail"-->
-                    <!--app:layout_constraintTop_toBottomOf="@id/program_playradio_title"/>-->
-
-            <!--<ImageView-->
-                    <!--android:id="@+id/program_playradio_play_button"-->
-                    <!--android:layout_width="@dimen/image_playradio_width_thumbnail"-->
-                    <!--android:layout_height="@dimen/image_playradio_height_thumbnail"-->
-                    <!--android:layout_marginEnd="@dimen/standard_margin"-->
-                    <!--android:onClick="@{()->mListener.onPlayRadio()}"-->
-                    <!--android:src="@mipmap/playbutton"-->
-                    <!--app:layout_constraintBottom_toBottomOf="parent"-->
-                    <!--app:layout_constraintEnd_toEndOf="parent"-->
-                    <!--app:layout_constraintTop_toTopOf="parent"/>-->
-        <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
-
+        <include
+                android:id="@+id/no_result_layout"
+                layout="@layout/no_result"
+                android:visibility="gone" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

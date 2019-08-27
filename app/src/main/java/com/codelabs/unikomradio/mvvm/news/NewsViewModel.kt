@@ -3,12 +3,17 @@ package com.codelabs.unikomradio.mvvm.news
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.codelabs.unikomradio.data.model.News
+import com.codelabs.unikomradio.data.model.Program
 import com.codelabs.unikomradio.utilities.NEWS
 import com.codelabs.unikomradio.utilities.base.BaseViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import timber.log.Timber
 
 class NewsViewModel : BaseViewModel() {
+
+    var noresultsearchtext = ""
+
+
     val db = FirebaseFirestore.getInstance()
     val docRef = db.collection(NEWS)
 
@@ -20,11 +25,15 @@ class NewsViewModel : BaseViewModel() {
     val isPlaying: LiveData<Boolean>
         get() = _isPlaying
 
+    private val _resultNews = MutableLiveData<List<News>>()
+    val resultNews: LiveData<List<News>>
+        get() = _resultNews
+
     init {
         start()
     }
 
-    private fun start() {
+    fun start() {
         docRef.addSnapshotListener { snapshot, exception ->
             if (exception != null) {
                 exception.printStackTrace()
@@ -45,6 +54,19 @@ class NewsViewModel : BaseViewModel() {
                 Timber.w("Current data null")
             }
         }
+    }
+
+    fun searchNews(searchText: String) {
+        noresultsearchtext = searchText
+        val resultNews = mutableListOf<News>()
+        if (news.value?.isNotEmpty()!!){
+            for (i in 0 until news.value?.size!!){
+                if (news.value!![i].title.toUpperCase().contains(searchText.toUpperCase())){
+                    resultNews.add(news.value!![i])
+                }
+            }
+        }
+        _resultNews.value = resultNews
     }
 
     fun playStreaming() {

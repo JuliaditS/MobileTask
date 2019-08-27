@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.codelabs.unikomradio.R
 import com.codelabs.unikomradio.data.model.TopChart
 import com.codelabs.unikomradio.databinding.ItemTopchartsBinding
-import timber.log.Timber
 
 class StreamingTopchartsAdapter : ListAdapter<TopChart, StreamingTopchartsAdapter.ViewHolder>(StreamingDiffCallback()) {
 
@@ -24,7 +23,7 @@ class StreamingTopchartsAdapter : ListAdapter<TopChart, StreamingTopchartsAdapte
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val topChart = getItem(position)
         holder.apply {
-            bind(createOnClickListener(), topChart)
+            bind(topChart)
             setImageState(stateRank(topChart.currentRank,topChart.rankBefore))
             itemView.tag = topChart
         }
@@ -48,7 +47,7 @@ class StreamingTopchartsAdapter : ListAdapter<TopChart, StreamingTopchartsAdapte
         private val binding: ItemTopchartsBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(listener: View.OnClickListener, item: TopChart) {
+        fun bind(item: TopChart) {
             binding.apply {
                 topchart = item
                 executePendingBindings()
