@@ -3,7 +3,6 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
                 name="mListener"
                 type="com.codelabs.unikomradio.mvvm.home.HomeUserActionListener"/>
@@ -24,7 +23,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
                 android:paddingTop="@dimen/small_margin"
                 android:paddingBottom="@dimen/small_margin">
 

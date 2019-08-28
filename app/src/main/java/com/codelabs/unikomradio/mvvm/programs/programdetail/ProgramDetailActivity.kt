@@ -28,6 +28,7 @@ class ProgramDetailActivity :
         mParentVM = viewModel
         val programData: Program = intent.getParcelableExtra(INTENT_PARCELABLE)
         mBinding.program = programData
+        mBinding.programDetailThumbnail.setImageURI(programData.imageUrl)
         adapter = ProgramDetailAdapter()
         mBinding.programDetailAnnouncerRecyclerview.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)

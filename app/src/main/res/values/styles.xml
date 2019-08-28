@@ -1,26 +1,51 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme.Dark" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:background">@color/colorPrimary</item>
         <item name="android:textColorPrimary">@android:color/white</item>
         <item name="android:textColorSecondary">@android:color/white</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="actionBarItemBackground">@color/colorPrimary</item>
     </style>
 
-    <style name="AppTheme" parent="BaseAppTheme"/>
+    <style name="AppTheme.Light" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@android:color/white</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@color/textColorStandard</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="actionBarItemBackground">@android:color/white</item>
+
+
+    </style>
+
+    <!-- Specific Feed activity theme -->
+    <style name="FeedActivityThemeLight" parent="AppTheme.Light">
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+
+    <style name="FeedActivityThemeDark" parent="AppTheme.Dark">
+        <item name="android:windowBackground">@color/colorPrimary</item>
+    </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar" />
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Dark"/>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Dark" />
 
     <!-- Dark base activity theme -->
     <style name="AppTheme.Primary.Base.Dark" parent="Theme.AppCompat.NoActionBar">
@@ -34,6 +59,18 @@
         <item name="android:textColorSecondary">@color/colorSecondary</item>
     </style>
 
+    <style name="BottomNavigationView.Light" parent="BottomNavigationView">
+        <item name="android:color">@android:color/black</item>
+    </style>
+
+    <style name="BottomNavigationView.Inactive" parent="BottomNavigationView">
+        <item name="android:color">@color/textColorStandard</item>
+    </style>
+
+    <style name="BottomNavigationView.Dark" parent="BottomNavigationView">
+        <item name="android:color">@color/colorPrimary</item>
+    </style>
+
     <style name="ButtonSeeAll" parent="Theme.AppCompat.Light">
         <item name="android:paddingStart">24dp</item>
         <item name="android:paddingEnd">24dp</item>
@@ -42,5 +79,16 @@
         <item name="android:textColor">@android:color/black</item>
         <item name="android:background">@drawable/background_radius_white</item>
         <item name="android:textSize">@dimen/font_size_small</item>
+    </style>
+
+    <style name="switchStyle" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:colorControlActivated">@color/colorAccent</item>
+        <!-- inactive thumb color -->
+        <item name="colorSwitchThumbNormal">#f1f1f1
+        </item>
+
+        <!-- inactive track color (30% transparency) -->
+        <item name="android:colorForeground">#f1f1f1
+        </item>
     </style>
 </resources>

@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
->
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
-        <import type="android.text.Html"/>
+        <import type="android.text.Html" />
 
-        <import type="android.os.Build"/>
+        <import type="android.os.Build" />
 
-        <import type="android.view.View"/>
+        <import type="android.view.View" />
 
         <variable
                 name="mListener"
-                type="com.codelabs.unikomradio.mvvm.programs.ProgramUserActionListener"/>
+                type="com.codelabs.unikomradio.mvvm.programs.ProgramUserActionListener" />
 
         <variable
                 name="program"
-                type="com.codelabs.unikomradio.data.model.Program"/>
+                type="com.codelabs.unikomradio.data.model.Program" />
     </data>
 
     <LinearLayout
@@ -25,7 +24,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/small_margin"
-            android:background="@color/colorPrimary"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -33,14 +31,15 @@
                 android:id="@+id/program_item_thumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/image_height_thumbnail"
+                android:elevation="3dp"
                 android:src="@drawable/thumbnailradio"
                 app:actualImageResource="@drawable/thumbnailradio"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:placeholderImage="@drawable/thumbnailradio"
-                app:roundWithOverlayColor="@color/colorPrimary"
-                app:roundedCornerRadius="12dp"/>
+                android:background="@drawable/background_radius_12dp"
+                app:roundedCornerRadius="12dp" />
 
         <TextView
                 android:id="@+id/program_item_title"
@@ -52,7 +51,7 @@
                 android:maxLines="1"
                 android:text="@{program.title}"
                 android:textSize="@dimen/font_size_small"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
         <TextView
                 android:id="@+id/program_item_day"
@@ -60,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@{program.heldDay}"
-                android:textColor="@color/textColorStandard"/>
+                android:textColor="@color/textColorStandard" />
 
 
     </LinearLayout>

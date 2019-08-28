@@ -17,11 +17,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
             tools:context=".mvvm.news.NewsFragment">
 
 
         <androidx.recyclerview.widget.RecyclerView
+                android:paddingTop="@dimen/standard_margin"
                 android:id="@+id/news_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"

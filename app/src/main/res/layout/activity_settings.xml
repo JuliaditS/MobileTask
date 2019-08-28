@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".mvvm.settings.SettingsActivity">
+
+    <TextView
+            android:id="@+id/settings_label_general"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/very_small_margin"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:layout_marginEnd="@dimen/very_small_margin"
+            android:text="@string/settings"
+            android:textSize="@dimen/font_size_title"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/settings_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:background="@color/colorSecondary"
+            android:paddingTop="@dimen/small_margin"
+            android:paddingBottom="@dimen/small_margin"
+            app:layout_constraintTop_toBottomOf="@id/settings_label_general">
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.83" />
+
+        <TextView
+                android:id="@+id/settings_notification_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/very_small_margin"
+                android:layout_marginEnd="@dimen/very_small_margin"
+                android:text="@string/notification"
+                app:layout_constraintEnd_toEndOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+                android:id="@+id/settings_notification_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/very_small_margin"
+                android:text="@string/settings_notification_description"
+                android:textColor="@color/textColorStandard"
+                app:layout_constraintEnd_toEndOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/settings_notification_label" />
+
+        <View
+                android:id="@+id/settings_notification_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/very_small_margin"
+                android:background="@color/textColorStandard"
+                app:layout_constraintTop_toBottomOf="@id/settings_notification_description" />
+
+
+        <TextView
+                android:id="@+id/settings_light_mode_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/very_small_margin"
+                android:layout_marginTop="@dimen/very_small_margin"
+                android:text="Light Mode"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/settings_notification_divider" />
+
+        <TextView
+                android:id="@+id/settings_state_lightmode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/very_small_margin"
+                android:text="On"
+                android:textColor="@color/textColorStandard"
+                app:layout_constraintTop_toBottomOf="@id/settings_light_mode_label" />
+
+        <Switch
+                android:id="@+id/settings_notification_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/switchStyle"
+                app:layout_constraintBottom_toBottomOf="@id/settings_notification_divider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <Switch
+                android:id="@+id/settings_light_mode_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/switchStyle"
+                app:layout_constraintBottom_toBottomOf="@id/settings_lightmode_divider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="@id/settings_notification_divider" />
+
+        <View
+                android:id="@+id/settings_lightmode_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/very_small_margin"
+                android:background="@color/textColorStandard"
+                app:layout_constraintTop_toBottomOf="@id/settings_state_lightmode" />
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/very_small_margin"
+                android:layout_marginTop="@dimen/very_small_margin"
+                android:text="@string/about"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/settings_lightmode_divider" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
->
-    <data>
-        <import type="android.text.Html"/>
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <import type="android.os.Build"/>
+    <data>
+
+        <import type="android.text.Html" />
+
+        <import type="android.os.Build" />
 
         <variable
                 name="mListener"
-                type="com.codelabs.unikomradio.mvvm.programs.ProgramUserActionListener"/>
+                type="com.codelabs.unikomradio.mvvm.programs.ProgramUserActionListener" />
+
         <variable
                 name="program"
-                type="com.codelabs.unikomradio.data.model.Program"/>
+                type="com.codelabs.unikomradio.data.model.Program" />
     </data>
+
     <LinearLayout
             android:id="@+id/item_program_today_layout"
             android:layout_width="@dimen/image_width_thumbnail"
-            android:orientation="vertical"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-    >
+            android:orientation="vertical">
 
         <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/program_item_thumbnail"
-                app:placeholderImage="@drawable/thumbnailradio"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/image_height_thumbnail"
+                android:elevation="12dp"
                 android:src="@drawable/thumbnailradio"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:roundWithOverlayColor="@color/colorPrimary"
-                app:roundedCornerRadius="12dp"
-        />
+                app:layout_constraintTop_toTopOf="parent"
+                app:placeholderImage="@drawable/thumbnailradio"
+                app:roundWithOverlayColor="@android:color/white"
+                android:background="@drawable/background_radius_12dp"
+                app:roundedCornerRadius="12dp" />
 
         <TextView
                 android:id="@+id/program_item_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/very_small_margin"
-                android:textSize="@dimen/font_size_small"
-                android:text="@{program.title}"
                 android:gravity="center"
-                android:textStyle="bold"
-        />
+                android:text="@{program.title}"
+                android:textSize="@dimen/font_size_small"
+                android:textStyle="bold" />
 
         <TextView
                 android:id="@+id/program_item_day"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{program.startAt + ` - ` + program.endAt}"
-                android:textColor="@color/textColorStandard"
                 android:gravity="center"
-        />
+                android:text="@{program.startAt + ` - ` + program.endAt}"
+                android:textColor="@color/textColorStandard" />
 
     </LinearLayout>
 </layout>

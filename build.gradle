@@ -38,12 +38,14 @@ buildscript {
         loggingInterceptorVersion = "3.8.0"
         retrofit2kotlinadapterVersion = "0.9.2"
         converterGsonVersion = "2.6.0"
-        exoPlayerVersion = "2.7.3"
+        exoPlayerVersion = "2.9.6"
         glideVersion = "4.9.0"
         timberVersion = "4.7.1"
         firebaseVersion = "17.1.0"
         firebaseFirestoreVersion = "21.0.0"
         frescoVersion = "2.0.0"
+        navVersion = "2.2.0-alpha01"
+        zcwengVersion = "0.0.3@aar"
 
     }
 

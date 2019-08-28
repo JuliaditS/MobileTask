@@ -14,6 +14,7 @@ import com.codelabs.unikomradio.mvvm.programs.specifyToday
 import com.codelabs.unikomradio.mvvm.streaming.streaming_topcharts.StreamingTopchartsActivity
 import com.codelabs.unikomradio.utilities.base.BaseFragment
 import com.codelabs.unikomradio.utilities.helper.Event
+import com.codelabs.unikomradio.utilities.helper.Preferences
 import com.google.android.exoplayer2.SimpleExoPlayer
 import timber.log.Timber
 
@@ -21,6 +22,7 @@ import timber.log.Timber
 class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.layout.streaming),
     StreamingUserActionListener {
 
+    private var isLightMode = false
     private var mediaPlayer: MediaPlayer? = null
     private lateinit var exoPlayer: SimpleExoPlayer
 
@@ -33,9 +35,17 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
         viewModel.apply {
             isPlaying.observe(viewLifecycleOwner, Observer<Boolean> {
                 if (it) {
-                    mBinding.streamingPlayStreaming.setImageResource(R.mipmap.pause)
+                    if (isLightMode){
+                        mBinding.streamingPlayStreaming.setImageResource(R.mipmap.pause_light)
+                    } else {
+                        mBinding.streamingPlayStreaming.setImageResource(R.mipmap.pause)
+                    }
                 } else {
-                    mBinding.streamingPlayStreaming.setImageResource(R.mipmap.playbutton)
+                    if (isLightMode){
+                        mBinding.streamingPlayStreaming.setImageResource(R.mipmap.playbuttonlight)
+                    } else {
+                        mBinding.streamingPlayStreaming.setImageResource(R.mipmap.playbutton)
+                    }
                 }
             })
 
@@ -74,9 +84,11 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
     }
 
     override fun setContentData() {
-//        if (mediaPlayer?.isPlaying != null){
-//            viewModel.stateStreaming(mediaPlayer!!.isPlaying)
-//        }
+
+        if (isLightMode){
+            mBinding.streamingPlaylistIcon.setImageResource(R.drawable.icon_topchart_light)
+            mBinding.streamingSoundActive.setImageResource(R.drawable.icon_sound_light)
+        }
 
         viewModel.stateStreaming(exoPlayer.playWhenReady)
     }
@@ -91,7 +103,13 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
         mBinding.mViewModel = viewModel
 //        mediaPlayer = (requireActivity().application as MyApplication).mMediaPlayer
         exoPlayer = (requireActivity().application as MyApplication).exoPlayer
+        isLightMode = Preferences(requireContext()).isLightMode()
+
     }
+
+
+
+
 
 //    override fun onPlayMusicClick() {
 //        val intent = Intent(activity, MediaPlayerServices::class.java)
@@ -144,11 +162,18 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
         if (viewModel.isMute.value == true) {
             mediaPlayer?.setVolume(0f, 0f)
             exoPlayer.volume = 0f
-            mBinding.streamingSoundActive.setImageResource(R.mipmap.volumemute)
+            if (!isLightMode){
+                mBinding.streamingSoundActive.setImageResource(R.mipmap.volumemutelight)
+            } else {
+                mBinding.streamingSoundActive.setImageResource(R.mipmap.volumemute)
+            }
         } else {
-//            mediaPlayer?.setVolume(1f, 1f)
             exoPlayer.volume = 1f
-            mBinding.streamingSoundActive.setImageResource(R.mipmap.volume)
+            if (!isLightMode){
+                mBinding.streamingSoundActive.setImageResource(R.mipmap.volumemutelight)
+            } else {
+                mBinding.streamingSoundActive.setImageResource(R.mipmap.volume)
+            }
         }
     }
 }

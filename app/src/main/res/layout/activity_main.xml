@@ -10,7 +10,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
             tools:context=".mvvm.main.MainActivity"
     >
 
@@ -87,13 +86,12 @@
                 android:id="@+id/main_bottomnavigationview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorSecondary"
-                android:backgroundTint="@color/colorSecondary"
                 android:theme="@style/BottomNavigationView"
-                app:itemIconTint="@drawable/nav_item_color_state"
                 app:itemTextColor="@drawable/nav_item_color_state"
+                app:itemIconTint="@drawable/nav_item_color_state"
                 app:labelVisibilityMode="labeled"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:itemBackground="@color/colorPrimary"
                 app:menu="@menu/menu_main"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

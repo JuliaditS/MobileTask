@@ -1,7 +1,11 @@
 package com.codelabs.unikomradio.mvvm.home
 
+import android.content.Intent
 import android.graphics.Point
 import android.media.MediaPlayer
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,10 +18,13 @@ import com.codelabs.unikomradio.databinding.HomeBinding
 import com.codelabs.unikomradio.mvvm.news.NewsAdapter
 import com.codelabs.unikomradio.mvvm.programs.ProgramTodayAdapter
 import com.codelabs.unikomradio.mvvm.programs.specifyToday
+import com.codelabs.unikomradio.mvvm.settings.SettingsActivity
 import com.codelabs.unikomradio.mvvm.streaming.streaming_topcharts.StreamingTopchartsAdapter
 import com.codelabs.unikomradio.utilities.base.BaseFragment
 import com.codelabs.unikomradio.utilities.helper.Event
 import com.codelabs.unikomradio.utilities.helper.OnSeeAllClickedListener
+import com.codelabs.unikomradio.utilities.helper.Preferences
+import com.codelabs.unikomradio.utilities.helper.ThemeMode
 import com.codelabs.unikomradio.utilities.helper.recyclerviewhelper.itemdecoration.CirclePagerIndicatorDecoration
 import com.codelabs.unikomradio.utilities.helper.recyclerviewhelper.itemdecoration.RecyclerviewItemDecoration
 import com.codelabs.unikomradio.utilities.helper.recyclerviewhelper.itemdecoration.RecyclerviewItemGridTwoHorizontalDecoration
@@ -41,9 +48,12 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
     }
 
     override fun afterInflateView() {
+        setHasOptionsMenu(true)
+        ThemeMode().setThemeModeOn(requireContext())
         mParentVM = viewModel
         mBinding.mViewModel = viewModel
         mediaPlayer = (requireActivity().application as MyApplication).mMediaPlayer
+
     }
 
     override fun setContentData() {
@@ -203,6 +213,18 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
                 }
             })
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_home,menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.item_menu_settings){
+            startActivity(Intent(requireContext(),SettingsActivity::class.java))
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onClickBroadcastSeeAll() {

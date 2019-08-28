@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:fresco="http://schemas.android.com/tools">
-    <data>
-        <import type="android.text.Html"/>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <import type="android.os.Build"/>
+    <data>
+
+        <import type="android.text.Html" />
+
+        <import type="android.os.Build" />
 
         <variable
                 name="clickListener"
-                type="android.view.View.OnClickListener"/>
+                type="android.view.View.OnClickListener" />
+
         <variable
                 name="crew"
-                type="com.codelabs.unikomradio.data.model.Crew"/>
+                type="com.codelabs.unikomradio.data.model.Crew" />
     </data>
 
     <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
             android:layout_marginTop="@dimen/small_margin"
+            android:orientation="vertical"
             android:paddingStart="@dimen/smallest_margin"
-            android:paddingEnd="@dimen/smallest_margin"
-
-    >
+            android:paddingEnd="@dimen/smallest_margin">
 
         <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/crew_item_thumbnail"
-                android:src="@mipmap/crew_placeholder"
-                app:placeholderImage="@mipmap/crew_placeholder"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/image_crew_height_thumbnail"
-                app:roundWithOverlayColor="@color/colorPrimary"
+                android:background="@drawable/background_radius_12dp"
+                android:elevation="3dp"
+                android:src="@mipmap/crew_placeholder"
+                app:placeholderImage="@mipmap/crew_placeholder"
                 app:roundedCornerRadius="12dp"
 
-        />
+                />
+
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/very_small_margin"
-                android:text="@{crew.name}"
                 android:gravity="center"
-                android:textStyle="bold"
-        />
+                android:text="@{crew.name}"
+                android:textStyle="bold" />
 
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{crew.role}"
                 android:gravity="center"
-        />
+                android:text="@{crew.role}" />
 
     </LinearLayout>
 
