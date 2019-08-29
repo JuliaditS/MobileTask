@@ -1,8 +1,11 @@
 package com.codelabs.unikomradio.mvvm.main
 
+import android.annotation.SuppressLint
 import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.content.res.Resources
 import android.graphics.drawable.ColorDrawable
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -10,6 +13,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.airbnb.paris.extensions.style
 import com.codelabs.unikomradio.MyApplication
 import com.codelabs.unikomradio.R
 import com.codelabs.unikomradio.databinding.ActivityMainBinding
@@ -25,7 +29,6 @@ import com.codelabs.unikomradio.utilities.helper.Preferences
 import com.codelabs.unikomradio.utilities.helper.ThemeMode
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.material.bottomnavigation.BottomNavigationView
-
 
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main),
     MainUserActionListener,
@@ -56,6 +59,16 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
         mBinding.mainBottomnavigationview.setOnNavigationItemSelectedListener(
             mOnNavigationItemSelectedListener
         )
+
+        if (!Preferences(this).isLightMode()) {
+            mBinding.mainBottomnavigationview.itemBackgroundResource = R.color.colorSecondary
+            mBinding.mainBottomnavigationview.background =
+                ColorDrawable(getColor(R.color.colorAccent))
+            mBinding.mainPlayradioTitle.background = ColorDrawable(getColor(R.color.colorSecondary))
+            mBinding.mainPlayradioDescription.background = ColorDrawable(getColor(R.color.colorSecondary))
+        }
+
+
     }
 
 
@@ -119,16 +132,49 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
         }
     }
 
+    @SuppressLint("ResourceType")
     override fun setContentData() {
-        if (Preferences(this).isLightMode()){
-            mBinding.mainBottomnavigationview.itemTextAppearanceActive = R.style.BottomNavigationView_Light
+
+        val iconsColorStates =
+            arrayOf(
+                intArrayOf(
+                    -android.R.attr.state_checked,
+                    android.R.attr.state_checked
+                )
+            )
+        val colorState = intArrayOf(R.color.colorAccent, R.color.colorAccent)
+
+        val textColorStates = ColorStateList(
+            arrayOf(
+                intArrayOf(-android.R.attr.state_checked),
+                intArrayOf(android.R.attr.state_checked)
+            ),
+            intArrayOf(R.color.colorAccent, R.color.colorAccent)
+        )
+//        mBinding.mainBottomnavigationview.itemIconTintList = ColorStateList(iconsColorStates,colorState)
+
+        if (Preferences(this).isLightMode()) {
             mBinding.mainPlayradioLayout.setBackgroundColor(resources.getColor(android.R.color.white))
             mBinding.mainPlayradioPlayButton.setImageResource(R.mipmap.playbuttonlight)
             mBinding.mainPlayradioDescription.setTextColor(resources.getColor(R.color.colorAccentLight))
             mBinding.mainPlayradioTitle.setTextColor(resources.getColor(android.R.color.black))
+            mBinding.mainBottomnavigationview.style(R.style.BottomNavigationView)
+            mBinding.mainBottomnavigationview.itemIconTintList =
+                resources.getColorStateList(R.drawable.nav_item_color_state_light)
+            mBinding.mainBottomnavigationview.itemTextAppearanceActive =
+                R.style.BottomNavigationView_Light_Active
         } else {
             mBinding.mainPlayradioTitle.setTextColor(resources.getColor(android.R.color.white))
+            mBinding.mainBottomnavigationview.style(R.style.BottomNavigationView)
+            mBinding.mainBottomnavigationview.itemIconTintList =
+                resources.getColorStateList(R.drawable.nav_item_color_state)
+            mBinding.mainBottomnavigationview.itemTextColor =
+                resources.getColorStateList(R.drawable.nav_item_color_state)
+            mBinding.mainBottomnavigationview.itemTextAppearanceActive =
+                R.style.BottomNavigationView_Dark_Active
+            mBinding.mainPlayradioLayout.background = ColorDrawable(getColor(R.color.colorSecondary))
         }
+
         try {
             if (mediaPlayer?.isPlaying != null) {
                 viewModel.stateStreaming(mediaPlayer!!.isPlaying)
@@ -211,5 +257,15 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
     override fun onBackPressed() {
         super.onBackPressed()
         this.finishAffinity()
+    }
+
+    override fun getTheme(): Resources.Theme {
+        val theme = super.getTheme()
+        if (Preferences(this).isLightMode()) {
+            theme.applyStyle(R.style.AppTheme_Light, true)
+        } else {
+            theme.applyStyle(R.style.AppTheme_Dark, true)
+        }
+        return super.getTheme()
     }
 }

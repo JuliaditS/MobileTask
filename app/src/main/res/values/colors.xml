@@ -8,4 +8,5 @@
     <color name="textColorStandard">#798399</color>
     <color name="colorIndicatorSlider">#BABEC7</color>
     <color name="colorAccentLight">#25AAE1</color>
+    <color name="bottomNavigationViewIcon">@android:color/white</color>
 </resources>

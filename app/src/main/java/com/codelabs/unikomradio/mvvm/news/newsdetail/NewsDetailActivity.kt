@@ -1,5 +1,7 @@
 package com.codelabs.unikomradio.mvvm.news.newsdetail
 
+import android.content.res.Resources
+import android.graphics.ColorFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -15,6 +17,9 @@ import com.codelabs.unikomradio.mvvm.programs.programdetail.ProgramDetailViewMod
 import com.codelabs.unikomradio.mvvm.programs.programdetail.ProgramDetailViewModelFactory
 import com.codelabs.unikomradio.utilities.INTENT_PARCELABLE
 import com.codelabs.unikomradio.utilities.base.BaseActivity
+import com.codelabs.unikomradio.utilities.helper.Preferences
+import com.codelabs.unikomradio.utilities.helper.ThemeMode
+import kotlinx.android.synthetic.main.activity_news_detail.*
 
 class NewsDetailActivity :
     BaseActivity<ProgramDetailViewModel, ActivityNewsDetailBinding>(R.layout.activity_news_detail) {
@@ -36,6 +41,15 @@ class NewsDetailActivity :
         mBinding.news = newsData
         mBinding.newsDetailThumbnail.setImageURI(newsData.imageUrl)
         adapter = ProgramDetailAdapter()
+        setTheme(R.style.FeedActivityThemeDark)
+
+        if (Preferences(this).isLightMode()){
+            setTheme(R.style.FeedActivityThemeLight)
+            mBinding.newsDetailDateLogo.setImageDrawable(getDrawable(R.drawable.icon_date_light))
+        } else {
+            setTheme(R.style.FeedActivityThemeDark)
+        }
+
     }
 
     override fun setContentData() {
@@ -57,4 +71,13 @@ class NewsDetailActivity :
         return super.onOptionsItemSelected(item)
     }
 
+    override fun getTheme(): Resources.Theme {
+        val theme = super.getTheme()
+        if (Preferences(this).isLightMode()){
+            theme.applyStyle(R.style.AppTheme_Light,true)
+        } else {
+            theme.applyStyle(R.style.AppTheme_Dark,true)
+        }
+        return super.getTheme()
+    }
 }

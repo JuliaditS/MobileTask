@@ -4,37 +4,37 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
                 name="news"
-                type="com.codelabs.unikomradio.data.model.News"/>
+                type="com.codelabs.unikomradio.data.model.News" />
     </data>
 
     <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
             tools:context=".mvvm.programs.programdetail.ProgramDetailActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/standard_margin"
                 android:layout_marginStart="@dimen/standard_margin"
-                android:layout_marginEnd="@dimen/standard_margin">
+                android:layout_marginEnd="@dimen/standard_margin"
+                android:paddingBottom="@dimen/standard_margin">
 
             <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/news_detail_thumbnail"
                     android:layout_width="match_parent"
                     android:layout_height="220dp"
                     android:layout_marginTop="@dimen/very_small_margin"
+                    android:scaleType="fitXY"
+                    fresco:actualImageResource="@drawable/news_placeholder"
+                    fresco:actualImageScaleType="fitXY"
                     fresco:layout_constraintEnd_toEndOf="parent"
                     fresco:layout_constraintStart_toStartOf="parent"
                     fresco:layout_constraintTop_toTopOf="parent"
-                    fresco:actualImageResource="@drawable/news_placeholder"
                     fresco:roundWithOverlayColor="@color/colorPrimary"
-                    fresco:actualImageScaleType="fitXY"
-                    android:scaleType="fitXY"
-                    fresco:roundedCornerRadius="12dp"/>
+                    fresco:roundedCornerRadius="12dp" />
 
             <TextView
                     android:id="@+id/news_detail_title"
@@ -42,45 +42,50 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/standard_margin"
                     android:text="@{news.title}"
-                    android:textColor="@android:color/white"
                     android:textSize="@dimen/font_size_title"
                     android:textStyle="bold"
                     fresco:layout_constraintStart_toStartOf="parent"
-                    fresco:layout_constraintTop_toBottomOf="@id/news_detail_thumbnail"/>
+                    fresco:layout_constraintTop_toBottomOf="@id/news_detail_thumbnail" />
+
+
+            <ImageView
+                    android:id="@+id/news_detail_date_logo"
+                    android:layout_width="@dimen/icon_width"
+                    android:layout_height="@dimen/icon_height"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/icon_date"
+                    fresco:layout_constraintStart_toStartOf="parent"
+                    fresco:layout_constraintTop_toBottomOf="@id/news_detail_title" />
+
 
             <TextView
                     android:id="@+id/news_detail_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/icon_date"
-                    android:layout_marginTop="@dimen/very_small_margin"
-                    android:drawablePadding="5dp"
+                    android:layout_marginStart="@dimen/very_small_margin"
                     android:text="@{news.date}"
-                    android:textColor="@color/textColorStandard"
-                    fresco:layout_constraintStart_toStartOf="parent"
-                    fresco:layout_constraintTop_toBottomOf="@id/news_detail_title"/>
-
+                    fresco:layout_constraintStart_toEndOf="@+id/news_detail_date_logo"
+                    fresco:layout_constraintTop_toBottomOf="@id/news_detail_title" />
 
             <TextView
                     android:id="@+id/program_detail_description"
-                    fresco:layout_constraintTop_toBottomOf="@id/news_detail_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colored"
-                    android:textSize="@dimen/font_size_small"
-                    android:lineSpacingMultiplier="1"
+                    android:layout_marginTop="@dimen/standard_margin"
                     android:lineSpacingExtra="6dp"
+                    android:lineSpacingMultiplier="1"
                     android:text="@{news.description}"
-                    android:layout_marginTop="@dimen/standard_margin"/>
+                    android:textSize="@dimen/font_size_small"
+                    fresco:layout_constraintTop_toBottomOf="@id/news_detail_date" />
 
             <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/standard_margin"
-                    fresco:layout_constraintStart_toStartOf="parent"
                     android:gravity="start"
                     android:text="@{`Sumber `+news.source}"
-                    fresco:layout_constraintTop_toBottomOf="@id/program_detail_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    fresco:layout_constraintStart_toStartOf="parent"
+                    fresco:layout_constraintTop_toBottomOf="@id/program_detail_description" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

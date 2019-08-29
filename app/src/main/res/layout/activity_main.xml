@@ -27,7 +27,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/standard_margin"
-                android:background="@color/colorSecondary"
                 android:paddingTop="@dimen/smallest_margin"
                 android:paddingBottom="@dimen/smallest_margin"
                 app:layout_constraintBottom_toTopOf="@id/main_bottomnavigationview"
@@ -86,12 +85,8 @@
                 android:id="@+id/main_bottomnavigationview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/BottomNavigationView"
-                app:itemTextColor="@drawable/nav_item_color_state"
-                app:itemIconTint="@drawable/nav_item_color_state"
-                app:labelVisibilityMode="labeled"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:itemBackground="@color/colorPrimary"
+                app:labelVisibilityMode="labeled"
                 app:menu="@menu/menu_main"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

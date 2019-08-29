@@ -1,5 +1,7 @@
 package com.codelabs.unikomradio.mvvm.streaming.streaming_topcharts
 
+import android.content.Context
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.codelabs.unikomradio.R
 import com.codelabs.unikomradio.data.model.TopChart
 import com.codelabs.unikomradio.databinding.ItemTopchartsBinding
+import com.codelabs.unikomradio.utilities.helper.Preferences
 
-class StreamingTopchartsAdapter : ListAdapter<TopChart, StreamingTopchartsAdapter.ViewHolder>(StreamingDiffCallback()) {
-
+class StreamingTopchartsAdapter :
+    ListAdapter<TopChart, StreamingTopchartsAdapter.ViewHolder>(StreamingDiffCallback()) {
+    private lateinit var context: Context
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        context = parent.context
         return ViewHolder(
             ItemTopchartsBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
@@ -24,16 +29,20 @@ class StreamingTopchartsAdapter : ListAdapter<TopChart, StreamingTopchartsAdapte
         val topChart = getItem(position)
         holder.apply {
             bind(topChart)
-            setImageState(stateRank(topChart.currentRank,topChart.rankBefore))
+            setImageState(stateRank(topChart.currentRank, topChart.rankBefore))
             itemView.tag = topChart
+            if (!Preferences(context).isLightMode()) {
+                itemView.background =
+                    ColorDrawable(context.resources.getColor(R.color.colorPrimary))
+            }
         }
     }
 
-    private fun stateRank(currentRank:Int, rankBefore:Int):Int{
+    private fun stateRank(currentRank: Int, rankBefore: Int): Int {
         var state = IDLE_STATE
-        if (currentRank>rankBefore){
+        if (currentRank > rankBefore) {
             state = DOWN_STATE
-        } else if(currentRank<rankBefore) {
+        } else if (currentRank < rankBefore) {
             state = UP_STATE
         }
         return state
@@ -54,9 +63,9 @@ class StreamingTopchartsAdapter : ListAdapter<TopChart, StreamingTopchartsAdapte
             }
         }
 
-        fun setImageState(state:Int){
+        fun setImageState(state: Int) {
             val image = binding.itemTopchartPositionChange
-            when (state){
+            when (state) {
                 DOWN_STATE -> image.setImageResource(R.drawable.icon_down_white)
                 UP_STATE -> image.setImageResource(R.drawable.icon_up_white)
                 else -> image.setImageResource(R.drawable.icon_middle)

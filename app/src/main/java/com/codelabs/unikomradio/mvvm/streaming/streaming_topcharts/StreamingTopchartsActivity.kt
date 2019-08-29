@@ -1,5 +1,6 @@
 package com.codelabs.unikomradio.mvvm.streaming.streaming_topcharts
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
@@ -9,6 +10,7 @@ import com.codelabs.unikomradio.databinding.StreamingTopchartsBinding
 import com.codelabs.unikomradio.utilities.InjectorUtils
 import com.codelabs.unikomradio.utilities.base.BaseActivity
 import com.codelabs.unikomradio.utilities.helper.Event
+import com.codelabs.unikomradio.utilities.helper.Preferences
 
 class StreamingTopchartsActivity :
     BaseActivity<StreamingTopchartsViewModel, StreamingTopchartsBinding>(R.layout.streaming_topcharts),
@@ -62,6 +64,16 @@ class StreamingTopchartsActivity :
             super.onBackPressed()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun getTheme(): Resources.Theme {
+        val theme = super.getTheme()
+        if (Preferences(this).isLightMode()) {
+            theme.applyStyle(R.style.AppTheme_Light, true)
+        } else {
+            theme.applyStyle(R.style.AppTheme_Dark, true)
+        }
+        return super.getTheme()
     }
 
 }

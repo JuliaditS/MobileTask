@@ -116,10 +116,10 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navVersion"
 
-//    implementation "com.github.zcweng:switch-button:$rootProject.zcwengVersion"
-
-    implementation 'com.rm:rmswitch:1.2.2'
     implementation 'com.jakewharton:process-phoenix:2.0.0'
+
+    implementation 'com.airbnb.android:paris:1.3.0'
+    kapt 'com.airbnb.android:paris-processor:1.3.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

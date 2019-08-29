@@ -1,11 +1,11 @@
 package com.codelabs.unikomradio.mvvm.home
 
 import android.content.Intent
-import android.graphics.Point
 import android.media.MediaPlayer
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -23,13 +23,11 @@ import com.codelabs.unikomradio.mvvm.streaming.streaming_topcharts.StreamingTopc
 import com.codelabs.unikomradio.utilities.base.BaseFragment
 import com.codelabs.unikomradio.utilities.helper.Event
 import com.codelabs.unikomradio.utilities.helper.OnSeeAllClickedListener
-import com.codelabs.unikomradio.utilities.helper.Preferences
 import com.codelabs.unikomradio.utilities.helper.ThemeMode
 import com.codelabs.unikomradio.utilities.helper.recyclerviewhelper.itemdecoration.CirclePagerIndicatorDecoration
 import com.codelabs.unikomradio.utilities.helper.recyclerviewhelper.itemdecoration.RecyclerviewItemDecoration
 import com.codelabs.unikomradio.utilities.helper.recyclerviewhelper.itemdecoration.RecyclerviewItemGridTwoHorizontalDecoration
 import com.codelabs.unikomradio.utilities.helper.recyclerviewhelper.snaphelper.SnapHelper
-import timber.log.Timber
 
 
 class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), HomeUserActionListener {
@@ -189,7 +187,6 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
                 if (it.isNotEmpty()) {
                     topChartAdapter.submitList(it)
                 } else {
-                    viewModel.showMessage.value = Event("topcharts not found")
                 }
             })
         }

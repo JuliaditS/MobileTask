@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.airbnb.paris.utils.getStyle
 import com.codelabs.unikomradio.R
 import com.codelabs.unikomradio.mvvm.main.MainActivity
 import com.codelabs.unikomradio.utilities.helper.Preferences
@@ -20,23 +21,26 @@ class SettingsActivity : AppCompatActivity() {
 
         settings_light_mode_switch.setOnCheckedChangeListener { buttonView, isChecked ->
             Preferences(this).setLightMode(isChecked)
-            if (isChecked){
-                settings_state_lightmode.text = "On"
-            } else {
-                settings_state_lightmode.text = "Off"
-            }
 
-            ProcessPhoenix.triggerRebirth(this, Intent(this, MainActivity::class.java))
+            ProcessPhoenix.triggerRebirth(this, Intent(this, SettingsActivity::class.java))
+        }
+
+        if (Preferences(this).isLightMode()){
+            settings_state_lightmode.text = "On"
+        } else {
+            settings_state_lightmode.text = "Off"
         }
 
         if (Preferences(this).isLightMode()){
             settings_layout.setBackgroundColor(resources.getColor(android.R.color.white))
         } else {
-            settings_layout.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            settings_layout.setBackgroundColor(resources.getColor(R.color.colorSecondary))
+            settingslayout.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            settings_notification_label.setTextColor(resources.getColor(android.R.color.white))
+            settings_light_mode_label.setTextColor(resources.getColor(android.R.color.white))
+            settings_about.setTextColor(resources.getColor(android.R.color.white))
+            settings_label_general.setTextColor(resources.getColor(android.R.color.white))
         }
-
-
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 

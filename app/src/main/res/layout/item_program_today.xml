@@ -33,8 +33,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:placeholderImage="@drawable/thumbnailradio"
-                app:roundWithOverlayColor="@android:color/white"
-                android:background="@drawable/background_radius_12dp"
+                app:roundWithOverlayColor="@color/colorPrimary"
                 app:roundedCornerRadius="12dp" />
 
         <TextView
