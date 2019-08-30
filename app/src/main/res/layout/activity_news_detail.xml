@@ -1,94 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:fresco="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-        <variable
-                name="news"
-                type="com.codelabs.unikomradio.data.model.News" />
-    </data>
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".mvvm.programs.programdetail.ProgramDetailActivity">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".mvvm.programs.programdetail.ProgramDetailActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/standard_margin"
-                android:layout_marginEnd="@dimen/standard_margin"
-                android:paddingBottom="@dimen/standard_margin">
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                    android:id="@+id/news_detail_thumbnail"
-                    android:layout_width="match_parent"
-                    android:layout_height="220dp"
-                    android:layout_marginTop="@dimen/very_small_margin"
-                    android:scaleType="fitXY"
-                    fresco:actualImageResource="@drawable/news_placeholder"
-                    fresco:actualImageScaleType="fitXY"
-                    fresco:layout_constraintEnd_toEndOf="parent"
-                    fresco:layout_constraintStart_toStartOf="parent"
-                    fresco:layout_constraintTop_toTopOf="parent"
-                    fresco:roundWithOverlayColor="@color/colorPrimary"
-                    fresco:roundedCornerRadius="12dp" />
-
-            <TextView
-                    android:id="@+id/news_detail_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:text="@{news.title}"
-                    android:textSize="@dimen/font_size_title"
-                    android:textStyle="bold"
-                    fresco:layout_constraintStart_toStartOf="parent"
-                    fresco:layout_constraintTop_toBottomOf="@id/news_detail_thumbnail" />
-
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginEnd="@dimen/standard_margin"
+            android:paddingBottom="@dimen/standard_margin">
 
             <ImageView
-                    android:id="@+id/news_detail_date_logo"
-                    android:layout_width="@dimen/icon_width"
-                    android:layout_height="@dimen/icon_height"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/icon_date"
-                    fresco:layout_constraintStart_toStartOf="parent"
-                    fresco:layout_constraintTop_toBottomOf="@id/news_detail_title" />
+                android:id="@+id/news_detail_date_logo"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/very_small_margin"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_date"
+                fresco:layout_constraintStart_toStartOf="parent"
+                fresco:layout_constraintTop_toBottomOf="@id/news_detail_title" />
+
+            <TextView
+                android:id="@+id/news_detail_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:layout_marginBottom="@dimen/standard_margin"
+                android:text="@{news.title}"
+                android:textSize="@dimen/font_size_title"
+                android:textStyle="bold"
+                fresco:layout_constraintStart_toStartOf="parent"
+                fresco:layout_constraintTop_toBottomOf="@id/news_detail_thumbnail_card" />
 
 
             <TextView
-                    android:id="@+id/news_detail_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/very_small_margin"
-                    android:text="@{news.date}"
-                    fresco:layout_constraintStart_toEndOf="@+id/news_detail_date_logo"
-                    fresco:layout_constraintTop_toBottomOf="@id/news_detail_title" />
+                android:id="@+id/news_detail_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/very_small_margin"
+                android:layout_marginTop="@dimen/very_small_margin"
+                android:text="@{news.date}"
+                fresco:layout_constraintStart_toEndOf="@+id/news_detail_date_logo"
+                fresco:layout_constraintTop_toBottomOf="@id/news_detail_title" />
+
 
             <TextView
-                    android:id="@+id/program_detail_description"
+                android:id="@+id/program_detail_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:lineSpacingExtra="6dp"
+                android:lineSpacingMultiplier="1"
+                android:text="@{news.description}"
+                android:textSize="@dimen/font_size_small"
+                fresco:layout_constraintTop_toBottomOf="@id/news_detail_date" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:gravity="start"
+                android:text="@{`Sumber `+news.source}"
+                fresco:layout_constraintStart_toStartOf="parent"
+                fresco:layout_constraintTop_toBottomOf="@id/program_detail_description" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/news_detail_thumbnail_card"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                fresco:cardCornerRadius="12dp"
+                fresco:cardElevation="4dp"
+                fresco:layout_constraintEnd_toEndOf="parent"
+                fresco:layout_constraintStart_toStartOf="parent"
+                fresco:layout_constraintTop_toTopOf="parent">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/news_detail_thumbnail"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:lineSpacingExtra="6dp"
-                    android:lineSpacingMultiplier="1"
-                    android:text="@{news.description}"
-                    android:textSize="@dimen/font_size_small"
-                    fresco:layout_constraintTop_toBottomOf="@id/news_detail_date" />
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:gravity="start"
-                    android:text="@{`Sumber `+news.source}"
-                    fresco:layout_constraintStart_toStartOf="parent"
-                    fresco:layout_constraintTop_toBottomOf="@id/program_detail_description" />
+                    android:layout_height="match_parent"
+                    fresco:actualImageResource="@drawable/news_placeholder"
+                    fresco:actualImageScaleType="centerCrop"
+                    fresco:roundedCornerRadius="12dp" />
+            </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </ScrollView>
+
+    <data>
+
+        <variable
+            name="news"
+            type="com.codelabs.unikomradio.data.model.News" />
+    </data>
 </layout>

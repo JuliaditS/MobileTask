@@ -7,26 +7,14 @@
         android:layout_height="match_parent"
         tools:context=".mvvm.settings.SettingsActivity">
 
-    <TextView
-            android:id="@+id/settings_label_general"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/very_small_margin"
-            android:layout_marginTop="@dimen/standard_margin"
-            android:layout_marginEnd="@dimen/very_small_margin"
-            android:text="@string/settings"
-            android:textSize="@dimen/font_size_title"
-            app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/settings_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/standard_margin"
-            android:background="@color/colorSecondary"
             android:paddingTop="@dimen/small_margin"
-            android:paddingBottom="@dimen/small_margin"
-            app:layout_constraintTop_toBottomOf="@id/settings_label_general">
+            app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"
@@ -62,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/very_small_margin"
-                android:background="@color/textColorStandard"
+                android:background="#E5E5E5"
                 app:layout_constraintTop_toBottomOf="@id/settings_notification_description" />
 
 
@@ -110,7 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/very_small_margin"
-                android:background="@color/textColorStandard"
+                android:background="#E5E5E5"
                 app:layout_constraintTop_toBottomOf="@id/settings_state_lightmode" />
 
         <TextView
@@ -122,6 +110,14 @@
                 android:text="@string/about"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/settings_lightmode_divider" />
+
+        <View
+            android:id="@+id/settings_about_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/very_small_margin"
+            android:background="#E5E5E5"
+            app:layout_constraintTop_toBottomOf="@id/settings_about" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

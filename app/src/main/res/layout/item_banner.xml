@@ -1,31 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/program_banner_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_radius_12dp"
+                app:actualImageResource="@drawable/placeholder_banner"
+                app:roundedCornerRadius="12dp" />
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <data>
 
         <variable
-                name="banner"
-                type="com.codelabs.unikomradio.data.model.Banner" />
+            name="banner"
+            type="com.codelabs.unikomradio.data.model.Banner" />
     </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="360dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-        <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/program_banner_thumbnail"
-                android:layout_width="match_parent"
-                android:layout_height="140dp"
-                android:elevation="3dp"
-                app:actualImageResource="@drawable/placeholder_banner"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:background="@drawable/background_radius_12dp"
-                app:roundedCornerRadius="12dp" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -24,12 +24,12 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/image_news_height_thumbnail"
                 android:layout_marginEnd="@dimen/very_small_margin"
+                android:background="@drawable/background_radius_12dp"
                 android:elevation="3dp"
                 app:actualImageResource="@drawable/news_placeholder"
                 app:layout_constraintEnd_toEndOf="@id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:background="@drawable/background_radius_12dp"
                 app:roundedCornerRadius="12dp" />
 
         <androidx.constraintlayout.widget.Guideline

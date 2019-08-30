@@ -226,6 +226,8 @@ class ProgramFragment : BaseFragment<ProgramViewModel, ProgramBinding>(R.layout.
         inflater.inflate(R.menu.menu, menu)
 
         searchView = menu.findItem(R.id.search)?.actionView as androidx.appcompat.widget.SearchView
+        searchView.maxWidth = Int.MAX_VALUE
+
         searchView.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {

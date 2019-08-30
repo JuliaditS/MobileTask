@@ -151,7 +151,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
             ),
             intArrayOf(R.color.colorAccent, R.color.colorAccent)
         )
-//        mBinding.mainBottomnavigationview.itemIconTintList = ColorStateList(iconsColorStates,colorState)
 
         if (Preferences(this).isLightMode()) {
             mBinding.mainPlayradioLayout.setBackgroundColor(resources.getColor(android.R.color.white))
@@ -163,6 +162,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
                 resources.getColorStateList(R.drawable.nav_item_color_state_light)
             mBinding.mainBottomnavigationview.itemTextAppearanceActive =
                 R.style.BottomNavigationView_Light_Active
+            mBinding.mainPlayradioDescription.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_livestreaming_light,0,0,0)
         } else {
             mBinding.mainPlayradioTitle.setTextColor(resources.getColor(android.R.color.white))
             mBinding.mainBottomnavigationview.style(R.style.BottomNavigationView)
