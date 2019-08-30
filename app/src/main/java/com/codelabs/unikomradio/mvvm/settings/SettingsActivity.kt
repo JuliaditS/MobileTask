@@ -1,6 +1,7 @@
 package com.codelabs.unikomradio.mvvm.settings
 
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -49,5 +50,15 @@ class SettingsActivity : AppCompatActivity() {
             super.onBackPressed()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun getTheme(): Resources.Theme {
+        val theme = super.getTheme()
+        if (Preferences(this).isLightMode()) {
+            theme.applyStyle(R.style.AppTheme_Light, true)
+        } else {
+            theme.applyStyle(R.style.AppTheme_Dark, true)
+        }
+        return super.getTheme()
     }
 }

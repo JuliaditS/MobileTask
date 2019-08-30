@@ -3,7 +3,11 @@
     <item>
         <shape android:shape="rectangle">
             <solid android:color="#CABBBBBB"/>
-            <corners android:radius="12dp" />
+<!--            <corners android:radius="12dp" />-->
+            <stroke
+                android:width="5dip"
+                android:color="@android:color/black" >
+            </stroke>
         </shape>
     </item>
 
@@ -14,7 +18,11 @@
             android:bottom="2dp">
         <shape android:shape="rectangle">
             <solid android:color="@android:color/white"/>
-            <corners android:radius="12dp" />
+<!--            <corners android:radius="12dp" />-->
+            <stroke
+                android:width="5dip"
+                android:color="@android:color/black" >
+            </stroke>
         </shape>
     </item>
 </layer-list>

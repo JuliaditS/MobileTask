@@ -23,6 +23,7 @@ import com.codelabs.unikomradio.mvvm.streaming.streaming_topcharts.StreamingTopc
 import com.codelabs.unikomradio.utilities.base.BaseFragment
 import com.codelabs.unikomradio.utilities.helper.Event
 import com.codelabs.unikomradio.utilities.helper.OnSeeAllClickedListener
+import com.codelabs.unikomradio.utilities.helper.Preferences
 import com.codelabs.unikomradio.utilities.helper.ThemeMode
 import com.codelabs.unikomradio.utilities.helper.recyclerviewhelper.itemdecoration.CirclePagerIndicatorDecoration
 import com.codelabs.unikomradio.utilities.helper.recyclerviewhelper.itemdecoration.RecyclerviewItemDecoration
@@ -213,7 +214,11 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_home,menu)
+        if (Preferences(requireContext()).isLightMode()){
+            inflater.inflate(R.menu.menu_main_light,menu)
+        } else {
+            inflater.inflate(R.menu.menu_home,menu)
+        }
         super.onCreateOptionsMenu(menu, inflater)
     }
 
