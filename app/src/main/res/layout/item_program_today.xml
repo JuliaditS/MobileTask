@@ -27,15 +27,14 @@
                 android:id="@+id/program_item_thumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/image_height_thumbnail"
+                android:background="@drawable/background_radius_12dp"
                 android:elevation="12dp"
-                android:src="@drawable/thumbnailradio"
+                app:actualImageResource="@drawable/thumbnailradio"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:placeholderImage="@drawable/thumbnailradio"
-            android:background="@drawable/background_radius_12dp"
-
-            app:roundedCornerRadius="12dp" />
+                app:roundedCornerRadius="12dp" />
 
         <TextView
                 android:id="@+id/program_item_title"

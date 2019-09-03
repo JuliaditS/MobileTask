@@ -3,6 +3,7 @@ package com.codelabs.unikomradio.mvvm.streaming
 import android.app.ActivityManager
 import android.content.Context.ACTIVITY_SERVICE
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.media.MediaPlayer
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -16,11 +17,10 @@ import com.codelabs.unikomradio.utilities.base.BaseFragment
 import com.codelabs.unikomradio.utilities.helper.Event
 import com.codelabs.unikomradio.utilities.helper.Preferences
 import com.google.android.exoplayer2.SimpleExoPlayer
-import timber.log.Timber
 
 
 class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.layout.streaming),
-    StreamingUserActionListener {
+        StreamingUserActionListener {
 
     private var isLightMode = false
     private var mediaPlayer: MediaPlayer? = null
@@ -35,13 +35,13 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
         viewModel.apply {
             isPlaying.observe(viewLifecycleOwner, Observer<Boolean> {
                 if (it) {
-                    if (isLightMode){
+                    if (isLightMode) {
                         mBinding.streamingPlayStreaming.setImageResource(R.mipmap.pause_light)
                     } else {
                         mBinding.streamingPlayStreaming.setImageResource(R.mipmap.pause)
                     }
                 } else {
-                    if (isLightMode){
+                    if (isLightMode) {
                         mBinding.streamingPlayStreaming.setImageResource(R.mipmap.playbuttonlight)
                     } else {
                         mBinding.streamingPlayStreaming.setImageResource(R.mipmap.playbutton)
@@ -67,7 +67,7 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
                 }
                 if (it.isNotEmpty()) {
                     for (p in programTodayList) {
-                        if ( (p.startAt.toDouble() <= specifyToday.getHourSpecify()) && (p.endAt.toDouble() >= specifyToday.getHourSpecify())){
+                        if ((p.startAt.toDouble() <= specifyToday.getHourSpecify()) && (p.endAt.toDouble() >= specifyToday.getHourSpecify())) {
                             mBinding.streamingSongThumbnail.setImageURI(p.imageUrl)
                             mBinding.streamingProgram.text = p.title
                             mBinding.streamingLabelProgram.text = "radio hits unikom"
@@ -85,7 +85,7 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
 
     override fun setContentData() {
 
-        if (isLightMode){
+        if (isLightMode) {
             mBinding.streamingPlaylistIcon.setImageResource(R.drawable.icon_topchart_light)
             mBinding.streamingSoundActive.setImageResource(R.drawable.icon_sound_light)
         }
@@ -105,28 +105,12 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
 //        exoPlayer = (requireActivity().application as MyApplication).exoPlayer
         isLightMode = Preferences(requireContext()).isLightMode()
 
+        if (isLightMode) {
+            mBinding.streamingSpectrum.setImageDrawable(requireContext().getDrawable(R.drawable.spectrum_light))
+            mBinding.streamingProggressbar.progressTintList = ColorStateList.valueOf(resources.getColor(R.color.colorPrimary))
+        }
+
     }
-
-
-
-
-
-//    override fun onPlayMusicClick() {
-//        val intent = Intent(activity, MediaPlayerServices::class.java)
-//        if (!isMyServiceRunning(MediaPlayerServices::class.java)) {
-//            intent.action = MediaPlayerServices.ACTION_PLAY
-//            activity?.startService(intent)
-//            viewModel.playStreaming()
-//        } else {
-//            if (mediaPlayer?.isPlaying == true) {
-//                mediaPlayer?.pause()
-//                viewModel.stopStreaming()
-//            } else {
-//                mediaPlayer?.start()
-//                viewModel.playStreaming()
-//            }
-//        }
-//    }
 
     override fun onPlayMusicClick() {
         try {
@@ -162,14 +146,14 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
         if (viewModel.isMute.value == true) {
             mediaPlayer?.setVolume(0f, 0f)
             exoPlayer.volume = 0f
-            if (!isLightMode){
+            if (!isLightMode) {
                 mBinding.streamingSoundActive.setImageResource(R.mipmap.volumemutelight)
             } else {
                 mBinding.streamingSoundActive.setImageResource(R.mipmap.volumemute)
             }
         } else {
             exoPlayer.volume = 1f
-            if (!isLightMode){
+            if (!isLightMode) {
                 mBinding.streamingSoundActive.setImageResource(R.mipmap.volumemutelight)
             } else {
                 mBinding.streamingSoundActive.setImageResource(R.mipmap.volume)
