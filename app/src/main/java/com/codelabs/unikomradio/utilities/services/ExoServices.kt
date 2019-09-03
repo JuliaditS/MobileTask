@@ -1,12 +1,11 @@
-package com.codelabs.unikomradio
+package com.codelabs.unikomradio.utilities.services
 
-import android.app.Application
-import android.content.Context
-import android.media.MediaPlayer
+import android.app.Service
+import android.content.Intent
 import android.net.Uri
 import android.os.Handler
-import com.codelabs.unikomradio.utilities.helper.Preferences
-import com.facebook.drawee.backends.pipeline.Fresco
+import android.os.IBinder
+import android.widget.Toast
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.SimpleExoPlayer
@@ -20,41 +19,16 @@ import com.google.android.exoplayer2.upstream.TransferListener
 import com.google.android.exoplayer2.util.Util
 import timber.log.Timber
 
+class ExoServices : Service() {
+    lateinit var exoPlayer: SimpleExoPlayer
 
-class MyApplication : Application() {
-
-    private var isNightModeEnabled = false
-
-    var mMediaPlayer: MediaPlayer? = null
-//    lateinit var exoPlayer: SimpleExoPlayer
-
-    private fun initMediaPlayer() {
-//        mMediaPlayer = MediaPlayer()
-    }
-
-    override fun onCreate() {
-        super.onCreate()
-        instance = this
-        if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        Toast.makeText(this,"ADA",Toast.LENGTH_SHORT).show()
+        if (intent?.action  == ACTION_PLAY){
+            Timber.i("IYA INI CUY")
+        } else {
+            Timber.i("TIDAK CUY")
         }
-
-//        initRadioStreaming()
-
-        Fresco.initialize(this)
-//        try {
-//            initMediaPlayer()
-//        } catch (e: IOException) {
-//            e.printStackTrace()
-//            Toast.makeText(this, "Check internet connection", Toast.LENGTH_SHORT).show()
-//        }
-
-        this.isNightModeEnabled = Preferences(this).isLightMode()
-
-    }
-
-
-//    private fun initRadioStreaming() {
 //        @C.AudioUsage val usage = Util.getAudioUsageForStreamType(C.STREAM_TYPE_MUSIC)
 //        @C.AudioContentType val contentType =
 //            Util.getAudioContentTypeForStreamType(C.STREAM_TYPE_MUSIC)
@@ -87,12 +61,21 @@ class MyApplication : Application() {
 //        exoPlayer.prepare(mediaSource)
 //        exoPlayer.audioAttributes = audioAttributes
 //        exoPlayer.volume = 1f
-//    }
+//        exoPlayer.playWhenReady = true
+
+        return START_STICKY
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        exoPlayer.release()
+    }
+
+    override fun onBind(p0: Intent?): IBinder? {
+        return null
+    }
 
     companion object {
-        lateinit var instance: MyApplication
-
-        fun getContext(): Context = instance.applicationContext
+        const val ACTION_PLAY: String = "com.codelabs.unikomradio.action.PLAY"
     }
 }
-

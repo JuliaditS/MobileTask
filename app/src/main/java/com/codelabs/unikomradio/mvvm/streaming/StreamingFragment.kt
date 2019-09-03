@@ -90,7 +90,7 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
             mBinding.streamingSoundActive.setImageResource(R.drawable.icon_sound_light)
         }
 
-        viewModel.stateStreaming(exoPlayer.playWhenReady)
+//        viewModel.stateStreaming(exoPlayer.playWhenReady)
     }
 
     override fun setMessageType(): String {
@@ -102,7 +102,7 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
         mBinding.mListener = this
         mBinding.mViewModel = viewModel
 //        mediaPlayer = (requireActivity().application as MyApplication).mMediaPlayer
-        exoPlayer = (requireActivity().application as MyApplication).exoPlayer
+//        exoPlayer = (requireActivity().application as MyApplication).exoPlayer
         isLightMode = Preferences(requireContext()).isLightMode()
 
     }

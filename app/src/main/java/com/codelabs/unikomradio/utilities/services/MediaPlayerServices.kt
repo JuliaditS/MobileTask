@@ -23,31 +23,32 @@ class MediaPlayerServices : Service(), MediaPlayer.OnPreparedListener, MediaPlay
     private var mediaPlayer: MediaPlayer? = null
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
-        val wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
-        wifiLock = wifiManager.createWifiLock(WifiManager.WIFI_MODE_FULL, "mylock")
-
-        mediaPlayer = (application as MyApplication).mMediaPlayer
-        val audioAttributes = AudioAttributes.Builder()
-            .setLegacyStreamType(AudioManager.STREAM_MUSIC)
-            .build()
-
-        try {
-            mediaPlayer?.apply {
-                isLooping = true
-                setAudioAttributes(audioAttributes)
-                setOnPreparedListener(this@MediaPlayerServices)
-                setDataSource(url)
-                prepareAsync()
-                setWakeMode(applicationContext, PowerManager.PARTIAL_WAKE_LOCK)
-                wifiLock?.acquire()
-            }
-        } catch (e: IllegalArgumentException){
-            e.printStackTrace()
-        } catch (e: IllegalStateException){
-            e.printStackTrace()
-        } catch (e: IOException){
-            e.printStackTrace()
-        }
+        Toast.makeText(this,"ANJING",Toast.LENGTH_SHORT).show()
+//        val wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+//        wifiLock = wifiManager.createWifiLock(WifiManager.WIFI_MODE_FULL, "mylock")
+//
+//        mediaPlayer = (application as MyApplication).mMediaPlayer
+//        val audioAttributes = AudioAttributes.Builder()
+//            .setLegacyStreamType(AudioManager.STREAM_MUSIC)
+//            .build()
+//
+//        try {
+//            mediaPlayer?.apply {
+//                isLooping = true
+//                setAudioAttributes(audioAttributes)
+//                setOnPreparedListener(this@MediaPlayerServices)
+//                setDataSource(url)
+//                prepareAsync()
+//                setWakeMode(applicationContext, PowerManager.PARTIAL_WAKE_LOCK)
+//                wifiLock?.acquire()
+//            }
+//        } catch (e: IllegalArgumentException){
+//            e.printStackTrace()
+//        } catch (e: IllegalStateException){
+//            e.printStackTrace()
+//        } catch (e: IOException){
+//            e.printStackTrace()
+//        }
 
 
         return START_STICKY

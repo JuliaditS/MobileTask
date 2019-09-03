@@ -28,6 +28,8 @@
         <activity android:name=".mvvm.streaming.streaming_topcharts.StreamingTopchartsActivity" />
 
         <service android:name=".utilities.services.MediaPlayerServices" />
+        <service android:name=".utilities.services.ExoServices" />
+
     </application>
 
 </manifest>

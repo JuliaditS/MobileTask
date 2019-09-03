@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.graphics.drawable.ColorDrawable
 import android.media.MediaPlayer
@@ -14,7 +13,6 @@ import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.airbnb.paris.extensions.style
-import com.codelabs.unikomradio.MyApplication
 import com.codelabs.unikomradio.R
 import com.codelabs.unikomradio.databinding.ActivityMainBinding
 import com.codelabs.unikomradio.mvvm.crew.CrewFragment
@@ -27,6 +25,8 @@ import com.codelabs.unikomradio.utilities.base.BaseActivity
 import com.codelabs.unikomradio.utilities.helper.OnSeeAllClickedListener
 import com.codelabs.unikomradio.utilities.helper.Preferences
 import com.codelabs.unikomradio.utilities.helper.ThemeMode
+import com.codelabs.unikomradio.utilities.services.ExoServices
+import com.codelabs.unikomradio.utilities.services.MediaPlayerServices
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -55,7 +55,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
         loadFragment(HomeFragment())
         supportActionBar?.title = "Discover Music"
 //        mediaPlayer = (this.application as MyApplication).mMediaPlayer
-        exoPlayer = (this.application as MyApplication).exoPlayer
+//        exoPlayer = (this.application as MyApplication).exoPlayer
         mBinding.mainBottomnavigationview.setOnNavigationItemSelectedListener(
             mOnNavigationItemSelectedListener
         )
@@ -65,7 +65,8 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
             mBinding.mainBottomnavigationview.background =
                 ColorDrawable(getColor(R.color.colorAccent))
             mBinding.mainPlayradioTitle.background = ColorDrawable(getColor(R.color.colorSecondary))
-            mBinding.mainPlayradioDescription.background = ColorDrawable(getColor(R.color.colorSecondary))
+            mBinding.mainPlayradioDescription.background =
+                ColorDrawable(getColor(R.color.colorSecondary))
         }
 
 
@@ -134,45 +135,27 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
 
     @SuppressLint("ResourceType")
     override fun setContentData() {
-
-        val iconsColorStates =
-            arrayOf(
-                intArrayOf(
-                    -android.R.attr.state_checked,
-                    android.R.attr.state_checked
-                )
-            )
-        val colorState = intArrayOf(R.color.colorAccent, R.color.colorAccent)
-
-        val textColorStates = ColorStateList(
-            arrayOf(
-                intArrayOf(-android.R.attr.state_checked),
-                intArrayOf(android.R.attr.state_checked)
-            ),
-            intArrayOf(R.color.colorAccent, R.color.colorAccent)
-        )
-//        mBinding.mainBottomnavigationview.itemIconTintList = ColorStateList(iconsColorStates,colorState)
-
         if (Preferences(this).isLightMode()) {
-            mBinding.mainPlayradioLayout.setBackgroundColor(resources.getColor(android.R.color.white))
+            mBinding.mainPlayradioLayout.setBackgroundColor(getColor(android.R.color.white))
             mBinding.mainPlayradioPlayButton.setImageResource(R.mipmap.playbuttonlight)
-            mBinding.mainPlayradioDescription.setTextColor(resources.getColor(R.color.colorAccentLight))
-            mBinding.mainPlayradioTitle.setTextColor(resources.getColor(android.R.color.black))
+            mBinding.mainPlayradioDescription.setTextColor(getColor(R.color.colorAccentLight))
+            mBinding.mainPlayradioTitle.setTextColor(getColor(android.R.color.black))
             mBinding.mainBottomnavigationview.style(R.style.BottomNavigationView)
             mBinding.mainBottomnavigationview.itemIconTintList =
-                resources.getColorStateList(R.drawable.nav_item_color_state_light)
+                getColorStateList(R.drawable.nav_item_color_state_light)
             mBinding.mainBottomnavigationview.itemTextAppearanceActive =
                 R.style.BottomNavigationView_Light_Active
         } else {
-            mBinding.mainPlayradioTitle.setTextColor(resources.getColor(android.R.color.white))
+            mBinding.mainPlayradioTitle.setTextColor(getColor(android.R.color.white))
             mBinding.mainBottomnavigationview.style(R.style.BottomNavigationView)
             mBinding.mainBottomnavigationview.itemIconTintList =
-                resources.getColorStateList(R.drawable.nav_item_color_state)
+                getColorStateList(R.drawable.nav_item_color_state)
             mBinding.mainBottomnavigationview.itemTextColor =
-                resources.getColorStateList(R.drawable.nav_item_color_state)
+                getColorStateList(R.drawable.nav_item_color_state)
             mBinding.mainBottomnavigationview.itemTextAppearanceActive =
                 R.style.BottomNavigationView_Dark_Active
-            mBinding.mainPlayradioLayout.background = ColorDrawable(getColor(R.color.colorSecondary))
+            mBinding.mainPlayradioLayout.background =
+                ColorDrawable(getColor(R.color.colorSecondary))
         }
 
         try {
@@ -206,7 +189,15 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
 //    }
 
     override fun onPlayRadio() {
-        try {
+
+        if (!isMyServiceRunning(ExoServices::class.java)) {
+            val intent = Intent(this,ExoServices::class.java)
+            intent.action = ExoServices.ACTION_PLAY
+            this.startService(intent)
+            viewModel.playStreaming()
+            exoPlayer.playWhenReady = true
+        }
+        else {
             if (exoPlayer.playWhenReady) {
                 viewModel.stopStreaming()
                 exoPlayer.playWhenReady = false
@@ -214,11 +205,11 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
                 viewModel.playStreaming()
                 exoPlayer.playWhenReady = true
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
         }
     }
 
+
+    @Suppress("DEPRECATION")
     private fun isMyServiceRunning(serviceClass: Class<*>): Boolean {
 
         val manager = this.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager?
