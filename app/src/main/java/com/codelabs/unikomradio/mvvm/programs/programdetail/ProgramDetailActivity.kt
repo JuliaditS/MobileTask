@@ -1,5 +1,6 @@
 package com.codelabs.unikomradio.mvvm.programs.programdetail
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
@@ -9,6 +10,7 @@ import com.codelabs.unikomradio.data.model.Program
 import com.codelabs.unikomradio.databinding.ActivityProgramDetailBinding
 import com.codelabs.unikomradio.utilities.INTENT_PARCELABLE
 import com.codelabs.unikomradio.utilities.base.BaseActivity
+import com.codelabs.unikomradio.utilities.helper.Preferences
 
 class ProgramDetailActivity :
     BaseActivity<ProgramDetailViewModel, ActivityProgramDetailBinding>(R.layout.activity_program_detail) {
@@ -45,6 +47,16 @@ class ProgramDetailActivity :
 
     override fun setMessageType(): String {
         return MESSAGE_TYPE_TOAST
+    }
+
+    override fun getTheme(): Resources.Theme {
+        val theme = super.getTheme()
+        if (Preferences(this).isLightMode()) {
+            theme.applyStyle(R.style.AppTheme_Light, true)
+        } else {
+            theme.applyStyle(R.style.AppTheme_Dark, true)
+        }
+        return super.getTheme()
     }
 
 

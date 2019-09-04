@@ -32,4 +32,7 @@
     <string name="settings_notification_description">Check security center to turn on the notifications</string>
     <string name="notification">Notification</string>
     <string name="about">About</string>
+
+    <string name="playback_channel_name">Playback</string>
+
 </resources>

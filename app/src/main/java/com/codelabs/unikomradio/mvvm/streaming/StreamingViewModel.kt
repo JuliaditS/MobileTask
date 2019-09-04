@@ -50,10 +50,8 @@ class StreamingViewModel : BaseViewModel() {
             }
 
             if (snapshot != null) {
-                Timber.w("Current data: ${snapshot.documents}")
                 val mutableList = mutableListOf<Program>()
-                var i = 0
-                for (document in snapshot.documents) {
+                for ((i, document) in snapshot.documents.withIndex()) {
                     document.toObject(Program::class.java)?.let { mutableList.add(it) }
                     val crewMap: HashMap<String, Any?>? = document["crew"] as HashMap<String, Any?>?
                     val crew = Crew(
@@ -63,7 +61,6 @@ class StreamingViewModel : BaseViewModel() {
                         crewMap?.get("role") as String? ?: ""
                     )
                     mutableList[i].announcer.add(crew)
-                    i++
                 }
                 _programs.value = mutableList
             } else {
@@ -85,7 +82,11 @@ class StreamingViewModel : BaseViewModel() {
         _isMute.value = _isMute.value != true
     }
 
-    fun stateStreaming(state: Boolean) {
+    fun isPlaying(): Boolean?{
+        return _isPlaying.value
+    }
+    fun setStateStreaming(state: Boolean?) {
         _isPlaying.value = state
     }
+
 }

@@ -23,4 +23,8 @@ class MainViewModel internal constructor() : BaseViewModel() {
         _isPlaying.value = state
     }
 
+    init {
+        _isPlaying.value = false
+    }
+
 }

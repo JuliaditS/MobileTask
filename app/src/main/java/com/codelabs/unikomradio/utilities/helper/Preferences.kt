@@ -3,6 +3,7 @@ package com.codelabs.unikomradio.utilities.helper
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
+import timber.log.Timber
 
 class Preferences(private val context: Context) {
 
@@ -15,11 +16,21 @@ class Preferences(private val context: Context) {
         editor.apply()
     }
 
-    public fun isLightMode(): Boolean {
+    fun isLightMode(): Boolean {
         return sharedPreferences.getBoolean(LIGHT_MODE, false)
+    }
+
+    fun setPlaying(state: Boolean){
+        editor.putBoolean(IS_PLAYING, state)
+        editor.apply()
+    }
+
+    fun isPlaying(): Boolean {
+        return sharedPreferences.getBoolean(IS_PLAYING, false)
     }
 
     companion object {
         const val LIGHT_MODE = "light_mode"
+        const val IS_PLAYING = "is_playing"
     }
 }

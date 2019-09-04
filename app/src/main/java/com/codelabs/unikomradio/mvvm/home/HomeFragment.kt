@@ -40,6 +40,7 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
 
     private lateinit var onSeeAllClickedListener: OnSeeAllClickedListener
 
+
     private var mediaPlayer: MediaPlayer? = null
 
     private val viewModel: HomeViewModel by viewModels {
@@ -62,8 +63,7 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
         initAllRecylerView()
 
         activity?.let {
-            if (it !is OnSeeAllClickedListener) throw IllegalArgumentException("Activity should implement OnSeeAllClickListener")
-
+            require(it is OnSeeAllClickedListener) { "Activity should implement OnSeeAllClickListener" }
             onSeeAllClickedListener = activity as OnSeeAllClickedListener
         }
 

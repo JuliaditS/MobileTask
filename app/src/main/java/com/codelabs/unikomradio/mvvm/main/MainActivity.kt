@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.graphics.drawable.ColorDrawable
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -15,6 +14,7 @@ import androidx.lifecycle.Observer
 import com.airbnb.paris.extensions.style
 import com.codelabs.unikomradio.R
 import com.codelabs.unikomradio.databinding.ActivityMainBinding
+import com.codelabs.unikomradio.mvvm.StateListener
 import com.codelabs.unikomradio.mvvm.crew.CrewFragment
 import com.codelabs.unikomradio.mvvm.home.HomeFragment
 import com.codelabs.unikomradio.mvvm.news.NewsFragment
@@ -26,18 +26,18 @@ import com.codelabs.unikomradio.utilities.helper.OnSeeAllClickedListener
 import com.codelabs.unikomradio.utilities.helper.Preferences
 import com.codelabs.unikomradio.utilities.helper.ThemeMode
 import com.codelabs.unikomradio.utilities.services.ExoServices
-import com.codelabs.unikomradio.utilities.services.MediaPlayerServices
+import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import timber.log.Timber
 
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main),
     MainUserActionListener,
-    OnSeeAllClickedListener {
+    OnSeeAllClickedListener, StateListener {
 
 
-    private var mediaPlayer: MediaPlayer? = null
     private lateinit var exoPlayer: SimpleExoPlayer
-
+    var playingState: Boolean? = false
 
     private val viewModel: MainViewModel by viewModels {
         MainViewModelFactory()
@@ -54,8 +54,8 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
         //init tampilan awal
         loadFragment(HomeFragment())
         supportActionBar?.title = "Discover Music"
-//        mediaPlayer = (this.application as MyApplication).mMediaPlayer
 //        exoPlayer = (this.application as MyApplication).exoPlayer
+
         mBinding.mainBottomnavigationview.setOnNavigationItemSelectedListener(
             mOnNavigationItemSelectedListener
         )
@@ -68,8 +68,14 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
             mBinding.mainPlayradioDescription.background =
                 ColorDrawable(getColor(R.color.colorSecondary))
         }
+    }
 
-
+    override fun onStart() {
+        super.onStart()
+        Timber.i("ANJING : ${Preferences(this).isPlaying()}")
+        if (Preferences(this).isPlaying()) {
+            viewModel.playStreaming()
+        }
     }
 
 
@@ -158,54 +164,43 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
                 ColorDrawable(getColor(R.color.colorSecondary))
         }
 
-        try {
-            if (mediaPlayer?.isPlaying != null) {
-                viewModel.stateStreaming(mediaPlayer!!.isPlaying)
-            }
-        } catch (e: IllegalStateException) {
-            e.printStackTrace()
-        }
+
     }
 
-//    With mediaplayer
-//    override fun onPlayRadio() {
-//        val intent = Intent(this, MediaPlayerServices::class.java)
-//        if (!isMyServiceRunning(MediaPlayerServices::class.java)) {
-//            intent.action = MediaPlayerServices.ACTION_PLAY
-//            this.startService(intent)
-//            viewModel.playStreaming()
-//
-//        } else {
-//            Timber.i("ternyata " + mediaPlayer?.isPlaying.toString())
-//            if (mediaPlayer?.isPlaying == true) {
-//                mediaPlayer?.pause()
-//                viewModel.stopStreaming()
-//
-//            } else {
-//                mediaPlayer?.start()
-//                viewModel.playStreaming()
-//            }
-//        }
-//    }
 
     override fun onPlayRadio() {
+        val intent = Intent(this, ExoServices::class.java)
+        val ExoPlayer = com.codelabs.unikomradio.mvvm.ExoPlayer(this).exoPlayer
+        playingState = Preferences(this).isPlaying()
 
         if (!isMyServiceRunning(ExoServices::class.java)) {
-            val intent = Intent(this,ExoServices::class.java)
-            intent.action = ExoServices.ACTION_PLAY
+            intent.action = ExoServices.ACTION_INIT
             this.startService(intent)
             viewModel.playStreaming()
-            exoPlayer.playWhenReady = true
-        }
-        else {
-            if (exoPlayer.playWhenReady) {
+            intent.action = ExoServices.ACTION_PLAY
+        } else {
+            if (viewModel.isPlaying.value == true) {
                 viewModel.stopStreaming()
-                exoPlayer.playWhenReady = false
+                intent.action = ExoServices.ACTION_PAUSE
             } else {
                 viewModel.playStreaming()
-                exoPlayer.playWhenReady = true
+                intent.action = ExoServices.ACTION_PLAY
             }
         }
+
+        this.startService(intent)
+
+        playingState = viewModel.isPlaying.value
+        playingState?.let { Preferences(this).setPlaying(it) }
+    }
+
+    override fun setStatePlayingRadio(state: Boolean?) {
+        playingState = state
+        playingState?.let { viewModel.stateStreaming(it) }
+    }
+
+    override fun isPlayingRadio(): Boolean? {
+        return playingState
     }
 
 
@@ -248,6 +243,10 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
     override fun onBackPressed() {
         super.onBackPressed()
         this.finishAffinity()
+    }
+
+    fun isPlayingState(): Boolean? {
+        return playingState
     }
 
     override fun getTheme(): Resources.Theme {
