@@ -23,6 +23,7 @@ android {
         versionCode 1
         versionName "1.0"
         buildConfigField "String", "BASE_URL", '"https://raw.githubusercontent.com/googlesamples/android-sunflower/master/app/src/main/assets/"'
+        buildConfigField "String", "BASE_URL_UNIKOM_RADIO_STREAMING", '"http://hits.unikom.ac.id:9996/;listen.pls?sid=1"'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

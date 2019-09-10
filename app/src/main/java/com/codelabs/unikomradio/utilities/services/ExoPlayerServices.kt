@@ -3,43 +3,47 @@ package com.codelabs.unikomradio.utilities.services
 import android.app.Notification
 import android.app.PendingIntent
 import android.app.Service
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.os.Binder
 import android.os.Bundle
 import android.os.Handler
 import android.os.IBinder
 import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
+import com.codelabs.unikomradio.BuildConfig
 import com.codelabs.unikomradio.R
 import com.codelabs.unikomradio.mvvm.ExoPlayer
-import com.codelabs.unikomradio.utilities.MEDIA_SESSION_TAG
-import com.codelabs.unikomradio.utilities.PLAYBACK_CHANNEL_ID
-import com.codelabs.unikomradio.utilities.PLAYBACK_NOTIFICATION_ID
+import com.codelabs.unikomradio.utilities.*
 import com.codelabs.unikomradio.utilities.helper.Preferences
-import com.google.android.exoplayer2.*
+import com.google.android.exoplayer2.C
+import com.google.android.exoplayer2.PlaybackParameters
+import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import com.google.android.exoplayer2.ext.mediasession.TimelineQueueNavigator
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory
 import com.google.android.exoplayer2.source.ExtractorMediaSource
-import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.upstream.TransferListener
 import com.google.android.exoplayer2.util.Util
+import com.google.firebase.firestore.FirebaseFirestore
 import timber.log.Timber
 
-class ExoServices : Service() {
+class ExoPlayerServices : Service() {
     lateinit var exoPlayer: SimpleExoPlayer
     private lateinit var playerNotificationManager: PlayerNotificationManager
     private lateinit var mediaSession: MediaSessionCompat
     private lateinit var mediaSessionConnector: MediaSessionConnector
+    var state = true
+
+    val db = FirebaseFirestore.getInstance()
+    private val docRef = db.collection(ON_RADIO_PLAYING).document(onradioplayingdocument)
+
 
     private fun initStreamingMusic() {
         @C.AudioUsage val usage = Util.getAudioUsageForStreamType(C.STREAM_TYPE_MUSIC)
@@ -52,27 +56,63 @@ class ExoServices : Service() {
 
         val bandwidthMeter = DefaultBandwidthMeter()
         val extractorsFactory = DefaultExtractorsFactory()
-//        val trackSelectionFactory = AdaptiveTrackSelection.Factory(bandwidthMeter)
 
         val dateSourceFactory = DefaultDataSourceFactory(
             this,
             Util.getUserAgent(this, packageName),
             bandwidthMeter as TransferListener
         )
+
         val mediaSource = ExtractorMediaSource(
-            Uri.parse("http://hits.unikom.ac.id:9996/;listen.pls?sid=1"),
+            Uri.parse(BuildConfig.BASE_URL_UNIKOM_RADIO_STREAMING),
             dateSourceFactory,
             extractorsFactory,
             Handler(),
             ExtractorMediaSource.EventListener {
                 it.printStackTrace()
             }
-        )    // replace Uri with your song url
+        )
 
         exoPlayer = ExoPlayer(this).exoPlayer
+        docRef.set(hashMapOf(ISPLAYING to exoPlayer.playWhenReady))
+
+
+//        exoPlayer.addListener(object : Player.EventListener {
+//            override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
+//                docRef.addSnapshotListener { snapshot, exception ->
+//                    if (exception != null) {
+//                        exception.printStackTrace()
+//                        return@addSnapshotListener
+//                    }
+//
+//                    if (snapshot != null) {
+//                        docRef.set(hashMapOf(ISPLAYING to playWhenReady))
+//
+//                    } else {
+//                        exception?.printStackTrace()
+//                        Timber.w("Current data null")
+//                    }
+//                }
+//            }
+//        })
+
         exoPlayer.prepare(mediaSource)
         exoPlayer.audioAttributes = audioAttributes
         exoPlayer.volume = 1f
+
+        exoPlayer.addListener(object : Player.EventListener {
+            override fun onPlaybackParametersChanged(playbackParameters: PlaybackParameters?) {
+                super.onPlaybackParametersChanged(playbackParameters)
+                Timber.i("anjingbabi: $playbackParameters")
+            }
+
+            override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
+                super.onPlayerStateChanged(playWhenReady, playbackState)
+                Timber.i("anjingkuda: $playWhenReady")
+                docRef.set(hashMapOf(ISPLAYING to playWhenReady))
+
+            }
+        })
 
         playerNotificationManager = PlayerNotificationManager.createWithNotificationChannel(
             this,
@@ -96,7 +136,10 @@ class ExoServices : Service() {
                     player: Player,
                     callback: PlayerNotificationManager.BitmapCallback
                 ): Bitmap? {
-                    return BitmapFactory.decodeResource(this@ExoServices.resources, R.drawable.thumbnailradio)
+                    return BitmapFactory.decodeResource(
+                        this@ExoPlayerServices.resources,
+                        R.drawable.thumbnailradio
+                    )
                 }
 
             }
@@ -112,6 +155,9 @@ class ExoServices : Service() {
                 stopSelf()
             }
         })
+
+
+        playerNotificationManager.setOngoing(true)
         playerNotificationManager.setPlayer(exoPlayer)
 
         mediaSession = MediaSessionCompat(this, MEDIA_SESSION_TAG)
@@ -150,7 +196,8 @@ class ExoServices : Service() {
             }
             ACTION_UNMUTE -> {
                 Timber.i("EXOSERVICES:  ACTION UNMUTE")
-                unMuteRadio() }
+                unMuteRadio()
+            }
 
             else -> {
                 Timber.i("EXOSERVICES:  ACTION ELSE")
@@ -183,6 +230,7 @@ class ExoServices : Service() {
         Preferences(this).setPlaying(false)
         mediaSession.release()
         mediaSessionConnector.setPlayer(null, null)
+        playerNotificationManager.setOngoing(false)
         playerNotificationManager.setPlayer(null)
         exoPlayer.release()
     }
@@ -199,13 +247,14 @@ class ExoServices : Service() {
         const val ACTION_UNMUTE: String = "com.codelabs.unikomradio.action.UNMUTE"
     }
 
-    inner class ExoBinder : Binder(){
-        fun getService(): ExoServices = this@ExoServices
-    }
 
     fun getMediaDescription(): MediaDescriptionCompat {
         val extras = Bundle()
-        val bitmap = BitmapFactory.decodeResource(this@ExoServices.resources, R.drawable.thumbnailradio)
+        val bitmap =
+            BitmapFactory.decodeResource(
+                this@ExoPlayerServices.resources,
+                R.drawable.thumbnailradio
+            )
         extras.putParcelable(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, bitmap)
         extras.putParcelable(MediaMetadataCompat.METADATA_KEY_DISPLAY_ICON, bitmap)
         return MediaDescriptionCompat.Builder()

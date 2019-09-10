@@ -19,7 +19,7 @@ import com.codelabs.unikomradio.mvvm.streaming.streaming_topcharts.StreamingTopc
 import com.codelabs.unikomradio.utilities.base.BaseFragment
 import com.codelabs.unikomradio.utilities.helper.Event
 import com.codelabs.unikomradio.utilities.helper.Preferences
-import com.codelabs.unikomradio.utilities.services.ExoServices
+import com.codelabs.unikomradio.utilities.services.ExoPlayerServices
 import com.google.android.exoplayer2.SimpleExoPlayer
 import timber.log.Timber
 
@@ -32,23 +32,10 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
     private var mediaPlayer: MediaPlayer? = null
     private lateinit var exoPlayer: SimpleExoPlayer
 
-    private lateinit var mExoService: ExoServices
+    private lateinit var mExoService: ExoPlayerServices
     private var mBound: Boolean = false
     private lateinit var stateListener: StateListener
 
-    private val mConnection = object : ServiceConnection {
-        override fun onServiceDisconnected(p0: ComponentName?) {
-            mBound = false
-        }
-
-        override fun onServiceConnected(className: ComponentName?, service: IBinder?) {
-            val binder = service as ExoServices.ExoBinder
-            mExoService = binder.getService()
-            mBound = true
-            exoPlayer = binder.getService().exoPlayer
-        }
-
-    }
 
     private val viewModel: StreamingViewModel by viewModels {
         StreamingViewModelFactory()
@@ -81,7 +68,8 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
             programs.observe(this@StreamingFragment, Observer {
 
                 val programTodayList = ArrayList<Program>()
-                for ((i, d) in it.withIndex()) {
+
+                for (d in it) {
                     if (d.heldDay.contains('-')) {
                         val dummyDay: String = d.heldDay.replace(" ", "")
                         val dummyDayString = dummyDay.split("-")
@@ -94,6 +82,7 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
                         }
                     }
                 }
+
                 if (it.isNotEmpty()) {
                     for (p in programTodayList) {
                         if ((p.startAt.toDouble() <= specifyToday.getHourSpecify()) && (p.endAt.toDouble() >= specifyToday.getHourSpecify())) {
@@ -110,13 +99,6 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
         }
     }
 
-    override fun onStop() {
-        super.onStop()
-        if (mBound) {
-            requireContext().unbindService(mConnection)
-            mBound = false
-        }
-    }
 
     override fun setContentData() {
 
@@ -144,18 +126,18 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
     }
 
     override fun onPlayMusicClick() {
-        val intent = Intent(requireContext(), ExoServices::class.java)
+        val intent = Intent(requireContext(), ExoPlayerServices::class.java)
 
-        if (!isMyServiceRunning(ExoServices::class.java)) {
+        if (!isMyServiceRunning(ExoPlayerServices::class.java)) {
             requireContext().startService(intent)
             viewModel.playStreaming()
         } else {
             if (viewModel.isPlaying.value == true) {
                 viewModel.stopStreaming()
-                intent.action = ExoServices.ACTION_PAUSE
+                intent.action = ExoPlayerServices.ACTION_PAUSE
             } else {
                 viewModel.playStreaming()
-                intent.action = ExoServices.ACTION_PLAY
+                intent.action = ExoPlayerServices.ACTION_PLAY
             }
             requireContext().startService(intent)
         }
@@ -179,10 +161,10 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
 
 
     override fun onMuteClick() {
-        val intent = Intent(requireContext(), ExoServices::class.java)
+        val intent = Intent(requireContext(), ExoPlayerServices::class.java)
 
-        if (!isMyServiceRunning(ExoServices::class.java)) {
-            intent.action = ExoServices.ACTION_INIT
+        if (!isMyServiceRunning(ExoPlayerServices::class.java)) {
+            intent.action = ExoPlayerServices.ACTION_INIT
             requireContext().startService(intent)
         }
 
@@ -190,14 +172,14 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
 
         Timber.i("cekcek: ${viewModel.isMute.value}")
         if (viewModel.isMute.value == true) {
-            intent.action = ExoServices.ACTION_UNMUTE
+            intent.action = ExoPlayerServices.ACTION_UNMUTE
             if (isLightMode) {
                 mBinding.streamingSoundActive.setImageResource(R.mipmap.volumelight)
             } else {
                 mBinding.streamingSoundActive.setImageResource(R.mipmap.volume)
             }
         } else {
-            intent.action = ExoServices.ACTION_MUTE
+            intent.action = ExoPlayerServices.ACTION_MUTE
             if (isLightMode) {
                 mBinding.streamingSoundActive.setImageResource(R.mipmap.volumemutelight)
             } else {
@@ -207,33 +189,6 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
 
         requireContext().startService(intent)
 
-
-//        if (!isMyServiceRunning(ExoServices::class.java)) {
-////            intent.action = ExoServices.ACTION_INIT
-////            requireContext().startService(intent)
-////            viewModel.playStreaming()
-////            intent.action = ExoServices.ACTION_MUTE
-////            if (!isLightMode) {
-////                mBinding.streamingSoundActive.setImageResource(R.mipmap.volumemutelight)
-////            } else {
-////                mBinding.streamingSoundActive.setImageResource(R.mipmap.volumemute)
-////            }
-////        }
-////
-////        else {
-////            if (viewModel.isMute.value == true) {
-////                intent.action = ExoServices.ACTION_MUTE
-////            } else {
-////                viewModel.playStreaming()
-////                intent.action = ExoServices.ACTION_UNMUTE
-////                if (!isLightMode) {
-////                    mBinding.streamingSoundActive.setImageResource(R.mipmap.volumemutelight)
-////                } else {
-////                    mBinding.streamingSoundActive.setImageResource(R.mipmap.volume)
-////                }
-////            }
-////        }
-////        requireContext().startService(intent)
     }
 }
 

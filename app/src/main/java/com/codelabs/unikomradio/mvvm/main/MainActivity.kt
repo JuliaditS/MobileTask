@@ -25,8 +25,7 @@ import com.codelabs.unikomradio.utilities.base.BaseActivity
 import com.codelabs.unikomradio.utilities.helper.OnSeeAllClickedListener
 import com.codelabs.unikomradio.utilities.helper.Preferences
 import com.codelabs.unikomradio.utilities.helper.ThemeMode
-import com.codelabs.unikomradio.utilities.services.ExoServices
-import com.google.android.exoplayer2.ExoPlayer
+import com.codelabs.unikomradio.utilities.services.ExoPlayerServices
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import timber.log.Timber
@@ -169,22 +168,22 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
 
 
     override fun onPlayRadio() {
-        val intent = Intent(this, ExoServices::class.java)
+        val intent = Intent(this, ExoPlayerServices::class.java)
         val ExoPlayer = com.codelabs.unikomradio.mvvm.ExoPlayer(this).exoPlayer
         playingState = Preferences(this).isPlaying()
 
-        if (!isMyServiceRunning(ExoServices::class.java)) {
-            intent.action = ExoServices.ACTION_INIT
+        if (!isMyServiceRunning(ExoPlayerServices::class.java)) {
+            intent.action = ExoPlayerServices.ACTION_INIT
             this.startService(intent)
             viewModel.playStreaming()
-            intent.action = ExoServices.ACTION_PLAY
+            intent.action = ExoPlayerServices.ACTION_PLAY
         } else {
             if (viewModel.isPlaying.value == true) {
                 viewModel.stopStreaming()
-                intent.action = ExoServices.ACTION_PAUSE
+                intent.action = ExoPlayerServices.ACTION_PAUSE
             } else {
                 viewModel.playStreaming()
-                intent.action = ExoServices.ACTION_PLAY
+                intent.action = ExoPlayerServices.ACTION_PLAY
             }
         }
 

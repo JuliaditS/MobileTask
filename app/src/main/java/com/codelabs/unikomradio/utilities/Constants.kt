@@ -7,6 +7,18 @@ const val CREW = "crews"
 const val PROGRAM = "programs"
 const val NEWS = "news"
 const val BANNER = "banner"
+const val ON_RADIO_PLAYING = "radio_state"
+
+
+//Firebase documents
+
+//-> radio_state -> ..{documet}..
+const val onradioplayingdocument = "onradioplaying"
+
+//-> radio_state -> onradioplaying
+const val ISPLAYING = "isPlaying"
+
+
 
 val PLAYBACK_CHANNEL_ID = "playback_channel"
 val PLAYBACK_NOTIFICATION_ID = 1
