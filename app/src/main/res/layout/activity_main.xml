@@ -75,7 +75,6 @@
                     android:layout_width="@dimen/image_playradio_width_thumbnail"
                     android:layout_height="@dimen/image_playradio_height_thumbnail"
                     android:layout_marginEnd="@dimen/standard_margin"
-                    android:src="@mipmap/playbutton"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>

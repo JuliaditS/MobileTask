@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.codelabs.unikomradio.data.model.Crew
 import com.codelabs.unikomradio.databinding.ItemCrewBinding
-import timber.log.Timber
+import com.facebook.drawee.drawable.ProgressBarDrawable
 
 class CrewAdapter : ListAdapter<Crew, CrewAdapter.ViewHolder>(CrewDiffCallback()) {
 
@@ -26,6 +26,7 @@ class CrewAdapter : ListAdapter<Crew, CrewAdapter.ViewHolder>(CrewDiffCallback()
         holder.apply {
             bind(createOnClickListener(), topChart)
             itemView.tag = topChart
+
         }
     }
 
@@ -42,17 +43,19 @@ class CrewAdapter : ListAdapter<Crew, CrewAdapter.ViewHolder>(CrewDiffCallback()
                 crew = item
                 executePendingBindings()
                 crewItemThumbnail.setImageURI(item.userPhoto)
+                crewItemThumbnail.hierarchy.setProgressBarImage(ProgressBarDrawable())
             }
         }
     }
 }
-    private class CrewDiffCallback : DiffUtil.ItemCallback<Crew>() {
 
-        override fun areItemsTheSame(oldItem: Crew, newItem: Crew): Boolean {
-            return false
-        }
+private class CrewDiffCallback : DiffUtil.ItemCallback<Crew>() {
 
-        override fun areContentsTheSame(oldItem: Crew, newItem: Crew): Boolean {
-            return oldItem == newItem
-        }
+    override fun areItemsTheSame(oldItem: Crew, newItem: Crew): Boolean {
+        return false
     }
+
+    override fun areContentsTheSame(oldItem: Crew, newItem: Crew): Boolean {
+        return oldItem == newItem
+    }
+}

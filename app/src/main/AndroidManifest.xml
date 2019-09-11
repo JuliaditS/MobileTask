@@ -19,7 +19,8 @@
         <activity android:name=".mvvm.news.newsdetail.NewsDetailActivity" />
         <activity android:name=".mvvm.programs.programdetail.ProgramDetailActivity" />
         <activity android:name=".mvvm.GardenActivity" />
-        <activity android:name=".mvvm.main.MainActivity">
+        <activity android:name=".mvvm.main.MainActivity"/>
+        <activity android:name=".mvvm.SplashScreen" android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

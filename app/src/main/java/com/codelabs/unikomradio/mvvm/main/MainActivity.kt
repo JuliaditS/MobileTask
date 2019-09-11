@@ -28,14 +28,12 @@ import com.codelabs.unikomradio.utilities.helper.ThemeMode
 import com.codelabs.unikomradio.utilities.services.ExoPlayerServices
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import timber.log.Timber
 
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main),
     MainUserActionListener,
     OnSeeAllClickedListener, StateListener {
 
-
-    private lateinit var exoPlayer: SimpleExoPlayer
+    private var isLightMode = false
     var playingState: Boolean? = false
 
     private val viewModel: MainViewModel by viewModels {
@@ -59,7 +57,9 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
             mOnNavigationItemSelectedListener
         )
 
-        if (!Preferences(this).isLightMode()) {
+        isLightMode = Preferences(this).isLightMode()
+
+        if (!isLightMode) {
             mBinding.mainBottomnavigationview.itemBackgroundResource = R.color.colorSecondary
             mBinding.mainBottomnavigationview.background =
                 ColorDrawable(getColor(R.color.colorAccent))
@@ -71,7 +71,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
 
     override fun onStart() {
         super.onStart()
-        Timber.i("ANJING : ${Preferences(this).isPlaying()}")
         if (Preferences(this).isPlaying()) {
             viewModel.playStreaming()
         }
@@ -131,8 +130,14 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
             isPlaying.observe(this@MainActivity, Observer<Boolean> {
                 if (it) {
                     mBinding.mainPlayradioPlayButton.setImageResource(R.mipmap.pause)
+                    if (isLightMode) {
+                        mBinding.mainPlayradioPlayButton.setImageResource(R.mipmap.pause_light)
+                    }
                 } else {
                     mBinding.mainPlayradioPlayButton.setImageResource(R.mipmap.playbutton)
+                    if (isLightMode) {
+                        mBinding.mainPlayradioPlayButton.setImageResource(R.drawable.icon_play_light)
+                    }
                 }
             })
         }
@@ -142,7 +147,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
     override fun setContentData() {
         if (Preferences(this).isLightMode()) {
             mBinding.mainPlayradioLayout.setBackgroundColor(getColor(android.R.color.white))
-            mBinding.mainPlayradioPlayButton.setImageResource(R.mipmap.playbuttonlight)
             mBinding.mainPlayradioDescription.setTextColor(getColor(R.color.colorAccentLight))
             mBinding.mainPlayradioTitle.setTextColor(getColor(android.R.color.black))
             mBinding.mainBottomnavigationview.style(R.style.BottomNavigationView)

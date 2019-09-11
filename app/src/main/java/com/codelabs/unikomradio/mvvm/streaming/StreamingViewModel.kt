@@ -30,9 +30,6 @@ class StreamingViewModel : BaseViewModel() {
         get() = _programs
 
 
-    /**
-     * Cancel all coroutines when the ViewModel is cleared.
-     */
     @ExperimentalCoroutinesApi
     override fun onCleared() {
         super.onCleared()

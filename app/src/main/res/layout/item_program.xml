@@ -32,12 +32,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/image_height_thumbnail"
                 android:elevation="3dp"
-                android:src="@drawable/thumbnailradio"
-                app:actualImageResource="@drawable/thumbnailradio"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:placeholderImage="@drawable/thumbnailradio"
                 android:background="@drawable/background_radius_12dp"
                 app:roundedCornerRadius="12dp" />
 

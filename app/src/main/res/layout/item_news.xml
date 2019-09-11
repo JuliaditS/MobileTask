@@ -26,7 +26,6 @@
                 android:layout_marginEnd="@dimen/very_small_margin"
                 android:background="@drawable/background_radius_12dp"
                 android:elevation="3dp"
-                app:actualImageResource="@drawable/news_placeholder"
                 app:layout_constraintEnd_toEndOf="@id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

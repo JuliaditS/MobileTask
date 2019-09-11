@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -9,47 +9,44 @@
         <import type="android.os.Build" />
 
         <variable
-                name="clickListener"
-                type="android.view.View.OnClickListener" />
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
 
         <variable
-                name="crew"
-                type="com.codelabs.unikomradio.data.model.Crew" />
+            name="crew"
+            type="com.codelabs.unikomradio.data.model.Crew" />
     </data>
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin"
-            android:orientation="vertical"
-            android:paddingStart="@dimen/smallest_margin"
-            android:paddingEnd="@dimen/smallest_margin">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/smallest_margin"
+        android:paddingEnd="@dimen/smallest_margin">
 
         <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/crew_item_thumbnail"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/image_crew_height_thumbnail"
-                android:background="@drawable/background_radius_12dp"
-                android:elevation="3dp"
-                android:src="@mipmap/crew_placeholder"
-                app:placeholderImage="@mipmap/crew_placeholder"
-                app:roundedCornerRadius="12dp"
-
-                />
+            android:id="@+id/crew_item_thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/image_crew_height_thumbnail"
+            android:background="@drawable/background_radius_12dp"
+            android:elevation="3dp"
+            app:roundedCornerRadius="12dp"
+            />
 
         <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/very_small_margin"
-                android:gravity="center"
-                android:text="@{crew.name}"
-                android:textStyle="bold" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/very_small_margin"
+            android:gravity="center"
+            android:text="@{crew.name}"
+            android:textStyle="bold" />
 
         <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@{crew.role}" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{crew.role}" />
 
     </LinearLayout>
 

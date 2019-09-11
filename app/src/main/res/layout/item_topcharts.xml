@@ -1,73 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
 
-        <import type="android.text.Html"/>
+        <import type="android.text.Html" />
 
-        <import type="android.os.Build"/>
+        <import type="android.os.Build" />
 
         <variable
-                name="clickListener"
-                type="android.view.View.OnClickListener"/>
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+
         <variable
-                name="topchart"
-                type="com.codelabs.unikomradio.data.model.TopChart"/>
+            name="topchart"
+            type="com.codelabs.unikomradio.data.model.TopChart" />
     </data>
+
     <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
 
-    >
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/standard_margin"
-                android:paddingEnd="@dimen/standard_margin"
-                android:padding="4dp"
         >
 
-            <TextView
-                    android:id="@+id/item_topchart_thumbnail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginStart="0dp"
-                    android:textSize="@dimen/font_size_standard"
-                    android:text="@{Integer.toString(topchart.currentRank)}"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:paddingStart="@dimen/standard_margin"
+            android:paddingEnd="@dimen/standard_margin">
 
             <TextView
-                    android:id="@+id/item_topchart_song_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/small_margin"
-                    android:layout_marginTop="@dimen/smallest_margin"
-                    android:text="@{topchart.song}"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/font_size_standard"
-                    app:layout_constraintStart_toEndOf="@id/item_topchart_thumbnail"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                android:id="@+id/item_topchart_thumbnail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginBottom="8dp"
+                android:text="@{Integer.toString(topchart.currentRank)}"
+                android:textSize="@dimen/font_size_standard"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                    android:id="@+id/item_topchart_song_singer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/small_margin"
-                    android:text="@{topchart.singer}"
-                    android:textSize="@dimen/font_size_standard"
-                    app:layout_constraintStart_toEndOf="@+id/item_topchart_thumbnail"
-                    app:layout_constraintTop_toBottomOf="@+id/item_topchart_song_title"/>
+                android:id="@+id/item_topchart_song_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_margin"
+                android:layout_marginTop="@dimen/smallest_margin"
+                android:text="@{topchart.song}"
+                android:textSize="@dimen/font_size_standard"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/item_topchart_thumbnail"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/item_topchart_song_singer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_margin"
+                android:text="@{topchart.singer}"
+                android:textSize="@dimen/font_size_standard"
+                app:layout_constraintStart_toEndOf="@+id/item_topchart_thumbnail"
+                app:layout_constraintTop_toBottomOf="@+id/item_topchart_song_title" />
 
             <ImageView
-                    android:id="@+id/item_topchart_position_change"
-                    android:layout_width="@dimen/icon_width"
-                    android:layout_height="@dimen/icon_height"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                android:id="@+id/item_topchart_position_change"
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_height"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
