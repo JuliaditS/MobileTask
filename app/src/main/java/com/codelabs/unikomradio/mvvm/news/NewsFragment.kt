@@ -13,13 +13,12 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codelabs.unikomradio.MyApplication
+import com.codelabs.unikomradio.NoInternet
 import com.codelabs.unikomradio.R
 import com.codelabs.unikomradio.databinding.NewsBinding
 import com.codelabs.unikomradio.utilities.base.BaseFragment
-import com.codelabs.unikomradio.utilities.helper.Event
 import com.codelabs.unikomradio.utilities.services.MediaPlayerServices
 import kotlinx.android.synthetic.main.no_result.view.*
-import timber.log.Timber
 
 class NewsFragment : BaseFragment<NewsViewModel, NewsBinding>(R.layout.news),
     NewsUserActionListener {
@@ -73,7 +72,8 @@ class NewsFragment : BaseFragment<NewsViewModel, NewsBinding>(R.layout.news),
                 if (it.isNotEmpty()) {
                     adapter.submitList(it)
                 } else {
-                    viewModel.showMessage.value = Event("news not found")
+//                    viewModel.showMessage.value = Event("news not found")
+                    startActivity(Intent(activity, NoInternet::class.java))
                 }
             })
         }

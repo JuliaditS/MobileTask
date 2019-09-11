@@ -12,6 +12,7 @@ import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.airbnb.paris.extensions.style
+import com.codelabs.unikomradio.NoInternet
 import com.codelabs.unikomradio.R
 import com.codelabs.unikomradio.databinding.ActivityMainBinding
 import com.codelabs.unikomradio.mvvm.StateListener
@@ -140,6 +141,12 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
                     }
                 }
             })
+
+            onError.observe(this@MainActivity, Observer<Boolean> {
+                if (it){
+                    startActivity(Intent(this@MainActivity, NoInternet::class.java))
+                }
+            })
         }
     }
 
@@ -173,7 +180,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
 
     override fun onPlayRadio() {
         val intent = Intent(this, ExoPlayerServices::class.java)
-        val ExoPlayer = com.codelabs.unikomradio.mvvm.ExoPlayer(this).exoPlayer
         playingState = Preferences(this).isPlaying()
 
         if (!isMyServiceRunning(ExoPlayerServices::class.java)) {
@@ -248,9 +254,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
         this.finishAffinity()
     }
 
-    fun isPlayingState(): Boolean? {
-        return playingState
-    }
 
     override fun getTheme(): Resources.Theme {
         val theme = super.getTheme()

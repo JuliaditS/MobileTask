@@ -15,10 +15,16 @@ class MainViewModel internal constructor() : BaseViewModel() {
     val db = FirebaseFirestore.getInstance()
     private val docRef = db.collection(ON_RADIO_PLAYING).document(onradioplayingdocument)
 
+    private val _onError = MutableLiveData<Boolean>()
+    val onError: LiveData<Boolean>
+        get() = _onError
+
     init {
+        _onError.value = false
         docRef.addSnapshotListener { snapshot, exception ->
             if (exception != null) {
                 exception.printStackTrace()
+                _onError.value = true
                 return@addSnapshotListener
             }
 

@@ -1,15 +1,13 @@
 package com.codelabs.unikomradio.mvvm.streaming
 
 import android.app.ActivityManager
-import android.content.ComponentName
 import android.content.Context.ACTIVITY_SERVICE
 import android.content.Intent
-import android.content.ServiceConnection
 import android.content.res.ColorStateList
 import android.media.MediaPlayer
-import android.os.IBinder
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.codelabs.unikomradio.NoInternet
 import com.codelabs.unikomradio.R
 import com.codelabs.unikomradio.data.model.Program
 import com.codelabs.unikomradio.databinding.StreamingBinding
@@ -17,7 +15,6 @@ import com.codelabs.unikomradio.mvvm.StateListener
 import com.codelabs.unikomradio.mvvm.programs.specifyToday
 import com.codelabs.unikomradio.mvvm.streaming.streaming_topcharts.StreamingTopchartsActivity
 import com.codelabs.unikomradio.utilities.base.BaseFragment
-import com.codelabs.unikomradio.utilities.helper.Event
 import com.codelabs.unikomradio.utilities.helper.Preferences
 import com.codelabs.unikomradio.utilities.services.ExoPlayerServices
 import com.google.android.exoplayer2.SimpleExoPlayer
@@ -92,7 +89,8 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
                         }
                     }
                 } else {
-                    viewModel.showMessage.value = Event("program not found")
+//                    viewModel.showMessage.value = Event("program not found")
+                    startActivity(Intent(activity, NoInternet::class.java))
                 }
             })
 

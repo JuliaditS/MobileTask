@@ -6,7 +6,6 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.view.Menu
 import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -14,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codelabs.unikomradio.MyApplication
+import com.codelabs.unikomradio.NoInternet
 import com.codelabs.unikomradio.R
 import com.codelabs.unikomradio.data.model.Program
 import com.codelabs.unikomradio.databinding.ProgramBinding
@@ -137,7 +137,8 @@ class ProgramFragment : BaseFragment<ProgramViewModel, ProgramBinding>(R.layout.
                 if (it.isNotEmpty() && !isSearching) {
                     programTodayAdapter.submitList(programTodayList)
                 } else {
-                    viewModel.showMessage.value = Event("program not found")
+//                    viewModel.showMessage.value = Event("program not found")
+                    startActivity(Intent(activity, NoInternet::class.java))
                 }
             })
         }
@@ -150,7 +151,8 @@ class ProgramFragment : BaseFragment<ProgramViewModel, ProgramBinding>(R.layout.
                         resultAdapter.submitList(it)
                         false
                     } else {
-                        mBinding.noResultLayout.noresult_label.text = resources.getString(R.string.no_result,viewModel.noresultsearchtext)
+                        mBinding.noResultLayout.noresult_label.text =
+                            resources.getString(R.string.no_result, viewModel.noresultsearchtext)
                         true
                     }
                     viewOnSearching(true)
@@ -254,7 +256,6 @@ class ProgramFragment : BaseFragment<ProgramViewModel, ProgramBinding>(R.layout.
 
         super.onCreateOptionsMenu(menu, inflater)
     }
-
 
 
 }

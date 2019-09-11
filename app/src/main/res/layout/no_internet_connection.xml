@@ -17,8 +17,57 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        app:layout_constraintTop_toBottomOf="@id/no_internet_connection_thumbnail"
+        android:id="@+id/no_internet_connection_label"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Oh Sucks!"
+        android:textSize="@dimen/font_size_title"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/no_internet_connection_thumbnail" />
+
+    <TextView
+        android:id="@+id/no_internet_connection_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Slow or no internet connection."
+        android:textSize="@dimen/font_size_standard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/no_internet_connection_label" />
+
+    <TextView
+        android:id="@+id/no_internet_connection_suggestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Please check your internet settings"
+        android:textSize="@dimen/font_size_standard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/no_internet_connection_description" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/icon_livestreaming_light"
+        android:drawablePadding="@dimen/very_small_margin"
+        android:gravity="center"
+        android:padding="@dimen/very_small_margin"
+        android:text="No connection internet"
+        android:textSize="@dimen/font_size_standard"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

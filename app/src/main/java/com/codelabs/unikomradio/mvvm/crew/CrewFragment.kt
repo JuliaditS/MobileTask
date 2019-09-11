@@ -5,19 +5,18 @@ import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.codelabs.unikomradio.MyApplication
-
+import com.codelabs.unikomradio.NoInternet
 import com.codelabs.unikomradio.R
 import com.codelabs.unikomradio.databinding.CrewBinding
 import com.codelabs.unikomradio.utilities.base.BaseFragment
-import com.codelabs.unikomradio.utilities.helper.Event
 import com.codelabs.unikomradio.utilities.services.MediaPlayerServices
 
-class CrewFragment : BaseFragment<CrewViewModel,CrewBinding>(R.layout.crew),CrewUserActionListener {
+class CrewFragment : BaseFragment<CrewViewModel, CrewBinding>(R.layout.crew),
+    CrewUserActionListener {
 
     private lateinit var adapter: CrewAdapter
     private var mediaPlayer: MediaPlayer? = null
@@ -36,10 +35,11 @@ class CrewFragment : BaseFragment<CrewViewModel,CrewBinding>(R.layout.crew),Crew
 
     override fun setContentData() {
         adapter = CrewAdapter()
-        mBinding.crewRecyclerview.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
+        mBinding.crewRecyclerview.layoutManager =
+            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         mBinding.crewRecyclerview.adapter = adapter
 
-        if (mediaPlayer?.isPlaying != null){
+        if (mediaPlayer?.isPlaying != null) {
             viewModel.stateStreaming(mediaPlayer!!.isPlaying)
         }
     }
@@ -51,23 +51,14 @@ class CrewFragment : BaseFragment<CrewViewModel,CrewBinding>(R.layout.crew),Crew
     override fun onCreateObserver(viewModel: CrewViewModel) {
         viewModel.apply {
             crews.observe(this@CrewFragment, Observer {
-                if (it.isNotEmpty()){
+                if (it.isNotEmpty()) {
                     adapter.submitList(it)
                 } else {
-                    viewModel.showMessage.value = Event("crew not found")
+//                    viewModel.showMessage.value = Event("crew not found")
+                    startActivity(Intent(activity, NoInternet::class.java))
                 }
             })
         }
-
-//        viewModel.apply {
-//            isPlaying.observe(viewLifecycleOwner, Observer<Boolean> {
-//                if (it) {
-//                    mBinding.crewPlayradioPlayButton.setImageResource(R.mipmap.pause)
-//                } else {
-//                    mBinding.crewPlayradioPlayButton.setImageResource(R.mipmap.playbutton)
-//                }
-//            })
-//        }
     }
 
     override fun onPlayRadio() {

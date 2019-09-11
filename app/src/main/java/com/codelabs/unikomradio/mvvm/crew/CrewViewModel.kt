@@ -22,11 +22,13 @@ class CrewViewModel internal constructor() : BaseViewModel() {
     val isPlaying: LiveData<Boolean>
         get() = _isPlaying
 
+
     init {
         start()
     }
 
     private fun start() {
+
         docRef.addSnapshotListener { snapshot, exception ->
             if (exception != null) {
                 Timber.w("Listen failed.")

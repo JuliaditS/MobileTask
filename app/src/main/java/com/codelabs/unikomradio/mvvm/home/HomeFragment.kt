@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codelabs.unikomradio.MyApplication
+import com.codelabs.unikomradio.NoInternet
 import com.codelabs.unikomradio.R
 import com.codelabs.unikomradio.data.model.Program
 import com.codelabs.unikomradio.databinding.HomeBinding
@@ -147,7 +148,8 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
                 if (it.isNotEmpty()) {
                     bannerAdapter.submitList(it)
                 } else {
-                    viewModel.showMessage.value = Event("banner not found")
+//                    viewModel.showMessage.value = Event("banner not found")
+                    startActivity(Intent(activity, NoInternet::class.java))
                 }
             })
         }
