@@ -5,8 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.codelabs.unikomradio.data.model.Crew
 import com.codelabs.unikomradio.data.model.Program
+import com.codelabs.unikomradio.utilities.ON_RADIO_PLAYING
 import com.codelabs.unikomradio.utilities.PROGRAM
 import com.codelabs.unikomradio.utilities.base.BaseViewModel
+import com.codelabs.unikomradio.utilities.onradioplayingdocument
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
@@ -16,6 +18,8 @@ import timber.log.Timber
 class StreamingViewModel : BaseViewModel() {
     val db = FirebaseFirestore.getInstance()
     val docRef = db.collection(PROGRAM)
+    val docIsPlaying = db.collection(ON_RADIO_PLAYING).document(onradioplayingdocument)
+
 
     private val _isPlaying = MutableLiveData<Boolean>()
     val isPlaying: LiveData<Boolean>
@@ -28,6 +32,10 @@ class StreamingViewModel : BaseViewModel() {
     private val _programs = MutableLiveData<List<Program>>()
     val programs: LiveData<List<Program>>
         get() = _programs
+
+    private val _onError = MutableLiveData<Boolean>()
+    val onError: LiveData<Boolean>
+        get() = _onError
 
 
     @ExperimentalCoroutinesApi
@@ -64,6 +72,22 @@ class StreamingViewModel : BaseViewModel() {
                 Timber.w("Current data null")
             }
         }
+
+        docIsPlaying.addSnapshotListener { snapshot, exception ->
+            if (exception != null) {
+                exception.printStackTrace()
+                _onError.value = true
+                return@addSnapshotListener
+            }
+
+            if (snapshot != null) {
+                _isPlaying.value = snapshot.data?.get("isPlaying").toString().toBoolean()
+            } else {
+                exception?.printStackTrace()
+                Timber.w("Current data null")
+            }
+        }
+
     }
 
 

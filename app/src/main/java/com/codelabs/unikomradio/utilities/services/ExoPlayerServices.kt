@@ -13,13 +13,16 @@ import android.os.IBinder
 import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
+import android.support.v4.media.session.PlaybackStateCompat
 import com.codelabs.unikomradio.BuildConfig
+import com.codelabs.unikomradio.NoInternet
 import com.codelabs.unikomradio.R
+import com.codelabs.unikomradio.data.model.Program
 import com.codelabs.unikomradio.mvvm.ExoPlayer
+import com.codelabs.unikomradio.mvvm.programs.specifyToday
 import com.codelabs.unikomradio.utilities.*
 import com.codelabs.unikomradio.utilities.helper.Preferences
 import com.google.android.exoplayer2.C
-import com.google.android.exoplayer2.PlaybackParameters
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
@@ -41,32 +44,32 @@ class ExoPlayerServices : Service() {
     private lateinit var mediaSessionConnector: MediaSessionConnector
     var state = true
 
+    private var todayProgramName = "unikom radio"
+
     val db = FirebaseFirestore.getInstance()
     private val docRef = db.collection(ON_RADIO_PLAYING).document(onradioplayingdocument)
-
+    private val docProgram = db.collection(PROGRAM)
 
     private fun initStreamingMusic() {
         @C.AudioUsage val usage = Util.getAudioUsageForStreamType(C.STREAM_TYPE_MUSIC)
         @C.AudioContentType val contentType =
             Util.getAudioContentTypeForStreamType(C.STREAM_TYPE_MUSIC)
+
         val audioAttributes =
             com.google.android.exoplayer2.audio.AudioAttributes.Builder().setUsage(usage)
                 .setContentType(contentType)
                 .build()
 
-        val bandwidthMeter = DefaultBandwidthMeter()
-        val extractorsFactory = DefaultExtractorsFactory()
-
         val dateSourceFactory = DefaultDataSourceFactory(
             this,
             Util.getUserAgent(this, packageName),
-            bandwidthMeter as TransferListener
+            DefaultBandwidthMeter() as TransferListener
         )
 
         val mediaSource = ExtractorMediaSource(
             Uri.parse(BuildConfig.BASE_URL_UNIKOM_RADIO_STREAMING),
             dateSourceFactory,
-            extractorsFactory,
+            DefaultExtractorsFactory(),
             Handler(),
             ExtractorMediaSource.EventListener {
                 it.printStackTrace()
@@ -76,40 +79,22 @@ class ExoPlayerServices : Service() {
         exoPlayer = ExoPlayer(this).exoPlayer
         docRef.set(hashMapOf(ISPLAYING to exoPlayer.playWhenReady))
 
-
-//        exoPlayer.addListener(object : Player.EventListener {
-//            override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
-//                docRef.addSnapshotListener { snapshot, exception ->
-//                    if (exception != null) {
-//                        exception.printStackTrace()
-//                        return@addSnapshotListener
-//                    }
-//
-//                    if (snapshot != null) {
-//                        docRef.set(hashMapOf(ISPLAYING to playWhenReady))
-//
-//                    } else {
-//                        exception?.printStackTrace()
-//                        Timber.w("Current data null")
-//                    }
-//                }
-//            }
-//        })
-
         exoPlayer.prepare(mediaSource)
         exoPlayer.audioAttributes = audioAttributes
         exoPlayer.volume = 1f
 
         exoPlayer.addListener(object : Player.EventListener {
-            override fun onPlaybackParametersChanged(playbackParameters: PlaybackParameters?) {
-                super.onPlaybackParametersChanged(playbackParameters)
-                Timber.i("anjingbabi: $playbackParameters")
-            }
-
             override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
                 super.onPlayerStateChanged(playWhenReady, playbackState)
-                Timber.i("anjingkuda: $playWhenReady")
+
                 docRef.set(hashMapOf(ISPLAYING to playWhenReady))
+                if (playbackState == PlaybackStateCompat.STATE_STOPPED) {
+                    docRef.set(hashMapOf(ISPLAYING to false))
+                }
+
+                if (playbackState == PlaybackStateCompat.STATE_ERROR) {
+                    startActivity(Intent(this@ExoPlayerServices, NoInternet::class.java))
+                }
 
             }
         })
@@ -121,7 +106,7 @@ class ExoPlayerServices : Service() {
             PLAYBACK_NOTIFICATION_ID,
             object : PlayerNotificationManager.MediaDescriptionAdapter {
                 override fun getCurrentContentTitle(player: Player): String {
-                    return "Unikom Radio"
+                    return todayProgramName
                 }
 
                 override fun createCurrentContentIntent(player: Player): PendingIntent? {
@@ -177,30 +162,15 @@ class ExoPlayerServices : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        when (intent?.action) {
-            ACTION_INIT -> {
-                Timber.i("EXOSERVICES:  ACTION INIT")
-                initStreamingMusic()
-            }
-            ACTION_PLAY -> {
-                Timber.i("EXOSERVICES:  ACTION PLAY")
-                playRadio()
-            }
-            ACTION_PAUSE -> {
-                Timber.i("EXOSERVICES:  ACTION PAUSE")
-                pauseRadio()
-            }
-            ACTION_MUTE -> {
-                Timber.i("EXOSERVICES:  ACTION MUTE")
-                muteRadio()
-            }
-            ACTION_UNMUTE -> {
-                Timber.i("EXOSERVICES:  ACTION UNMUTE")
-                unMuteRadio()
-            }
+        getProgramToday()
 
+        when (intent?.action) {
+            ACTION_INIT -> initStreamingMusic()
+            ACTION_PLAY -> playRadio()
+            ACTION_PAUSE -> pauseRadio()
+            ACTION_MUTE -> muteRadio()
+            ACTION_UNMUTE -> unMuteRadio()
             else -> {
-                Timber.i("EXOSERVICES:  ACTION ELSE")
                 initStreamingMusic()
             }
         }
@@ -235,6 +205,43 @@ class ExoPlayerServices : Service() {
         exoPlayer.release()
     }
 
+    private fun getProgramToday() {
+        docProgram.addSnapshotListener { snapshot, exception ->
+            if (exception != null) {
+                Timber.w("Listen failed.")
+                exception.printStackTrace()
+                return@addSnapshotListener
+            }
+
+            if (snapshot != null) {
+                for (document in snapshot.documents) {
+                    try {
+                        val program = document.toObject(Program::class.java)
+
+                        if (program != null) {
+                            if (specifyToday.isToday(program.heldDay)) {
+                                todayProgramName = program.title
+                                break
+                            } else {
+                                val dummyDay: String = program.heldDay.replace(" ", "")
+                                val dummyDayString = dummyDay.split("-")
+                                if (specifyToday.isToday(dummyDayString[0], dummyDayString[1])) {
+                                    if ((program.startAt.toDouble() <= specifyToday.getHourSpecify()) && (program.endAt.toDouble() >= specifyToday.getHourSpecify())) {
+                                        todayProgramName = program.title
+                                    }
+                                }
+                            }
+                        }
+                    } catch (e: Exception) {
+                        Timber.i(e.localizedMessage)
+                    }
+                }
+            } else {
+                Timber.w("Current data null")
+            }
+        }
+    }
+
     override fun onBind(p0: Intent?): IBinder? {
         return null
     }
@@ -260,8 +267,8 @@ class ExoPlayerServices : Service() {
         return MediaDescriptionCompat.Builder()
             .setMediaId("21")
             .setIconBitmap(bitmap)
-            .setTitle("unikomradio")
-            .setDescription("unikomradiodescription")
+            .setTitle("Unikom Radio")
+            .setDescription(todayProgramName)
             .setExtras(extras)
             .build()
     }

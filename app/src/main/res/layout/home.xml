@@ -134,7 +134,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/very_small_margin"
                     android:layout_marginTop="@dimen/standard_margin"
-                    android:text="@string/title_new"
+                android:text="@string/title_news"
                     android:textSize="@dimen/font_size_title"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"

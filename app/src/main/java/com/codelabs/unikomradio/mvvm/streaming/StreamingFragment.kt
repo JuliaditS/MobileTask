@@ -4,7 +4,6 @@ import android.app.ActivityManager
 import android.content.Context.ACTIVITY_SERVICE
 import android.content.Intent
 import android.content.res.ColorStateList
-import android.media.MediaPlayer
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.codelabs.unikomradio.NoInternet
@@ -17,22 +16,14 @@ import com.codelabs.unikomradio.mvvm.streaming.streaming_topcharts.StreamingTopc
 import com.codelabs.unikomradio.utilities.base.BaseFragment
 import com.codelabs.unikomradio.utilities.helper.Preferences
 import com.codelabs.unikomradio.utilities.services.ExoPlayerServices
-import com.google.android.exoplayer2.SimpleExoPlayer
 import timber.log.Timber
 
 
 class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.layout.streaming),
     StreamingUserActionListener {
 
-
     private var isLightMode = false
-    private var mediaPlayer: MediaPlayer? = null
-    private lateinit var exoPlayer: SimpleExoPlayer
-
-    private lateinit var mExoService: ExoPlayerServices
-    private var mBound: Boolean = false
     private lateinit var stateListener: StateListener
-
 
     private val viewModel: StreamingViewModel by viewModels {
         StreamingViewModelFactory()
@@ -59,6 +50,12 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
                     } else {
                         mBinding.streamingPlayStreaming.setImageResource(R.mipmap.playbutton)
                     }
+                }
+            })
+
+            onError.observe(viewLifecycleOwner, Observer<Boolean> {
+                if (it) {
+                    startActivity(Intent(context, NoInternet::class.java))
                 }
             })
 
@@ -89,7 +86,6 @@ class StreamingFragment : BaseFragment<StreamingViewModel, StreamingBinding>(R.l
                         }
                     }
                 } else {
-//                    viewModel.showMessage.value = Event("program not found")
                     startActivity(Intent(activity, NoInternet::class.java))
                 }
             })

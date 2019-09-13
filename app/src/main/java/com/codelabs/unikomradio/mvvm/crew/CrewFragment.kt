@@ -54,7 +54,6 @@ class CrewFragment : BaseFragment<CrewViewModel, CrewBinding>(R.layout.crew),
                 if (it.isNotEmpty()) {
                     adapter.submitList(it)
                 } else {
-//                    viewModel.showMessage.value = Event("crew not found")
                     startActivity(Intent(activity, NoInternet::class.java))
                 }
             })

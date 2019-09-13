@@ -15,11 +15,16 @@ class MainViewModel internal constructor() : BaseViewModel() {
     val db = FirebaseFirestore.getInstance()
     private val docRef = db.collection(ON_RADIO_PLAYING).document(onradioplayingdocument)
 
+    private val _isPlaying = MutableLiveData<Boolean>()
+    val isPlaying: LiveData<Boolean>
+        get() = _isPlaying
+
     private val _onError = MutableLiveData<Boolean>()
     val onError: LiveData<Boolean>
         get() = _onError
 
     init {
+        _isPlaying.value = false
         _onError.value = false
         docRef.addSnapshotListener { snapshot, exception ->
             if (exception != null) {
@@ -37,9 +42,6 @@ class MainViewModel internal constructor() : BaseViewModel() {
         }
     }
 
-    private val _isPlaying = MutableLiveData<Boolean>()
-    val isPlaying: LiveData<Boolean>
-        get() = _isPlaying
 
     fun playStreaming() {
         docRef.set(hashMapOf(ISPLAYING to true))
@@ -53,9 +55,5 @@ class MainViewModel internal constructor() : BaseViewModel() {
 
     fun stateStreaming(state: Boolean) {
         _isPlaying.value = state
-    }
-
-    init {
-        _isPlaying.value = false
     }
 }

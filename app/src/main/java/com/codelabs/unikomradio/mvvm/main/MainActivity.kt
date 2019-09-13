@@ -12,7 +12,6 @@ import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.airbnb.paris.extensions.style
-import com.codelabs.unikomradio.NoInternet
 import com.codelabs.unikomradio.R
 import com.codelabs.unikomradio.databinding.ActivityMainBinding
 import com.codelabs.unikomradio.mvvm.StateListener
@@ -27,7 +26,6 @@ import com.codelabs.unikomradio.utilities.helper.OnSeeAllClickedListener
 import com.codelabs.unikomradio.utilities.helper.Preferences
 import com.codelabs.unikomradio.utilities.helper.ThemeMode
 import com.codelabs.unikomradio.utilities.services.ExoPlayerServices
-import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main),
@@ -45,14 +43,15 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ThemeMode().setThemeModeOn(this)
+
         mParentVM = viewModel
         mBinding.mViewModel = viewModel
         mBinding.mListener = this
         supportActionBar?.elevation = 0f
-        //init tampilan awal
+
+        //For initialize firstload
         loadFragment(HomeFragment())
-        supportActionBar?.title = "Discover Music"
-//        exoPlayer = (this.application as MyApplication).exoPlayer
+        supportActionBar?.title = getString(R.string.title_home)
 
         mBinding.mainBottomnavigationview.setOnNavigationItemSelectedListener(
             mOnNavigationItemSelectedListener
@@ -70,44 +69,36 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        if (Preferences(this).isPlaying()) {
-            viewModel.playStreaming()
-        }
-    }
-
-
     private val mOnNavigationItemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
             var fragment: Fragment? = null
             when (item.itemId) {
                 R.id.main_home_item -> {
                     fragment = HomeFragment()
-                    supportActionBar?.title = "Discover Music"
+                    supportActionBar?.title = getString(R.string.title_home)
                     mBinding.mainPlayradioLayout.visibility = View.VISIBLE
                 }
 
                 R.id.main_programs_item -> {
                     fragment = ProgramFragment()
-                    supportActionBar?.title = "Programs Music"
+                    supportActionBar?.title = getString(R.string.title_program)
                     mBinding.mainPlayradioLayout.visibility = View.VISIBLE
                 }
 
                 R.id.main_streaming_play_item -> {
                     fragment = StreamingFragment()
-                    supportActionBar?.title = "Live Streaming Radio"
+                    supportActionBar?.title = getString(R.string.title_radio)
                     mBinding.mainPlayradioLayout.visibility = View.GONE
                 }
 
                 R.id.main_crew_item -> {
                     fragment = CrewFragment()
-                    supportActionBar?.title = "On Air Tropps"
+                    supportActionBar?.title = getString(R.string.title_crew)
                     mBinding.mainPlayradioLayout.visibility = View.VISIBLE
                 }
 
                 R.id.main_news_item -> {
-                    supportActionBar?.title = "News"
+                    supportActionBar?.title = getString(R.string.title_news)
                     fragment = NewsFragment()
                     mBinding.mainPlayradioLayout.visibility = View.VISIBLE
                 }
@@ -141,12 +132,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
                     }
                 }
             })
-
-            onError.observe(this@MainActivity, Observer<Boolean> {
-                if (it){
-                    startActivity(Intent(this@MainActivity, NoInternet::class.java))
-                }
-            })
         }
     }
 
@@ -173,8 +158,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
             mBinding.mainPlayradioLayout.background =
                 ColorDrawable(getColor(R.color.colorSecondary))
         }
-
-
     }
 
 
@@ -211,7 +194,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
     override fun isPlayingRadio(): Boolean? {
         return playingState
     }
-
 
     @Suppress("DEPRECATION")
     private fun isMyServiceRunning(serviceClass: Class<*>): Boolean {
@@ -253,7 +235,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
         super.onBackPressed()
         this.finishAffinity()
     }
-
 
     override fun getTheme(): Resources.Theme {
         val theme = super.getTheme()
