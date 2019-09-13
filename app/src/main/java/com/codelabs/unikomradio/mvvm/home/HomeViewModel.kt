@@ -116,14 +116,8 @@ class HomeViewModel internal constructor() : BaseViewModel() {
 
             if (snapshot != null) {
                 val mutableList = mutableListOf<TopChart>()
-
-                var i=0
                 for (document in snapshot.documents) {
-                    if (i>3){
-                        break
-                    }
                     document.toObject(TopChart::class.java)?.let { mutableList.add(it) }
-                    i++
                 }
                 _topcharts.value = mutableList
             } else {

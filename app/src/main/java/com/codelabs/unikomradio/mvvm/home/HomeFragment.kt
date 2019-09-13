@@ -5,7 +5,6 @@ import android.media.MediaPlayer
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -22,7 +21,6 @@ import com.codelabs.unikomradio.mvvm.programs.specifyToday
 import com.codelabs.unikomradio.mvvm.settings.SettingsActivity
 import com.codelabs.unikomradio.mvvm.streaming.streaming_topcharts.StreamingTopchartsAdapter
 import com.codelabs.unikomradio.utilities.base.BaseFragment
-import com.codelabs.unikomradio.utilities.helper.Event
 import com.codelabs.unikomradio.utilities.helper.OnSeeAllClickedListener
 import com.codelabs.unikomradio.utilities.helper.Preferences
 import com.codelabs.unikomradio.utilities.helper.ThemeMode
@@ -148,7 +146,6 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
                 if (it.isNotEmpty()) {
                     bannerAdapter.submitList(it)
                 } else {
-//                    viewModel.showMessage.value = Event("banner not found")
                     startActivity(Intent(activity, NoInternet::class.java))
                 }
             })
@@ -180,7 +177,7 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
                 if (it.isNotEmpty()) {
                     programAdapter.submitList(programTodayList)
                 } else {
-                    viewModel.showMessage.value = Event("program not found")
+                    startActivity(Intent(activity, NoInternet::class.java))
                 }
             })
         }
@@ -188,8 +185,13 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
         viewModel.apply {
             topcharts.observe(this@HomeFragment, Observer {
                 if (it.isNotEmpty()) {
-                    topChartAdapter.submitList(it)
+                    topChartAdapter.submitList(
+                        it.sortedBy { topChart -> topChart.currentRank }.take(
+                            3
+                        )
+                    )
                 } else {
+                    startActivity(Intent(activity, NoInternet::class.java))
                 }
             })
         }
@@ -199,7 +201,7 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
                 if (it.isNotEmpty()) {
                     crewAdapter.submitList(it)
                 } else {
-                    viewModel.showMessage.value = Event("crew not found")
+                    startActivity(Intent(activity, NoInternet::class.java))
                 }
             })
         }
@@ -209,7 +211,8 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
                 if (it.isNotEmpty()) {
                     newsAdapter.submitList(it)
                 } else {
-                    viewModel.showMessage.value = Event("news not found")
+                    startActivity(Intent(activity, NoInternet::class.java))
+
                 }
             })
         }

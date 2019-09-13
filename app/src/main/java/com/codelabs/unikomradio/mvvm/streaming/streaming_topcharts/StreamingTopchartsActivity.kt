@@ -14,8 +14,7 @@ import com.codelabs.unikomradio.utilities.helper.Preferences
 
 class StreamingTopchartsActivity :
     BaseActivity<StreamingTopchartsViewModel, StreamingTopchartsBinding>(R.layout.streaming_topcharts),
-    StreamingTopchartsUserActionListener
-{
+    StreamingTopchartsUserActionListener {
 
     private lateinit var adapter: StreamingTopchartsAdapter
 
@@ -37,8 +36,8 @@ class StreamingTopchartsActivity :
     override fun onCreateObserver(viewModel: StreamingTopchartsViewModel) {
         viewModel.apply {
             topcharts.observe(this@StreamingTopchartsActivity, Observer {
-                if (it.isNotEmpty()){
-                    adapter.submitList(it)
+                if (it.isNotEmpty()) {
+                    adapter.submitList(it.sortedBy { topChart -> topChart.currentRank })
                 } else {
                     viewModel.showMessage.value = Event("Topcharts not found")
                 }
@@ -60,7 +59,7 @@ class StreamingTopchartsActivity :
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home){
+        if (item.itemId == android.R.id.home) {
             super.onBackPressed()
         }
         return super.onOptionsItemSelected(item)
