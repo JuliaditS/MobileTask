@@ -42,8 +42,8 @@ class CrewAdapter : ListAdapter<Crew, CrewAdapter.ViewHolder>(CrewDiffCallback()
             binding.apply {
                 crew = item
                 executePendingBindings()
-                crewItemThumbnail.setImageURI(item.userPhoto)
                 crewItemThumbnail.hierarchy.setProgressBarImage(ProgressBarDrawable())
+                crewItemThumbnail.setImageURI(item.userPhoto)
             }
         }
     }

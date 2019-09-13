@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.codelabs.unikomradio.data.model.Banner
 import com.codelabs.unikomradio.databinding.ItemBannerBinding
-import timber.log.Timber
+import com.facebook.drawee.drawable.ProgressBarDrawable
 
 class BannerAdapter : ListAdapter<Banner, BannerAdapter.ViewHolder>(BannerDiffCallback()) {
 
@@ -43,13 +43,12 @@ class BannerAdapter : ListAdapter<Banner, BannerAdapter.ViewHolder>(BannerDiffCa
         private val binding: ItemBannerBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-
         fun bind(item: Banner) {
-
             binding.apply {
                 banner = item
                 executePendingBindings()
-                binding.programBannerThumbnail.setImageURI(item.imageUrl)
+                programBannerThumbnail.hierarchy.setProgressBarImage(ProgressBarDrawable())
+                programBannerThumbnail.setImageURI(item.imageUrl)
             }
 
         }

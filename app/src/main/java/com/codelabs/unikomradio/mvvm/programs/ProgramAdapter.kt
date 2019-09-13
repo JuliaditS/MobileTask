@@ -11,7 +11,7 @@ import com.codelabs.unikomradio.data.model.Program
 import com.codelabs.unikomradio.databinding.ItemProgramBinding
 import com.codelabs.unikomradio.mvvm.programs.programdetail.ProgramDetailActivity
 import com.codelabs.unikomradio.utilities.INTENT_PARCELABLE
-import timber.log.Timber
+import com.facebook.drawee.drawable.ProgressBarDrawable
 
 class ProgramAdapter : ListAdapter<Program, ProgramAdapter.ViewHolder>(ProgramDiffCallback()) {
 
@@ -48,6 +48,9 @@ class ProgramAdapter : ListAdapter<Program, ProgramAdapter.ViewHolder>(ProgramDi
                     intent.putExtra(INTENT_PARCELABLE, program)
                     context.startActivity(intent)
                 }
+                programItemThumbnail.hierarchy.setProgressBarImage(
+                    ProgressBarDrawable()
+                )
                 programItemThumbnail.setImageURI(item.imageUrl)
             }
 

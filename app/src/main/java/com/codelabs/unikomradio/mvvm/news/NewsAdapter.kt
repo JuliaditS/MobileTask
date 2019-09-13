@@ -13,7 +13,7 @@ import com.codelabs.unikomradio.data.model.News
 import com.codelabs.unikomradio.databinding.ItemNewsBinding
 import com.codelabs.unikomradio.mvvm.news.newsdetail.NewsDetailActivity
 import com.codelabs.unikomradio.utilities.INTENT_PARCELABLE
-import timber.log.Timber
+import com.facebook.drawee.drawable.ProgressBarDrawable
 
 class NewsAdapter : ListAdapter<News, NewsAdapter.ViewHolder>(NewsDiffCallback()) {
     private lateinit var context: Context
@@ -54,7 +54,11 @@ class NewsAdapter : ListAdapter<News, NewsAdapter.ViewHolder>(NewsDiffCallback()
                     intent.putExtra(INTENT_PARCELABLE, news)
                     context.startActivity(intent)
                 }
-                binding.newsItemThumbnail.setImageURI(item.imageUrl)
+                newsItemThumbnail.hierarchy.setProgressBarImage(
+                    ProgressBarDrawable()
+                )
+
+                newsItemThumbnail.setImageURI(item.imageUrl)
             }
 
         }

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.codelabs.unikomradio.data.model.Crew
 import com.codelabs.unikomradio.databinding.ItemHomeCrewBinding
+import com.facebook.drawee.drawable.ProgressBarDrawable
 
 class CrewHomeAdapter : ListAdapter<Crew, CrewHomeAdapter.ViewHolder>(CrewDiffCallback()) {
     private lateinit var context: Context
@@ -50,6 +51,9 @@ class CrewHomeAdapter : ListAdapter<Crew, CrewHomeAdapter.ViewHolder>(CrewDiffCa
             binding.apply {
                 crew = item
                 executePendingBindings()
+                crewItemThumbnail.hierarchy.setProgressBarImage(
+                    ProgressBarDrawable()
+                )
                 crewItemThumbnail.setImageURI(item.userPhoto)
             }
         }
