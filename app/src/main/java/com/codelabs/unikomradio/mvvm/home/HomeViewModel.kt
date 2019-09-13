@@ -83,9 +83,6 @@ class HomeViewModel internal constructor() : BaseViewModel() {
             if (snapshot != null) {
                 Timber.w("Current data: ${snapshot.documents}")
                 val mutableList = mutableListOf<Program>()
-                val announcerList = mutableListOf<Crew>()
-
-                val announcer: HashMap<String, String> = HashMap<String, String>()
 
                 for ((i, document) in snapshot.documents.withIndex()) {
                     document.toObject(Program::class.java)?.let { mutableList.add(it) }

@@ -19,6 +19,7 @@ import com.codelabs.unikomradio.mvvm.crew.CrewFragment
 import com.codelabs.unikomradio.mvvm.home.HomeFragment
 import com.codelabs.unikomradio.mvvm.news.NewsFragment
 import com.codelabs.unikomradio.mvvm.programs.ProgramFragment
+import com.codelabs.unikomradio.mvvm.programs.specifyToday
 import com.codelabs.unikomradio.mvvm.streaming.StreamingFragment
 import com.codelabs.unikomradio.mvvm.streaming.streaming_topcharts.StreamingTopchartsActivity
 import com.codelabs.unikomradio.utilities.base.BaseActivity
@@ -132,7 +133,24 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
                     }
                 }
             })
+
+            todayProgram.observe(this@MainActivity, Observer {
+                if (it != null) {
+                    if (specifyToday.isToday(it.heldDay)) {
+                        mBinding.mainPlayradioPlayImageThumbnail.setImageURI(it.imageUrl)
+                    } else {
+                        val dummyDay: String = it.heldDay.replace(" ", "")
+                        val dummyDayString = dummyDay.split("-")
+                        if (specifyToday.isToday(dummyDayString[0], dummyDayString[1])) {
+                            if ((it.startAt.toDouble() <= specifyToday.getHourSpecify()) && (it.endAt.toDouble() >= specifyToday.getHourSpecify())) {
+                                mBinding.mainPlayradioPlayImageThumbnail.setImageURI(it.imageUrl)
+                            }
+                        }
+                    }
+                }
+            })
         }
+
     }
 
     @SuppressLint("ResourceType")

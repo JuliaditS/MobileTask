@@ -30,12 +30,14 @@ import com.codelabs.unikomradio.utilities.helper.recyclerviewhelper.itemdecorati
 import com.codelabs.unikomradio.utilities.helper.recyclerviewhelper.snaphelper.SnapHelper
 
 
-class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), HomeUserActionListener {
+class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home),
+    HomeUserActionListener {
     private lateinit var bannerAdapter: BannerAdapter
     private lateinit var programAdapter: ProgramTodayAdapter
     private lateinit var topChartAdapter: StreamingTopchartsAdapter
     private lateinit var crewAdapter: CrewHomeAdapter
     private lateinit var newsAdapter: NewsAdapter
+    private lateinit var todayProgramImageUrl: String
 
     private lateinit var onSeeAllClickedListener: OnSeeAllClickedListener
 
@@ -186,9 +188,7 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
             topcharts.observe(this@HomeFragment, Observer {
                 if (it.isNotEmpty()) {
                     topChartAdapter.submitList(
-                        it.sortedBy { topChart -> topChart.currentRank }.take(
-                            3
-                        )
+                        it.sortedBy { topChart -> topChart.currentRank }.take(3)
                     )
                 } else {
                     startActivity(Intent(activity, NoInternet::class.java))
@@ -212,24 +212,25 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home), Ho
                     newsAdapter.submitList(it)
                 } else {
                     startActivity(Intent(activity, NoInternet::class.java))
-
                 }
             })
         }
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        if (Preferences(requireContext()).isLightMode()){
-            inflater.inflate(R.menu.menu_main_light,menu)
+        if (Preferences(requireContext()).isLightMode()) {
+            inflater.inflate(R.menu.menu_main_light, menu)
         } else {
-            inflater.inflate(R.menu.menu_home,menu)
+            inflater.inflate(R.menu.menu_home, menu)
         }
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.item_menu_settings){
-            startActivity(Intent(requireContext(),SettingsActivity::class.java))
+        if (item.itemId == R.id.item_menu_settings) {
+            startActivity(Intent(requireContext(), SettingsActivity::class.java))
         }
         return super.onOptionsItemSelected(item)
     }
