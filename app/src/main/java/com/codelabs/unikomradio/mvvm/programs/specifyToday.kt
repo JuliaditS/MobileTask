@@ -9,7 +9,7 @@ object specifyToday{
     private const val TUESDAY = "selasa"
     private const val WEDNESDAY = "rabu"
     private const val THURSDAY = "kamis"
-    private const val FRIDAY = "jum'at"
+    private const val FRIDAY = "jumat"
     private const val SATURDAY = "sabtu"
 
     private lateinit var today:String
@@ -51,8 +51,13 @@ object specifyToday{
         return day == today
     }
 
-    fun isToday(startDay:String,endDay:String):Boolean{
+    fun isToday(_startDay:String,_endDay:String):Boolean{
 
+        //special case jum'at to jumat
+        val startDay = removeApostrophe(_startDay)
+        val endDay = removeApostrophe(_endDay)
+
+        Timber.i("cekidot dijerona: ( ${getDayOrder(today)} >= ${getDayOrder(startDay.toLowerCase())} && ${getDayOrder(today)} <= ${getDayOrder(endDay.toLowerCase())} )")
         if ( ( getDayOrder(today) >= getDayOrder(startDay.toLowerCase()) ) &&
             ( getDayOrder(today) <= getDayOrder(endDay.toLowerCase()) )
         ) {
@@ -60,6 +65,10 @@ object specifyToday{
         }
 
         return false
+    }
+
+    private fun removeApostrophe(string:String):String {
+      return string.replace("'","")
     }
 
     private fun getDayOrder(day:String):Int{
@@ -71,7 +80,7 @@ object specifyToday{
             THURSDAY-> 4
             FRIDAY-> 5
             SATURDAY-> 6
-            else -> 0
+            else -> -1
         }
     }
 

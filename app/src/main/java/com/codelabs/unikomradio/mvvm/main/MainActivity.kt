@@ -28,6 +28,7 @@ import com.codelabs.unikomradio.utilities.helper.Preferences
 import com.codelabs.unikomradio.utilities.helper.ThemeMode
 import com.codelabs.unikomradio.utilities.services.ExoPlayerServices
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import timber.log.Timber
 
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main),
     MainUserActionListener,
@@ -142,6 +143,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
                         val dummyDay: String = it.heldDay.replace(" ", "")
                         val dummyDayString = dummyDay.split("-")
                         if (specifyToday.isToday(dummyDayString[0], dummyDayString[1])) {
+
                             if ((it.startAt.toDouble() <= specifyToday.getHourSpecify()) && (it.endAt.toDouble() >= specifyToday.getHourSpecify())) {
                                 mBinding.mainPlayradioPlayImageThumbnail.setImageURI(it.imageUrl)
                             }

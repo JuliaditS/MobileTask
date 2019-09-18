@@ -65,7 +65,6 @@ class MainViewModel internal constructor() : BaseViewModel() {
                         if (program != null) {
                             if (specifyToday.isToday(program.heldDay)) {
                                 _todayProgram.value = program
-                                break
                             } else {
                                 val dummyDay: String = program.heldDay.replace(" ", "")
                                 val dummyDayString = dummyDay.split("-")

@@ -118,6 +118,8 @@ class ProgramFragment : BaseFragment<ProgramViewModel, ProgramBinding>(R.layout.
                     if (d.heldDay.contains('-')) {
                         val dummyDay: String = d.heldDay.replace(" ", "")
                         val dummyDayString = dummyDay.split("-")
+                        Timber.i("cekidot: dummyDayString[0]: ${dummyDayString[0]}  dummyDayString[1]): ${dummyDayString[1]})")
+
                         if (specifyToday.isToday(dummyDayString[0], dummyDayString[1])) {
                             programTodayList.add(d)
                         }
