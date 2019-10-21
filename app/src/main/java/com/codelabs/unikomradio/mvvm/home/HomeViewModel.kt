@@ -1,5 +1,6 @@
 package com.codelabs.unikomradio.mvvm.home
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.codelabs.unikomradio.data.model.*
@@ -49,7 +50,14 @@ class HomeViewModel internal constructor() : BaseViewModel() {
         initNews()
     }
 
+    private var context: Context? = null
+
+    fun initContext(context: Context?) {
+        this.context = context
+    }
+
     private fun initBanner() {
+
         docBanner.addSnapshotListener { snapshot, exception ->
             if (exception != null) {
                 Timber.w("Listen failed.")
@@ -62,8 +70,9 @@ class HomeViewModel internal constructor() : BaseViewModel() {
 
                 for (document in snapshot.documents) {
                     document.toObject(Banner::class.java)?.let { mutableList.add(it) }
-
                 }
+
+
                 _banner.value = mutableList
 
             } else {
@@ -88,10 +97,10 @@ class HomeViewModel internal constructor() : BaseViewModel() {
                     document.toObject(Program::class.java)?.let { mutableList.add(it) }
                     val crewMap: HashMap<String, Any?>? = document["crew"] as HashMap<String, Any?>?
                     val crew = Crew(
-                            -1,
-                            crewMap?.get("userPhoto") as String? ?: "",
-                            crewMap?.get("name") as String? ?: "",
-                            crewMap?.get("role") as String? ?: ""
+                        -1,
+                        crewMap?.get("userPhoto") as String? ?: "",
+                        crewMap?.get("name") as String? ?: "",
+                        crewMap?.get("role") as String? ?: ""
                     )
                     mutableList[i].announcer.add(crew)
                 }
@@ -143,7 +152,7 @@ class HomeViewModel internal constructor() : BaseViewModel() {
         }
     }
 
-    private fun initNews(){
+    private fun initNews() {
         docNews.addSnapshotListener { snapshot, exception ->
             if (exception != null) {
                 Timber.w("Listen failed.")

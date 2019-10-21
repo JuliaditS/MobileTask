@@ -9,6 +9,14 @@ apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'com.google.gms.google-services'
 
 android {
+    signingConfigs {
+        unikomradio {
+            storeFile file('/home/codelabs/Documents/college activities/KP/unikomradio.jks')
+            storePassword 'unikomjaya'
+            keyAlias = 'unikomradiokey'
+            keyPassword 'unikomjaya'
+        }
+    }
     compileSdkVersion rootProject.compileSdkVersion
 
     dataBinding {
@@ -20,15 +28,16 @@ android {
         applicationId "com.codelabs.unikomradio"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 1
+        versionCode 3
         versionName "1.0"
         buildConfigField "String", "BASE_URL", '"https://raw.githubusercontent.com/googlesamples/android-sunflower/master/app/src/main/assets/"'
         buildConfigField "String", "BASE_URL_UNIKOM_RADIO_STREAMING", '"http://hits.unikom.ac.id:9996/;listen.pls?sid=1"'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.unikomradio
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -91,6 +100,8 @@ dependencies {
     androidTestImplementation "androidx.work:work-testing:$rootProject.workVersion"
     androidTestImplementation "com.google.truth:truth:$rootProject.truth"
     testImplementation "junit:junit:$rootProject.junitVersion"
+
+    implementation "com.google.truth:truth:$rootProject.truth"
 
     implementation 'com.github.andremion:musiccoverview:1.0.0'
 

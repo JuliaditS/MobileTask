@@ -5,6 +5,7 @@ import android.media.MediaPlayer
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -143,6 +144,7 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeBinding>(R.layout.home),
 
 
     override fun onCreateObserver(viewModel: HomeViewModel) {
+        viewModel.initContext(context)
         viewModel.apply {
             banner.observe(this@HomeFragment, Observer {
                 if (it.isNotEmpty()) {
