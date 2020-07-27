@@ -46,15 +46,25 @@ class ProgramViewModel internal constructor() : BaseViewModel() {
                 val mutableList = mutableListOf<Program>()
                 for ((i, document) in snapshot.documents.withIndex()) {
                     document.toObject(Program::class.java)?.let { mutableList.add(it) }
-                    val crewMap: HashMap<String, Any?>? = document["crew"] as HashMap<String, Any?>?
-                    val crew = Crew(
-                        -1,
-                        crewMap?.get("userPhoto") as String? ?: "",
-                        crewMap?.get("name") as String? ?: "",
-                        crewMap?.get("role") as String? ?: ""
-                    )
-                    mutableList[i].announcer.add(crew)
+                    try {
+                        val crews = document["crew"] as List<Map<String, Any>>?
+                        if (crews != null) {
+                            for (crew in crews) {
+                                val crewObject = Crew(
+                                    -1,
+                                    crew.get("userPhoto") as String? ?: "",
+                                    crew.get("name") as String? ?: "",
+                                    crew.get("role") as String? ?: ""
+                                )
+                                mutableList[i].announcer.add(crewObject)
+                            }
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        Timber.d("crewsMap : ${e.message}")
+                    }
                 }
+
                 _programs.value = mutableList
                 firstLoad = false
             } else {

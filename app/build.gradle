@@ -28,10 +28,11 @@ android {
         applicationId "com.codelabs.unikomradio"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 3
+        versionCode 4
         versionName "1.0"
         buildConfigField "String", "BASE_URL", '"https://raw.githubusercontent.com/googlesamples/android-sunflower/master/app/src/main/assets/"'
-        buildConfigField "String", "BASE_URL_UNIKOM_RADIO_STREAMING", '"http://hits.unikom.ac.id:9996/;listen.pls?sid=1"'
+//        buildConfigField "String", "BASE_URL_UNIKOM_RADIO_STREAMING", '"http://hits.unikom.ac.id:9996/;listen.pls?sid=1"'
+        buildConfigField "String", "BASE_URL_UNIKOM_RADIO_STREAMING", '"https://open.spotify.com/track/0BOevCYSi1sW2slj67GBdv"'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.unikomradio
     }
