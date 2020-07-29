@@ -14,7 +14,7 @@
 
         <variable
             name="topchart"
-            type="com.codelabs.unikomradio.data.model.TopChart" />
+            type="com.codelabs.newunikomradio.data.model.TopChart" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

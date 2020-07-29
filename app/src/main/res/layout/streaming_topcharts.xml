@@ -4,10 +4,10 @@
     <data>
         <variable
                 name="mViewModel"
-                type="com.codelabs.unikomradio.mvvm.streaming.streaming_topcharts.StreamingTopchartsViewModel"/>
+                type="com.codelabs.newunikomradio.mvvm.streaming.streaming_topcharts.StreamingTopchartsViewModel"/>
         <variable
                 name="mListener"
-                type="com.codelabs.unikomradio.mvvm.streaming.streaming_topcharts.StreamingTopchartsUserActionListener"/>
+                type="com.codelabs.newunikomradio.mvvm.streaming.streaming_topcharts.StreamingTopchartsUserActionListener"/>
     </data>
 
     <LinearLayout

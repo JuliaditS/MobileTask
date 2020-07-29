@@ -10,11 +10,11 @@
 
         <variable
                 name="mListener"
-                type="com.codelabs.unikomradio.mvvm.programs.ProgramUserActionListener" />
+                type="com.codelabs.newunikomradio.mvvm.programs.ProgramUserActionListener" />
 
         <variable
                 name="program"
-                type="com.codelabs.unikomradio.data.model.Program" />
+                type="com.codelabs.newunikomradio.data.model.Program" />
     </data>
 
     <LinearLayout

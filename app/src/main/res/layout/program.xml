@@ -7,11 +7,11 @@
 
         <variable
                 name="mListener"
-                type="com.codelabs.unikomradio.mvvm.programs.ProgramUserActionListener" />
+                type="com.codelabs.newunikomradio.mvvm.programs.ProgramUserActionListener" />
 
         <variable
                 name="mViewModel"
-                type="com.codelabs.unikomradio.mvvm.programs.ProgramViewModel" />
+                type="com.codelabs.newunikomradio.mvvm.programs.ProgramViewModel" />
     </data>
 
 

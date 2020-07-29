@@ -97,6 +97,6 @@
 
         <variable
             name="news"
-            type="com.codelabs.unikomradio.data.model.News" />
+            type="com.codelabs.newunikomradio.data.model.News" />
     </data>
 </layout>

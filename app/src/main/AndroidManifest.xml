@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.codelabs.unikomradio">
+    package="com.codelabs.newunikomradio">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
 
     <application
-        android:name=".MyApplication"
+        android:name="com.codelabs.newunikomradio.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/iconunikomradio"
         android:label="@string/app_name"
@@ -15,16 +15,16 @@
         android:roundIcon="@mipmap/iconunikomradio"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".mvvm.settings.SettingsActivity"></activity>
-        <activity android:name=".mvvm.news.newsdetail.NewsDetailActivity" />
-        <activity android:name=".mvvm.programs.programdetail.ProgramDetailActivity" />
+        <activity android:name="com.codelabs.newunikomradio.mvvm.settings.SettingsActivity"></activity>
+        <activity android:name="com.codelabs.newunikomradio.mvvm.news.newsdetail.NewsDetailActivity" />
+        <activity android:name="com.codelabs.newunikomradio.mvvm.programs.programdetail.ProgramDetailActivity" />
         <activity
-            android:name=".NoInternet"
+            android:name="com.codelabs.newunikomradio.NoInternet"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".mvvm.GardenActivity" />
-        <activity android:name=".mvvm.main.MainActivity" />
+        <activity android:name="com.codelabs.newunikomradio.mvvm.GardenActivity" />
+        <activity android:name="com.codelabs.newunikomradio.mvvm.main.MainActivity" />
         <activity
-            android:name=".mvvm.SplashScreen"
+            android:name="com.codelabs.newunikomradio.mvvm.SplashScreen"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,10 +32,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mvvm.streaming.streaming_topcharts.StreamingTopchartsActivity" />
+        <activity android:name="com.codelabs.newunikomradio.mvvm.streaming.streaming_topcharts.StreamingTopchartsActivity" />
 
-        <service android:name=".utilities.services.MediaPlayerServices" />
-        <service android:name=".utilities.services.ExoPlayerServices" />
+        <service android:name="com.codelabs.newunikomradio.utilities.services.MediaPlayerServices" />
+        <service android:name="com.codelabs.newunikomradio.utilities.services.ExoPlayerServices" />
 
     </application>
 

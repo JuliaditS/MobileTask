@@ -5,11 +5,11 @@
     <data>
         <variable
                 name="mListener"
-                type="com.codelabs.unikomradio.mvvm.home.HomeUserActionListener"/>
+                type="com.codelabs.newunikomradio.mvvm.home.HomeUserActionListener"/>
 
         <variable
                 name="mViewModel"
-                type="com.codelabs.unikomradio.mvvm.home.HomeViewModel"/>
+                type="com.codelabs.newunikomradio.mvvm.home.HomeViewModel"/>
     </data>
 
 
