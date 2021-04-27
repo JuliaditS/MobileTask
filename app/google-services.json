@@ -8,6 +8,86 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:17883412285:android:b1c10b56b5f0197952f754",
+        "android_client_info": {
+          "package_name": "ac.id.unikom.codelabs.radio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "17883412285-3mppll8bsn4bsb2jl01o211bsr24nk6k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ac.id.unikom.codelabs.radio",
+            "certificate_hash": "05ee529fe7ed610371774675696cfe8eadd59cdc"
+          }
+        },
+        {
+          "client_id": "17883412285-mbqpbo82i7f3ji6f38cc4mn70fp8ipua.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAH0IAjTU1Oj8Zy4x-X3ek40OME7DQTlxs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "17883412285-mbqpbo82i7f3ji6f38cc4mn70fp8ipua.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "17883412285-rvku263hqnvi7p2ima4e03emarg3rrl0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mochamadnurkhayalkadafi.HitsUnikomRadio"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:17883412285:android:5d3ddfb37213399752f754",
+        "android_client_info": {
+          "package_name": "com.codelabs.newunikomradio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "17883412285-mbqpbo82i7f3ji6f38cc4mn70fp8ipua.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAH0IAjTU1Oj8Zy4x-X3ek40OME7DQTlxs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "17883412285-mbqpbo82i7f3ji6f38cc4mn70fp8ipua.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "17883412285-rvku263hqnvi7p2ima4e03emarg3rrl0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mochamadnurkhayalkadafi.HitsUnikomRadio"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:17883412285:android:7c416192407a6945",
         "android_client_info": {
           "package_name": "com.codelabs.unikomradio"
@@ -38,6 +118,13 @@
             {
               "client_id": "17883412285-mbqpbo82i7f3ji6f38cc4mn70fp8ipua.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "17883412285-rvku263hqnvi7p2ima4e03emarg3rrl0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mochamadnurkhayalkadafi.HitsUnikomRadio"
+              }
             }
           ]
         }

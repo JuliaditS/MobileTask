@@ -7,10 +7,10 @@
 
         <variable
                 name="mListener"
-                type="com.codelabs.newunikomradio.mvvm.crew.CrewUserActionListener"/>
+                type="ac.id.unikom.codelabs.radio.mvvm.crew.CrewUserActionListener"/>
         <variable
                 name="mViewModel"
-                type="com.codelabs.newunikomradio.mvvm.crew.CrewViewModel"/>
+                type="ac.id.unikom.codelabs.radio.mvvm.crew.CrewViewModel"/>
 
     </data>
 

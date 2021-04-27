@@ -144,10 +144,10 @@
 
         <variable
             name="mViewModel"
-            type="com.codelabs.newunikomradio.mvvm.streaming.StreamingViewModel" />
+            type="ac.id.unikom.codelabs.radio.mvvm.streaming.StreamingViewModel" />
 
         <variable
             name="mListener"
-            type="com.codelabs.newunikomradio.mvvm.streaming.StreamingUserActionListener" />
+            type="ac.id.unikom.codelabs.radio.mvvm.streaming.StreamingUserActionListener" />
     </data>
 </layout>

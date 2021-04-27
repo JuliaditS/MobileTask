@@ -11,7 +11,7 @@
 
         <variable
                 name="crew"
-                type="com.codelabs.newunikomradio.data.model.Crew" />
+                type="ac.id.unikom.codelabs.radio.data.model.Crew" />
     </data>
 
     <LinearLayout

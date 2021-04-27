@@ -3,9 +3,9 @@
         xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable name="mListener"
-                  type="com.codelabs.newunikomradio.mvvm.main.MainUserActionListener"/>
+                  type="ac.id.unikom.codelabs.radio.mvvm.main.MainUserActionListener"/>
         <variable name="mViewModel"
-                  type="com.codelabs.newunikomradio.mvvm.main.MainViewModel"/>
+                  type="ac.id.unikom.codelabs.radio.mvvm.main.MainViewModel"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

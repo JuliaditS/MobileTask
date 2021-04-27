@@ -7,11 +7,11 @@
 
         <variable
                 name="mListener"
-                type="com.codelabs.newunikomradio.mvvm.news.NewsUserActionListener" />
+                type="ac.id.unikom.codelabs.radio.mvvm.news.NewsUserActionListener" />
 
         <variable
                 name="mViewModel"
-                type="com.codelabs.newunikomradio.mvvm.news.NewsViewModel" />
+                type="ac.id.unikom.codelabs.radio.mvvm.news.NewsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

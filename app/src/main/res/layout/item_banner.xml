@@ -31,7 +31,7 @@
 
         <variable
             name="banner"
-            type="com.codelabs.newunikomradio.data.model.Banner" />
+            type="ac.id.unikom.codelabs.radio.data.model.Banner" />
     </data>
 
 </layout>

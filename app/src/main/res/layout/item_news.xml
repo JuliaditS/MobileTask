@@ -6,7 +6,7 @@
 
         <variable
                 name="news"
-                type="com.codelabs.newunikomradio.data.model.News" />
+                type="ac.id.unikom.codelabs.radio.data.model.News" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -6,7 +6,7 @@
     <data>
         <variable
                 name="program"
-                type="com.codelabs.newunikomradio.data.model.Program"/>
+                type="ac.id.unikom.codelabs.radio.data.model.Program"/>
     </data>
 
     <ScrollView
