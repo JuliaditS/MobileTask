@@ -11,10 +11,10 @@ apply plugin: 'com.google.gms.google-services'
 android {
     signingConfigs {
         unikomradio {
-            storeFile file('/home/codelabs/Documents/college activities/KP/unikomradio.jks')
-            storePassword 'unikomjaya'
+            storeFile file('./keystore-unikomradioapp.jks')
+            storePassword 'code@labs'
             keyAlias = 'unikomradiokey'
-            keyPassword 'unikomjaya'
+            keyPassword 'code@labs'
         }
     }
     compileSdkVersion rootProject.compileSdkVersion
